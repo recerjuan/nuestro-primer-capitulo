@@ -1,0 +1,262 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Primer Capítulo ❤️</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+    <div class="hearts"></div>
+
+    <!-- PANTALLA 1 -->
+    <section class="pantalla activa" id="pantalla1">
+        <div class="contenido inicio">
+
+            <div class="corazon-principal">❤️</div>
+
+            <p class="pequeno">PARA TI MI REINA</p>
+
+            <h1>
+                Esta es una pequeña muestra
+                <span>de mi amor por ti</span>
+            </h1>
+
+            <p class="descripcion">
+                Solo es un pequeño detalle para una mujer mujer especial y hermosa como tu, Carol Dayana.
+                
+            </p>
+
+            <button onclick="siguientePantalla()">
+                Siguiente <span>→</span>
+            </button>
+
+        </div>
+    </section>
+
+
+    <!-- PANTALLA 2 -->
+    <section class="pantalla" id="pantalla2">
+
+        <div class="contenido carta-container">
+
+            <p class="pequeno">PARA EL AMOR DE MI VIDA</p>
+
+            <div class="carta">
+
+                <div class="carta-corazon">♥</div>
+
+                <h2>PARA LA MUJER QUE AMO</h2>
+
+                <p>
+                    Hoy quiero dedicarte estas palabras
+                     porque te convertiste en una persona muy importante
+                      para mi y esta fue la manera que encontre para demostrarte el amor que siento por ti. 
+            
+                </p>
+
+                <p>
+                    Han pasado muchos dias desde que decidimos comenzar
+                    esta historia juntos y, aunque pueda parecer
+                    poco tiempo, para mí ha sido suficiente para
+                    darme cuenta de lo especial que eres.
+                </p>
+
+                <p>
+                    Gracias por cada conversación, cada risa,
+                    cada momento y todos las cosas que has
+                    compartido conmigo.
+                </p>
+
+                <p>
+                    Quizás todavía nos falten muchas fotos,
+                    muchos lugares por conocer y muchísimas
+                    historias por vivir.
+                </p>
+
+                <p>
+                    Pero precisamente eso es lo bonito:
+                    <strong>nuestra historia apenas comienza.</strong>
+                </p>
+
+                <p class="firma">
+                    Con todo mi amor para la mujer que mas amo. ❤️
+                </p>
+
+            </div>
+
+            <div class="navegacion">
+
+                <button
+                    class="boton-regresar"
+                    onclick="anteriorPantalla()">
+                    ← Regresar
+                </button>
+
+                <button onclick="siguientePantalla()">
+                    Siguiente <span>→</span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PANTALLA 3 -->
+    <section class="pantalla" id="pantalla3">
+
+        <div class="contenido">
+
+            <p class="pequeno">
+                DESDE QUE COMENZÓ NUESTRA HISTORIA
+            </p>
+
+            <h2 class="titulo-contador">
+                El tiempo que llevamos juntos ❤️
+            </h2>
+
+            <p class="fecha-inicio">
+                Desde el 8 de julio de 2026 · 7:25 PM
+            </p>
+
+            <div class="contador">
+
+                <div class="tiempo">
+                    <span id="dias">0</span>
+                    <small>DÍAS</small>
+                </div>
+
+                <div class="separador">:</div>
+
+                <div class="tiempo">
+                    <span id="horas">0</span>
+                    <small>HORAS</small>
+                </div>
+
+                <div class="separador">:</div>
+
+                <div class="tiempo">
+                    <span id="minutos">0</span>
+                    <small>MINUTOS</small>
+                </div>
+
+                <div class="separador">:</div>
+
+                <div class="tiempo">
+                    <span id="segundos">0</span>
+                    <small>SEGUNDOS</small>
+                </div>
+
+            </div>
+
+            <p class="mensaje-contador">
+                Y cada segundo que pasa,
+                es otro segundo que agradezco tenerte en mi vida.
+            </p>
+
+            <div class="navegacion">
+
+                <button
+                    class="boton-regresar"
+                    onclick="anteriorPantalla()">
+                    ← Regresar
+                </button>
+
+                <button onclick="siguientePantalla()">
+                    Siguiente <span>→</span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PANTALLA 4 -->
+    <section class="pantalla" id="pantalla4">
+
+        <div class="contenido final">
+
+            <p class="pequeno">
+                NUESTRA HISTORIA APENAS COMIENZA
+            </p>
+
+            <h2>
+                Aún no termino esta página...
+            </h2>
+
+            <p class="final-texto">
+                Porque todavía nos faltan muchas cosas por vivir,
+                muchos lugares por conocer, muchas risas por compartir
+                y muchísimas fotos por tomarnos juntos.
+            </p>
+
+            <div class="album">
+
+                <div class="foto-vacia">
+                    <span>📷</span>
+                    <p>Nuestra primera foto</p>
+                </div>
+
+                <div class="foto-vacia">
+                    <span>📷</span>
+                    <p>Un momento especial</p>
+                </div>
+
+                <div class="foto-vacia">
+                    <span>📷</span>
+                    <p>Una aventura juntos</p>
+                </div>
+
+                <div class="foto-vacia">
+                    <span>📷</span>
+                    <p>Lo que viene...</p>
+                </div>
+
+            </div>
+
+            <div class="agradecimiento">
+
+                <p>
+                    Gracias por todos estos días juntos,
+                    por cada momento hermoso, por las risas,
+                    por las conversaciones y por hacer de estos
+                    dias algo tan especial.
+                </p>
+
+                <h3>
+                    Feliz primer mes, mi amor ❤️
+                </h3>
+
+                <p class="final-frase">
+                    Esto apenas comienza...
+                </p>
+
+            </div>
+
+            <div class="navegacion">
+
+                <button
+                    class="boton-regresar"
+                    onclick="anteriorPantalla()">
+                    ← Regresar
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
