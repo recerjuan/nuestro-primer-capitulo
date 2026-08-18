@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -54,11 +55,12 @@ position: fixed;
 inset: 0;
 
 ```
-display: flex;
-align-items: center;
-justify-content: center;
+width: 100%;
+height: 100%;
 
-padding: 40px 30px;
+display: block;
+
+padding: 50px 30px;
 
 opacity: 0;
 visibility: hidden;
@@ -70,8 +72,8 @@ transition:
     transform 0.8s ease,
     visibility 0.8s;
 
-overflow-y: auto;
 overflow-x: hidden;
+overflow-y: auto;
 
 z-index: 2;
 ```
@@ -84,17 +86,21 @@ visibility: visible;
 transform: translateX(0);
 }
 
+/* =========================
+CONTENIDO
+========================= */
+
 .contenido {
 width: 100%;
 max-width: 900px;
 
 ```
+margin: 0 auto;
+
 text-align: center;
 
 position: relative;
 z-index: 3;
-
-margin: auto;
 ```
 
 }
@@ -104,9 +110,15 @@ INICIO
 ========================= */
 
 .inicio {
+min-height: calc(100vh - 100px);
+
+```
 display: flex;
 flex-direction: column;
 align-items: center;
+justify-content: center;
+```
+
 }
 
 .corazon-principal {
@@ -126,12 +138,13 @@ filter:
 }
 
 @keyframes latido {
-0%,
-100% {
-transform: scale(1);
-}
 
 ```
+0%,
+100% {
+    transform: scale(1);
+}
+
 50% {
     transform: scale(1.15);
 }
@@ -287,16 +300,11 @@ CARTA
 ========================= */
 
 .carta-container {
+width: 100%;
 max-width: 700px;
 
 ```
-/*
-   Importante:
-   permite que la carta crezca
-   sin quedar cortada.
-*/
-margin-top: 30px;
-margin-bottom: 30px;
+margin: 30px auto 50px;
 ```
 
 }
@@ -305,7 +313,9 @@ margin-bottom: 30px;
 position: relative;
 
 ```
-padding: 55px 50px 45px;
+width: 100%;
+
+padding: 60px 50px 45px;
 
 border-radius: 20px;
 
@@ -334,16 +344,19 @@ animation:
 }
 
 @keyframes aparecerCarta {
-from {
-opacity: 0;
-transform:
-translateY(30px)
-scale(0.97);
-}
 
 ```
+from {
+    opacity: 0;
+
+    transform:
+        translateY(30px)
+        scale(0.97);
+}
+
 to {
     opacity: 1;
+
     transform:
         translateY(0)
         scale(1);
@@ -366,6 +379,7 @@ width: 50px;
 height: 50px;
 
 display: flex;
+
 align-items: center;
 justify-content: center;
 
@@ -452,7 +466,11 @@ margin-bottom: 10px;
 
 .fecha-inicio {
 color: #a99da2;
+
+```
 font-size: 13px;
+```
+
 }
 
 .contador {
@@ -538,11 +556,11 @@ PANTALLA FINAL
 ========================= */
 
 .final {
+width: 100%;
 max-width: 850px;
 
 ```
-margin-top: 30px;
-margin-bottom: 30px;
+margin: 20px auto 50px;
 ```
 
 }
@@ -840,12 +858,13 @@ text-shadow:
 }
 
 @keyframes subir {
-0% {
-transform:
-translateY(0)
-rotate(0deg);
 
 ```
+0% {
+    transform:
+        translateY(0)
+        rotate(0deg);
+
     opacity: 0;
 }
 
@@ -901,12 +920,13 @@ animation:
 }
 
 @keyframes moverBrillo {
-from {
-transform:
-translate(0, 0);
-}
 
 ```
+from {
+    transform:
+        translate(0, 0);
+}
+
 to {
     transform:
         translate(70vw, 50vh);
@@ -916,24 +936,51 @@ to {
 }
 
 /* =========================
-RESPONSIVE
+TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+```
+.album {
+    grid-template-columns:
+        repeat(2, 1fr);
+}
+```
+
+}
+
+/* =========================
+CELULAR
 ========================= */
 
 @media (max-width: 700px) {
 
 ```
 .pantalla {
-    align-items: flex-start;
-
     padding:
-        60px 18px 40px;
+        55px 18px 40px;
+
+    display: block;
 
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .contenido {
-    margin-top: auto;
-    margin-bottom: auto;
+    width: 100%;
+
+    margin:
+        0 auto;
+}
+
+.inicio {
+    min-height:
+        calc(100vh - 95px);
+
+    display: flex;
+
+    justify-content: center;
 }
 
 .corazon-principal {
@@ -944,24 +991,38 @@ h1 {
     font-size: 50px;
 }
 
+.descripcion {
+    font-size: 14px;
+}
+
 .carta-container {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin:
+        25px auto 50px;
 }
 
 .carta {
     padding:
-        45px 25px 30px;
+        55px 25px 35px;
 }
 
 .carta h2 {
     font-size: 35px;
+
+    line-height: 1.2;
+
+    margin-bottom: 25px;
 }
 
 .carta p {
     font-size: 13px;
 
-    line-height: 1.8;
+    line-height: 1.9;
+
+    margin-bottom: 16px;
+}
+
+.firma {
+    font-size: 20px !important;
 }
 
 .contador {
@@ -996,7 +1057,8 @@ h1 {
 }
 
 .agradecimiento {
-    padding: 25px 10px;
+    padding:
+        25px 10px;
 }
 ```
 
@@ -1006,6 +1068,38 @@ h1 {
 CELULARES PEQUEÑOS
 ========================= */
 
+@media (max-width: 400px) {
+
+```
+.pantalla {
+    padding:
+        50px 14px 35px;
+}
+
+.carta {
+    padding:
+        50px 20px 30px;
+}
+
+.carta h2 {
+    font-size: 31px;
+}
+
+.carta p {
+    font-size: 12.5px;
+}
+
+.album {
+    gap: 8px;
+}
+```
+
+}
+
+/* =========================
+PANTALLAS BAJAS
+========================= */
+
 @media (max-height: 700px) {
 
 ```
@@ -1013,17 +1107,14 @@ CELULARES PEQUEÑOS
     align-items: flex-start;
 
     padding-top: 45px;
-    padding-bottom: 35px;
+    padding-bottom: 40px;
 }
 
 .carta-container {
     margin-top: 20px;
 }
-
-.carta {
-    padding-top: 45px;
-}
 ```
 
 }
+
 
