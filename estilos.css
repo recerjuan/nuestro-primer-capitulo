@@ -12,111 +12,187 @@ body {
 
 body {
     font-family: Arial, sans-serif;
-    background: #0d080c;
-    color: #ffffff;
+    background:
+        radial-gradient(circle at 15% 15%, #3a0d1f 0%, transparent 30%),
+        radial-gradient(circle at 85% 85%, #260817 0%, transparent 35%),
+        #090509;
+
+    color: white;
     overflow-x: hidden;
 }
 
 
-/* ================================
+/* =========================================
    FONDO
-================================ */
+========================================= */
 
 body::before {
     content: "";
+
     position: fixed;
+
     inset: 0;
 
     background:
         radial-gradient(
             circle at 20% 20%,
-            rgba(210, 35, 90, 0.20),
-            transparent 35%
+            rgba(255, 50, 110, 0.15),
+            transparent 30%
         ),
         radial-gradient(
-            circle at 80% 80%,
-            rgba(255, 80, 130, 0.15),
-            transparent 35%
+            circle at 80% 30%,
+            rgba(220, 60, 110, 0.10),
+            transparent 30%
         ),
         radial-gradient(
-            circle at 50% 50%,
-            rgba(120, 20, 55, 0.08),
-            transparent 50%
+            circle at 50% 100%,
+            rgba(180, 20, 80, 0.12),
+            transparent 35%
         );
 
     pointer-events: none;
+
     z-index: 0;
 }
 
+.fondo-brillo {
+    position: fixed;
 
-/* ================================
+    width: 450px;
+    height: 450px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 50, 110, 0.08);
+
+    filter: blur(100px);
+
+    top: -180px;
+    left: -150px;
+
+    animation:
+        brilloMovimiento 12s infinite alternate ease-in-out;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+@keyframes brilloMovimiento {
+
+    from {
+        transform:
+            translate(0, 0);
+    }
+
+    to {
+        transform:
+            translate(75vw, 70vh);
+    }
+}
+
+
+/* =========================================
    PANTALLAS
-================================ */
+========================================= */
 
 .pantalla {
     position: fixed;
+
     inset: 0;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    padding: 30px;
+    padding: 35px 25px;
 
     opacity: 0;
+
     visibility: hidden;
 
-    transform: translateX(50px);
+    transform:
+        translateX(45px);
 
     transition:
-        opacity 0.8s ease,
-        transform 0.8s ease,
-        visibility 0.8s;
+        opacity .8s ease,
+        transform .8s ease,
+        visibility .8s;
 
     overflow-y: auto;
+
+    z-index: 2;
 }
 
 .pantalla.activa {
     opacity: 1;
+
     visibility: visible;
-    transform: translateX(0);
+
+    transform:
+        translateX(0);
 }
 
 .contenido {
+    position: relative;
+
     width: 100%;
+
     max-width: 900px;
 
     text-align: center;
 
-    position: relative;
-    z-index: 2;
+    z-index: 5;
 }
 
 
-/* ================================
+/* =========================================
+   TEXTO PEQUEÑO
+========================================= */
+
+.pequeno {
+    font-size: 11px;
+
+    letter-spacing: 5px;
+
+    color: #e58aa5;
+
+    margin-bottom: 20px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================
    INICIO
-================================ */
+========================================= */
 
 .inicio {
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 }
 
 .corazon-principal {
-    font-size: 75px;
+    font-size: 90px;
+
+    color: #ff668e;
 
     margin-bottom: 25px;
-
-    color: #f05c86;
 
     animation:
         latido 1.5s infinite ease-in-out;
 
     filter:
         drop-shadow(
-            0 0 20px
-            rgba(255, 60, 110, 0.6)
+            0 0 15px #ff416f
+        )
+        drop-shadow(
+            0 0 40px rgba(255, 65, 111, .45)
         );
 }
 
@@ -124,113 +200,121 @@ body::before {
 
     0%,
     100% {
-        transform: scale(1);
+        transform:
+            scale(1);
     }
 
     50% {
-        transform: scale(1.15);
+        transform:
+            scale(1.13);
     }
-}
-
-.pequeno {
-    font-size: 12px;
-
-    letter-spacing: 5px;
-
-    color: #d88a9f;
-
-    margin-bottom: 20px;
 }
 
 h1 {
     font-family: Georgia, serif;
 
     font-size:
-        clamp(45px, 7vw, 85px);
+        clamp(48px, 7vw, 88px);
 
-    font-weight: 500;
+    font-weight: 400;
 
-    line-height: 0.95;
+    line-height: .98;
 
     max-width: 850px;
+
+    text-shadow:
+        0 5px 30px
+        rgba(0, 0, 0, .5);
 }
 
 h1 span {
     display: block;
 
-    color: #e98aa3;
+    color: #f08aa5;
+
+    font-style: italic;
+
+    margin-top: 8px;
 }
 
 .descripcion {
-    max-width: 500px;
+    max-width: 550px;
 
-    margin-top: 30px;
+    margin-top: 32px;
 
-    color: #b8aeb2;
+    color: #c7b8be;
 
     font-size: 15px;
 
-    line-height: 1.8;
+    line-height: 1.9;
 }
 
 
-/* ================================
+/* =========================================
    BOTONES
-================================ */
+========================================= */
 
 button {
-    margin-top: 40px;
+    margin-top: 38px;
 
     padding: 14px 30px;
 
     border:
         1px solid
-        rgba(255, 150, 180, 0.4);
+        rgba(255, 150, 180, .45);
 
     border-radius: 50px;
 
     background:
-        rgba(255, 255, 255, 0.04);
+        rgba(255, 255, 255, .045);
 
     color: white;
-
-    font-family: Arial, sans-serif;
 
     font-size: 14px;
 
     cursor: pointer;
 
-    transition: 0.3s;
+    transition:
+        .3s ease;
 
-    backdrop-filter: blur(10px);
+    backdrop-filter:
+        blur(15px);
+}
+
+button:hover {
+    transform:
+        translateY(-4px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #c83d68,
+            #ef7095
+        );
+
+    border-color:
+        transparent;
+
+    box-shadow:
+        0 12px 35px
+        rgba(220, 60, 105, .35);
 }
 
 button span {
     margin-left: 10px;
 
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #d84f76;
-
-    border-color: #d84f76;
-
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 10px 30px
-        rgba(216, 79, 118, 0.3);
+    transition:
+        .3s;
 }
 
 button:hover span {
-    margin-left: 15px;
+    margin-left: 17px;
 }
 
 
-/* ================================
+/* =========================================
    NAVEGACIÓN
-================================ */
+========================================= */
 
 .navegacion {
     display: flex;
@@ -240,201 +324,330 @@ button:hover span {
     align-items: center;
 
     gap: 15px;
+
+    flex-wrap: wrap;
 }
 
 .boton-regresar {
+    color: #b7a9ae;
+
     background:
-        rgba(255, 255, 255, 0.025);
+        rgba(255, 255, 255, .025);
 
     border-color:
-        rgba(255, 255, 255, 0.18);
-
-    color: #b8aeb2;
-}
-
-.boton-regresar:hover {
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    border-color:
-        rgba(255, 150, 180, 0.35);
-
-    color: white;
+        rgba(255, 255, 255, .14);
 }
 
 
-/* ================================
+/* =========================================
    CARTA
-================================ */
+========================================= */
+
+.pantalla-carta {
+    align-items: flex-start;
+
+    padding-top: 45px;
+}
 
 .carta-container {
-    max-width: 700px;
+    max-width: 820px;
+
+    padding-bottom: 30px;
 }
-
-
-/*
-   IMPORTANTE:
-   La carta es larga.
-   No cambiamos su posición ni su estructura.
-*/
 
 .carta {
     position: relative;
 
-    padding: 50px;
+    width: 100%;
 
-    border-radius: 20px;
+    padding: 65px 70px 55px;
+
+    border-radius: 25px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.08),
-            rgba(255, 255, 255, 0.025)
+            rgba(255, 255, 255, .10),
+            rgba(255, 255, 255, .035)
         );
 
     border:
         1px solid
-        rgba(255, 170, 195, 0.15);
+        rgba(255, 160, 190, .20);
 
     box-shadow:
         0 30px 80px
-        rgba(0, 0, 0, 0.45),
+        rgba(0, 0, 0, .55),
 
-        0 0 40px
-        rgba(216, 79, 118, 0.08);
+        inset 0 0 50px
+        rgba(255, 80, 130, .025);
 
-    backdrop-filter: blur(15px);
+    backdrop-filter:
+        blur(18px);
 
     text-align: left;
 
-    animation:
-        aparecerCarta 1s ease;
-}
-
-@keyframes aparecerCarta {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateY(30px)
-            scale(0.97);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
+    overflow: visible;
 }
 
 
-/* CORAZÓN */
+/* BORDE INTERIOR */
 
-.carta-corazon {
+.carta::before {
+    content: "";
+
     position: absolute;
 
-    top: -25px;
+    inset: 12px;
+
+    border:
+        1px solid
+        rgba(255, 150, 180, .10);
+
+    border-radius: 17px;
+
+    pointer-events: none;
+}
+
+
+/* CORAZÓN SUPERIOR */
+
+.carta-decoracion.superior {
+    position: absolute;
+
+    top: -28px;
+
     left: 50%;
 
     transform:
         translateX(-50%);
 
-    width: 50px;
-    height: 50px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
+    width: 58px;
+    height: 58px;
 
     border-radius: 50%;
 
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
     background:
         linear-gradient(
-            145deg,
-            #c93f68,
-            #e96d91
+            135deg,
+            #bd315d,
+            #f07399
         );
 
-    font-size: 22px;
+    color: white;
+
+    font-size: 25px;
 
     box-shadow:
-        0 10px 30px
-        rgba(216, 79, 118, 0.5);
+        0 10px 35px
+        rgba(220, 60, 105, .45);
 
     animation:
-        latido 1.5s infinite ease-in-out;
+        latido 1.7s infinite ease-in-out;
+
+    z-index: 5;
 }
 
 
-/* TÍTULO DE LA CARTA */
+/* ESQUINAS */
+
+.esquina {
+    position: absolute;
+
+    color: rgba(240, 115, 150, .25);
+
+    font-size: 34px;
+}
+
+.esquina-1 {
+    top: 25px;
+    left: 28px;
+}
+
+.esquina-2 {
+    top: 25px;
+    right: 28px;
+}
+
+.esquina-3 {
+    bottom: 25px;
+    left: 28px;
+}
+
+.esquina-4 {
+    bottom: 25px;
+    right: 28px;
+}
+
+
+/* CONTENIDO */
+
+.carta-contenido {
+    position: relative;
+
+    z-index: 2;
+}
+
+.etiqueta-carta {
+    text-align: center;
+
+    color: #d87594 !important;
+
+    font-size: 10px !important;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 18px !important;
+}
 
 .carta h2 {
     font-family: Georgia, serif;
 
     text-align: center;
 
-    font-size: 42px;
+    font-size:
+        clamp(30px, 4vw, 45px);
 
-    font-weight: 500;
+    font-weight: 400;
 
     line-height: 1.15;
 
-    margin-bottom: 30px;
+    margin-bottom: 18px;
+
+    color: #fff;
 }
 
+.carta h2 span {
+    display: block;
 
-/* TEXTO DE LA CARTA */
+    color: #ed8ba7;
+
+    font-style: italic;
+}
+
+.linea-romantica {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin:
+        10px auto 35px;
+
+    color: #e56f92;
+}
+
+.linea-romantica::before,
+.linea-romantica::after {
+    content: "";
+
+    width: 90px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(230, 100, 140, .5)
+        );
+}
+
+.linea-romantica::after {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(230, 100, 140, .5),
+            transparent
+        );
+}
 
 .carta p {
-    color: #c9bec2;
+    color: #d0c2c7;
 
-    line-height: 1.9;
+    font-size: 15px;
 
-    font-size: 14px;
+    line-height: 2;
 
-    margin-bottom: 18px;
+    margin-bottom: 20px;
+
+    text-align: justify;
 }
 
-.carta strong {
-    color: #e98aa3;
+.separador-carta {
+    width: 70%;
+
+    height: 1px;
+
+    margin:
+        35px auto 25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(235, 120, 155, .4),
+            transparent
+        );
 }
 
 .firma {
-    text-align: right;
+    text-align: right !important;
+
+    color: #ed8ba7 !important;
 
     font-family: Georgia, serif;
 
-    font-size: 22px !important;
-
     font-style: italic;
 
-    color: #e98aa3 !important;
+    font-size: 22px !important;
 
-    margin-top: 30px;
+    line-height: 1.5 !important;
 }
 
 
-/* ================================
+/* =========================================
    CONTADOR
-================================ */
+========================================= */
+
+.contador-contenido {
+    max-width: 950px;
+}
+
+.corazon-contador {
+    color: #ed6d91;
+
+    font-size: 35px;
+
+    margin-bottom: 10px;
+
+    animation:
+        latido 2s infinite ease-in-out;
+}
 
 .titulo-contador {
     font-family: Georgia, serif;
 
     font-size:
-        clamp(38px, 6vw, 65px);
+        clamp(40px, 6vw, 70px);
 
-    font-weight: 500;
+    font-weight: 400;
 
-    margin-bottom: 10px;
+    line-height: 1;
+
+    margin-bottom: 15px;
 }
 
 .fecha-inicio {
-    color: #a99da2;
+    color: #a99ca2;
 
     font-size: 13px;
 }
@@ -446,24 +659,32 @@ button:hover span {
 
     align-items: center;
 
-    gap: 15px;
+    gap: 12px;
 
-    margin-top: 60px;
+    margin-top: 55px;
 }
 
 .tiempo {
-    min-width: 110px;
+    min-width: 125px;
 
-    padding: 10px 5px;
+    padding: 22px 10px;
 
-    border-radius: 12px;
+    border-radius: 20px;
 
     background:
-        rgba(255, 255, 255, 0.025);
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, .07),
+            rgba(255, 255, 255, .025)
+        );
 
     border:
         1px solid
-        rgba(255, 150, 180, 0.08);
+        rgba(255, 150, 180, .13);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0, 0, 0, .25);
 }
 
 .tiempo span {
@@ -473,63 +694,93 @@ button:hover span {
 
     font-size: 65px;
 
-    line-height: 1;
-
     color: #f08ca6;
 
+    line-height: 1;
+
     text-shadow:
-        0 0 25px
-        rgba(240, 140, 166, 0.25);
+        0 0 30px
+        rgba(240, 100, 145, .3);
 }
 
 .tiempo small {
     display: block;
 
-    margin-top: 10px;
+    margin-top: 12px;
 
     font-size: 9px;
 
     letter-spacing: 3px;
 
-    color: #95888e;
+    color: #94858c;
 }
 
-.separador {
-    font-size: 40px;
+.separador-tiempo {
+    color: #754355;
 
-    color: #59434b;
-
-    margin-bottom: 20px;
+    font-size: 35px;
 }
 
 .mensaje-contador {
-    max-width: 500px;
+    max-width: 550px;
 
-    margin: 50px auto 0;
+    margin:
+        45px auto 0;
 
-    color: #b8aeb2;
+    color: #bcaeb4;
 
     line-height: 1.8;
 
-    font-size: 14px;
+    font-size: 15px;
+}
+
+.frase-contador {
+    margin-top: 25px;
+
+    color: #e78ba6;
+
+    font-family: Georgia, serif;
+
+    font-style: italic;
+
+    font-size: 18px;
 }
 
 
-/* ================================
+/* =========================================
    PANTALLA FINAL
-================================ */
+========================================= */
+
+.pantalla-final {
+    align-items: flex-start;
+
+    padding-top: 45px;
+}
 
 .final {
-    max-width: 850px;
+    max-width: 900px;
+
+    padding-bottom: 40px;
+}
+
+.corazon-final {
+    color: #f0648c;
+
+    font-size: 45px;
+
+    margin-bottom: 10px;
+
+    animation:
+        latido 2s infinite ease-in-out;
 }
 
 .final h2 {
     font-family: Georgia, serif;
 
     font-size:
-        clamp(40px, 6vw, 65px);
+        clamp(38px, 6vw, 65px);
 
-    font-weight: 500;
+    font-weight: 400;
 
     line-height: 1.05;
 }
@@ -537,19 +788,20 @@ button:hover span {
 .final-texto {
     max-width: 650px;
 
-    margin: 20px auto 35px;
+    margin:
+        22px auto 38px;
 
-    color: #b8aeb2;
+    color: #b9abb1;
 
-    line-height: 1.8;
+    line-height: 1.9;
 
-    font-size: 14px;
+    font-size: 15px;
 }
 
 
-/* ================================
+/* =========================================
    ÁLBUM
-================================ */
+========================================= */
 
 .album {
     display: grid;
@@ -557,7 +809,9 @@ button:hover span {
     grid-template-columns:
         repeat(4, 1fr);
 
-    gap: 15px;
+    gap: 18px;
+
+    width: 100%;
 }
 
 
@@ -565,6 +819,8 @@ button:hover span {
 
 .foto-vacia {
     position: relative;
+
+    width: 100%;
 
     aspect-ratio: 1 / 1;
 
@@ -576,82 +832,93 @@ button:hover span {
 
     justify-content: center;
 
-    border-radius: 15px;
-
-    border:
-        1px dashed
-        rgba(255, 150, 180, 0.25);
-
-    background:
-        rgba(255, 255, 255, 0.025);
-
-    transition: 0.3s;
+    border-radius: 20px;
 
     overflow: hidden;
-}
-
-.foto-vacia:hover {
-    transform: translateY(-5px);
-
-    border-color: #d84f76;
-
-    background:
-        rgba(216, 79, 118, 0.08);
-
-    box-shadow:
-        0 10px 30px
-        rgba(216, 79, 118, 0.12);
-}
-
-
-/* ================================
-   PRIMERA FOTO
-================================ */
-
-.foto-con-imagen {
-    position: relative;
 
     border:
         1px solid
-        rgba(255, 150, 180, 0.30);
+        rgba(255, 150, 180, .18);
 
     background:
-        #180a10;
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, .06),
+            rgba(255, 255, 255, .02)
+        );
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 0, 0, .3);
+
+    transition:
+        .4s ease;
+}
+
+.foto-vacia:hover {
+    transform:
+        translateY(-7px);
+
+    border-color:
+        rgba(240, 100, 145, .5);
+
+    box-shadow:
+        0 20px 45px
+        rgba(210, 50, 100, .2);
+}
+
+
+/* =========================================
+   PRIMERA FOTO
+========================================= */
+
+.foto-con-imagen {
+    display: block;
+
+    position: relative;
+
+    min-height: 0;
+
+    background:
+        #1a0a11;
 }
 
 .foto-con-imagen img {
     position: absolute;
 
-    inset: 0;
+    display: block;
+
+    visibility: visible;
+
+    opacity: 1;
+
+    top: 0;
+    left: 0;
 
     width: 100%;
     height: 100%;
 
     object-fit: cover;
 
-    display: block;
-
     z-index: 1;
 
     transition:
-        transform 0.5s ease;
+        transform .6s ease;
 }
 
-.foto-con-imagen::after {
-    content: "";
-
+.foto-overlay {
     position: absolute;
 
     inset: 0;
 
+    z-index: 2;
+
     background:
         linear-gradient(
             to top,
-            rgba(0, 0, 0, 0.8),
-            transparent 60%
+            rgba(0, 0, 0, .85),
+            rgba(0, 0, 0, .05) 65%
         );
-
-    z-index: 2;
 
     pointer-events: none;
 }
@@ -662,114 +929,181 @@ button:hover span {
     left: 0;
     right: 0;
 
-    bottom: 15px;
+    bottom: 18px;
 
     z-index: 3;
 
     text-align: center;
 }
 
+.texto-foto span {
+    display: block;
+
+    color: #ff8cab;
+
+    font-size: 17px;
+
+    margin-bottom: 5px;
+}
+
 .texto-foto p {
-    margin: 0;
-
     color: white;
-
-    font-size: 12px;
 
     font-family: Georgia, serif;
 
+    font-size: 14px;
+
+    margin: 0;
+
     text-shadow:
-        0 2px 8px
-        rgba(0, 0, 0, 0.7);
+        0 2px 10px
+        black;
 }
 
 .foto-con-imagen:hover img {
-    transform: scale(1.06);
+    transform:
+        scale(1.08);
 }
 
 
-/* ================================
-   FOTOS VACÍAS
-================================ */
+/* SI LA IMAGEN NO EXISTE */
+
+.foto-error {
+    background:
+        linear-gradient(
+            135deg,
+            #260a18,
+            #12060c
+        );
+}
+
+.foto-error::before {
+    content: "❤️";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    font-size: 45px;
+
+    opacity: .7;
+}
+
+
+/* FOTOS VACÍAS */
 
 .foto-vacia > span {
-    font-size: 30px;
+    font-size: 35px;
 
-    opacity: 0.5;
+    opacity: .55;
 
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .foto-vacia > p {
-    font-size: 10px;
+    color: #8f7e85;
 
-    color: #82757a;
+    font-size: 11px;
 
     text-align: center;
 }
 
 
-/* ================================
+/* =========================================
    AGRADECIMIENTO
-================================ */
+========================================= */
 
 .agradecimiento {
-    margin-top: 40px;
+    margin-top: 45px;
 
-    padding: 30px;
+    padding:
+        35px 25px;
 
     border-top:
         1px solid
-        rgba(255, 255, 255, 0.08);
+        rgba(255, 150, 180, .12);
+}
+
+.mini-corazones {
+    color: #df668b;
+
+    letter-spacing: 8px;
+
+    font-size: 15px;
+
+    margin-bottom: 20px;
 }
 
 .agradecimiento p {
-    max-width: 650px;
+    max-width: 680px;
 
     margin: auto;
 
-    color: #b8aeb2;
+    color: #bcaeb4;
 
-    font-size: 14px;
+    font-size: 15px;
 
     line-height: 1.9;
 }
 
 .agradecimiento h3 {
+    max-width: 750px;
+
+    margin:
+        25px auto 0;
+
+    color: #ef8ca7;
+
     font-family: Georgia, serif;
 
-    font-size: 32px;
+    font-size:
+        clamp(25px, 4vw, 36px);
 
-    font-weight: 500;
+    font-weight: 400;
 
-    color: #e98aa3;
-
-    margin-top: 20px;
+    line-height: 1.25;
 }
 
 .final-frase {
-    margin-top: 15px !important;
+    margin-top: 20px !important;
+
+    color: white !important;
 
     font-family: Georgia, serif;
 
-    font-size: 22px !important;
+    font-style: italic;
 
-    color: #ffffff !important;
+    font-size: 22px !important;
+}
+
+.final-corazon {
+    margin-top: 20px;
+
+    color: #f0648c;
+
+    font-size: 28px;
+
+    animation:
+        latido 2s infinite ease-in-out;
 }
 
 
-/* ================================
+/* =========================================
    CORAZONES FLOTANTES
-================================ */
+========================================= */
 
 .hearts {
     position: fixed;
 
     inset: 0;
 
-    pointer-events: none;
-
     overflow: hidden;
+
+    pointer-events: none;
 
     z-index: 1;
 }
@@ -777,9 +1111,9 @@ button:hover span {
 .heart {
     position: absolute;
 
-    bottom: -30px;
+    bottom: -40px;
 
-    color: #d84f76;
+    color: #e75f87;
 
     opacity: 0;
 
@@ -787,8 +1121,8 @@ button:hover span {
         subir linear forwards;
 
     text-shadow:
-        0 0 10px
-        rgba(216, 79, 118, 0.4);
+        0 0 12px
+        rgba(240, 80, 125, .5);
 }
 
 @keyframes subir {
@@ -796,116 +1130,80 @@ button:hover span {
     0% {
         transform:
             translateY(0)
-            rotate(0deg);
+            rotate(0deg)
+            scale(.7);
 
         opacity: 0;
     }
 
     10% {
-        opacity: 0.5;
+        opacity: .65;
     }
 
     90% {
-        opacity: 0.2;
+        opacity: .2;
     }
 
     100% {
         transform:
             translateY(-110vh)
-            rotate(360deg);
+            rotate(360deg)
+            scale(1.2);
 
         opacity: 0;
     }
 }
 
 
-/* ================================
-   BRILLO
-================================ */
-
-.pantalla::after {
-    content: "";
-
-    position: fixed;
-
-    width: 300px;
-    height: 300px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(216, 79, 118, 0.06);
-
-    filter: blur(80px);
-
-    pointer-events: none;
-
-    top: 10%;
-    left: 5%;
-
-    animation:
-        moverBrillo
-        8s infinite alternate ease-in-out;
-}
-
-@keyframes moverBrillo {
-
-    from {
-        transform:
-            translate(0, 0);
-    }
-
-    to {
-        transform:
-            translate(70vw, 50vh);
-    }
-}
-
-
-/* ================================
+/* =========================================
    RESPONSIVE
-================================ */
+========================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
 
     .pantalla {
         padding:
-            25px 18px;
+            30px 18px;
     }
 
-    .corazon-principal {
-        font-size: 60px;
-    }
-
-    h1 {
-        font-size: 50px;
+    .pantalla-carta,
+    .pantalla-final {
+        align-items: flex-start;
     }
 
     .carta {
         padding:
-            35px 25px;
-    }
-
-    .carta h2 {
-        font-size: 35px;
+            55px 30px 40px;
     }
 
     .carta p {
-        font-size: 13px;
+        font-size: 14px;
+
+        line-height: 1.9;
+
+        text-align: left;
+    }
+
+    .album {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 12px;
     }
 
     .contador {
         gap: 5px;
-
-        margin-top: 45px;
     }
 
     .tiempo {
-        min-width: 65px;
+        min-width: 70px;
+
+        padding:
+            15px 5px;
     }
 
     .tiempo span {
-        font-size: 40px;
+        font-size: 38px;
     }
 
     .tiempo small {
@@ -914,27 +1212,72 @@ button:hover span {
         letter-spacing: 1px;
     }
 
-    .separador {
-        font-size: 25px;
+    .separador-tiempo {
+        font-size: 22px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    h1 {
+        font-size: 48px;
+    }
+
+    .corazon-principal {
+        font-size: 65px;
+    }
+
+    .descripcion {
+        font-size: 14px;
+    }
+
+    .carta {
+        padding:
+            50px 22px 35px;
+
+        border-radius: 20px;
+    }
+
+    .carta h2 {
+        font-size: 30px;
+    }
+
+    .esquina {
+        display: none;
+    }
+
+    .contador {
+        margin-top: 35px;
+    }
+
+    .tiempo {
+        min-width: 60px;
+
+        padding: 12px 3px;
+    }
+
+    .tiempo span {
+        font-size: 30px;
+    }
+
+    .tiempo small {
+        font-size: 6px;
+    }
+
+    .separador-tiempo {
+        font-size: 18px;
     }
 
     .album {
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 10px;
+        gap: 9px;
     }
 
-    .agradecimiento {
-        padding:
-            25px 10px;
+    .foto-vacia {
+        border-radius: 14px;
     }
 
-    .navegacion {
-        flex-wrap: wrap;
-    }
-
-    .navegacion button {
-        margin-top: 25px;
+    .texto-foto p {
+        font-size: 11px;
     }
 }
