@@ -68,7 +68,7 @@ body::before {
         transform 0.8s ease,
         visibility 0.8s;
 
-    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .pantalla.activa {
@@ -85,6 +85,63 @@ body::before {
 
     position: relative;
     z-index: 2;
+}
+
+
+/* =========================
+   CORRECCIÓN CARTA
+========================= */
+
+#pantalla2 {
+    display: block;
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 60px 30px 60px;
+}
+
+#pantalla2 .contenido {
+    width: 100%;
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    padding-bottom: 30px;
+}
+
+#pantalla2 .carta-container {
+    width: 100%;
+    max-width: 700px;
+
+    margin: 0 auto;
+}
+
+
+/* BARRA DE DESPLAZAMIENTO DE LA CARTA */
+
+#pantalla2::-webkit-scrollbar {
+    width: 8px;
+}
+
+#pantalla2::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+#pantalla2::-webkit-scrollbar-thumb {
+    background: #d84f76;
+    border-radius: 20px;
+}
+
+#pantalla2::-webkit-scrollbar-thumb:hover {
+    background: #e98aa3;
 }
 
 
@@ -251,68 +308,10 @@ button:hover span {
    CARTA
 ========================= */
 
-/*
-   IMPORTANTE:
-   La carta es larga.
-   Por eso NO se limita su altura.
-   La pantalla 2 tendrá desplazamiento
-   vertical cuando sea necesario.
-*/
-
-#pantalla2 {
-    align-items: flex-start;
-
-    justify-content: center;
-
-    overflow-y: auto;
-
-    overflow-x: hidden;
-
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
-
-
-/* Barra de desplazamiento de la carta */
-
-#pantalla2::-webkit-scrollbar {
-    width: 7px;
-}
-
-#pantalla2::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.02);
-}
-
-#pantalla2::-webkit-scrollbar-thumb {
-    background: rgba(216, 79, 118, 0.45);
-
-    border-radius: 20px;
-}
-
-#pantalla2::-webkit-scrollbar-thumb:hover {
-    background: rgba(216, 79, 118, 0.75);
-}
-
-
-.carta-container {
-    width: 100%;
-
-    max-width: 700px;
-
-    padding-top: 20px;
-
-    padding-bottom: 20px;
-}
-
-
 .carta {
     position: relative;
 
-    width: 100%;
-
     padding: 50px;
-
-    margin: 20px auto 0;
 
     border-radius: 20px;
 
@@ -338,12 +337,10 @@ button:hover span {
         aparecerCarta 1s ease;
 }
 
-
 @keyframes aparecerCarta {
 
     from {
         opacity: 0;
-
         transform:
             translateY(30px)
             scale(0.97);
@@ -351,13 +348,11 @@ button:hover span {
 
     to {
         opacity: 1;
-
         transform:
             translateY(0)
             scale(1);
     }
 }
-
 
 .carta-corazon {
     position: absolute;
@@ -372,7 +367,6 @@ button:hover span {
     height: 50px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -392,7 +386,6 @@ button:hover span {
     z-index: 5;
 }
 
-
 .carta h2 {
     font-family: Georgia, serif;
 
@@ -407,7 +400,6 @@ button:hover span {
     margin-bottom: 30px;
 }
 
-
 .carta p {
     color: #c9bec2;
 
@@ -418,11 +410,9 @@ button:hover span {
     margin-bottom: 18px;
 }
 
-
 .carta strong {
     color: #e98aa3;
 }
-
 
 .firma {
     text-align: right;
@@ -840,6 +830,8 @@ button:hover span {
     animation:
         moverBrillo
         8s infinite alternate ease-in-out;
+
+    z-index: 0;
 }
 
 @keyframes moverBrillo {
@@ -874,26 +866,34 @@ button:hover span {
         font-size: 50px;
     }
 
-    /*
-       La carta en celular también
-       puede crecer y desplazarse.
-    */
+    /* CARTA EN CELULAR */
 
     #pantalla2 {
-        align-items: flex-start;
+        display: block;
+
+        align-items: initial;
 
         padding:
-            45px 18px
-            30px;
+            50px 18px
+            40px;
 
         overflow-y: auto;
     }
 
-    .carta-container {
+    #pantalla2 .contenido {
+        width: 100%;
+
         max-width: 100%;
 
-        padding-top: 20px;
+        margin: 0 auto;
+
         padding-bottom: 20px;
+    }
+
+    #pantalla2 .carta-container {
+        width: 100%;
+
+        max-width: 100%;
     }
 
     .carta {
