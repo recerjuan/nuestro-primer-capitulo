@@ -1,126 +1,252 @@
 let pantallaActual = 1;
 
-function siguientePantalla() {
-    const pantallaAnterior = document.getElementById(
-        "pantalla" + pantallaActual
-    );
+const totalPantallas = 4;
 
-    pantallaActual++;
 
-    const pantallaSiguiente = document.getElementById(
-        "pantalla" + pantallaActual
-    );
+/* =========================================
+   CAMBIAR DE PANTALLA
+========================================= */
 
-    if (!pantallaSiguiente) {
-        pantallaActual--;
+function mostrarPantalla(numero) {
+
+    if (numero < 1 || numero > totalPantallas) {
         return;
     }
 
-    pantallaAnterior.classList.remove("activa");
+    document
+        .querySelectorAll(".pantalla")
+        .forEach(function (pantalla) {
 
-    setTimeout(function () {
-        pantallaSiguiente.classList.add("activa");
-    }, 100);
+            pantalla.classList.remove("activa");
+
+        });
+
+    const nuevaPantalla =
+        document.getElementById(
+            "pantalla" + numero
+        );
+
+    if (nuevaPantalla) {
+
+        nuevaPantalla.classList.add("activa");
+
+        pantallaActual = numero;
+
+    }
 }
+
+
+/* =========================================
+   SIGUIENTE
+========================================= */
+
+function siguientePantalla() {
+
+    if (pantallaActual < totalPantallas) {
+
+        mostrarPantalla(
+            pantallaActual + 1
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   ANTERIOR
+========================================= */
 
 function anteriorPantalla() {
-    if (pantallaActual <= 1) {
-        return;
+
+    if (pantallaActual > 1) {
+
+        mostrarPantalla(
+            pantallaActual - 1
+        );
+
     }
 
-    const pantallaActualElemento = document.getElementById(
-        "pantalla" + pantallaActual
-    );
-
-    pantallaActual--;
-
-    const pantallaAnterior = document.getElementById(
-        "pantalla" + pantallaActual
-    );
-
-    pantallaActualElemento.classList.remove("activa");
-
-    setTimeout(function () {
-        pantallaAnterior.classList.add("activa");
-    }, 100);
 }
 
 
-/* CONTADOR */
-
-const fechaInicio = new Date("2026-07-08T19:25:00-05:00");
+/* =========================================
+   CONTADOR
+========================================= */
 
 function actualizarContador() {
-    const ahora = new Date();
 
-    let diferencia = ahora.getTime() - fechaInicio.getTime();
+    /*
+       8 de julio de 2026
+       7:25 PM
+    */
+
+    const inicio =
+        new Date(
+            2026,
+            6,
+            8,
+            19,
+            25,
+            0
+        );
+
+    const ahora =
+        new Date();
+
+    let diferencia =
+        ahora.getTime() -
+        inicio.getTime();
+
 
     if (diferencia < 0) {
+
         diferencia = 0;
+
     }
 
-    const segundosTotales = Math.floor(diferencia / 1000);
 
-    const dias = Math.floor(segundosTotales / 86400);
+    const segundo =
+        1000;
 
-    const horas = Math.floor(
-        (segundosTotales % 86400) / 3600
-    );
+    const minuto =
+        segundo * 60;
 
-    const minutos = Math.floor(
-        (segundosTotales % 3600) / 60
-    );
+    const hora =
+        minuto * 60;
 
-    const segundos = segundosTotales % 60;
+    const dia =
+        hora * 24;
 
-    document.getElementById("dias").textContent = dias;
+
+    const dias =
+        Math.floor(
+            diferencia / dia
+        );
+
+    const horas =
+        Math.floor(
+            (diferencia % dia) / hora
+        );
+
+    const minutos =
+        Math.floor(
+            (diferencia % hora) / minuto
+        );
+
+    const segundos =
+        Math.floor(
+            (diferencia % minuto) / segundo
+        );
+
+
+    document.getElementById("dias").textContent =
+        dias;
 
     document.getElementById("horas").textContent =
-        horas.toString().padStart(2, "0");
+        String(horas).padStart(2, "0");
 
     document.getElementById("minutos").textContent =
-        minutos.toString().padStart(2, "0");
+        String(minutos).padStart(2, "0");
 
     document.getElementById("segundos").textContent =
-        segundos.toString().padStart(2, "0");
+        String(segundos).padStart(2, "0");
 }
+
 
 actualizarContador();
 
-setInterval(actualizarContador, 1000);
+setInterval(
+    actualizarContador,
+    1000
+);
 
 
-/* CORAZONES FLOTANTES */
-
-const contenedorCorazones = document.querySelector(".hearts");
+/* =========================================
+   CORAZONES
+========================================= */
 
 function crearCorazon() {
-    const corazon = document.createElement("div");
 
-    corazon.classList.add("heart");
+    const contenedor =
+        document.querySelector(".hearts");
 
-    corazon.innerHTML = "♥";
+    if (!contenedor) {
+        return;
+    }
 
-    corazon.style.left =
-        Math.random() * 100 + "%";
+    const corazon =
+        document.createElement("div");
+
+    corazon.className = "heart";
+
+    corazon.textContent =
+        Math.random() > 0.5
+            ? "♥"
+            : "♡";
+
+
+    const posicion =
+        Math.random() * 100;
 
     const tamaño =
-        Math.random() * 15 + 10;
+        10 + Math.random() * 18;
+
+    const duracion =
+        6 + Math.random() * 7;
+
+
+    corazon.style.left =
+        posicion + "%";
 
     corazon.style.fontSize =
         tamaño + "px";
 
-    const duracion =
-        Math.random() * 8 + 7;
-
     corazon.style.animationDuration =
         duracion + "s";
 
-    contenedorCorazones.appendChild(corazon);
 
-    setTimeout(function () {
-        corazon.remove();
-    }, duracion * 1000);
+    contenedor.appendChild(
+        corazon
+    );
+
+
+    setTimeout(
+        function () {
+
+            corazon.remove();
+
+        },
+        duracion * 1000
+    );
 }
 
-setInterval(crearCorazon, 900);
+
+setInterval(
+    crearCorazon,
+    700
+);
+
+
+/* =========================================
+   TECLADO
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function (evento) {
+
+        if (evento.key === "ArrowRight") {
+
+            siguientePantalla();
+
+        }
+
+        if (evento.key === "ArrowLeft") {
+
+            anteriorPantalla();
+
+        }
+
+    }
+);
