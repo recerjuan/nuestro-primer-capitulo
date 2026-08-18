@@ -18,9 +18,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    FONDO
-========================= */
+========================================================= */
 
 body::before {
     content: "";
@@ -44,9 +44,9 @@ body::before {
 }
 
 
-/* =========================
+/* =========================================================
    PANTALLAS
-========================= */
+========================================================= */
 
 .pantalla {
     position: fixed;
@@ -88,9 +88,9 @@ body::before {
 }
 
 
-/* =========================
-   CORRECCIÓN CARTA
-========================= */
+/* =========================================================
+   CORRECCIÓN ESPECIAL PARA LA CARTA LARGA
+========================================================= */
 
 #pantalla2 {
     display: block;
@@ -105,7 +105,7 @@ body::before {
     overflow-y: auto;
     overflow-x: hidden;
 
-    padding: 60px 30px 60px;
+    padding: 65px 30px 70px;
 }
 
 #pantalla2 .contenido {
@@ -125,7 +125,7 @@ body::before {
 }
 
 
-/* BARRA DE DESPLAZAMIENTO DE LA CARTA */
+/* BARRA DE DESPLAZAMIENTO */
 
 #pantalla2::-webkit-scrollbar {
     width: 8px;
@@ -145,9 +145,9 @@ body::before {
 }
 
 
-/* =========================
+/* =========================================================
    INICIO
-========================= */
+========================================================= */
 
 .inicio {
     display: flex;
@@ -218,9 +218,9 @@ h1 span {
 }
 
 
-/* =========================
+/* =========================================================
    BOTONES
-========================= */
+========================================================= */
 
 button {
     margin-top: 40px;
@@ -270,9 +270,9 @@ button:hover span {
 }
 
 
-/* =========================
+/* =========================================================
    NAVEGACIÓN
-========================= */
+========================================================= */
 
 .navegacion {
     display: flex;
@@ -304,30 +304,35 @@ button:hover span {
 }
 
 
-/* =========================
+/* =========================================================
    CARTA
-========================= */
+========================================================= */
 
 .carta {
     position: relative;
 
-    padding: 50px;
+    width: 100%;
 
-    border-radius: 20px;
+    padding: 65px 50px 50px;
+
+    border-radius: 25px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.07),
-            rgba(255, 255, 255, 0.02)
+            rgba(255, 255, 255, 0.09),
+            rgba(255, 255, 255, 0.025)
         );
 
     border: 1px solid
-        rgba(255, 255, 255, 0.1);
+        rgba(255, 150, 180, 0.20);
 
     box-shadow:
         0 30px 80px
-        rgba(0, 0, 0, 0.4);
+        rgba(0, 0, 0, 0.45),
+
+        0 0 40px
+        rgba(216, 79, 118, 0.08);
 
     backdrop-filter: blur(15px);
 
@@ -337,56 +342,61 @@ button:hover span {
         aparecerCarta 1s ease;
 }
 
-@keyframes aparecerCarta {
 
-    from {
-        opacity: 0;
-        transform:
-            translateY(30px)
-            scale(0.97);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
+/* =========================================================
+   CORAZÓN SOBRE LA CARTA
+========================================================= */
 
 .carta-corazon {
     position: absolute;
 
-    top: -25px;
+    top: -28px;
     left: 50%;
 
     transform:
         translateX(-50%);
 
-    width: 50px;
-    height: 50px;
+    width: 58px;
+    height: 58px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     border-radius: 50%;
 
-    background: #d84f76;
+    background:
+        linear-gradient(
+            135deg,
+            #e98aa3,
+            #c93663
+        );
 
-    font-size: 22px;
+    color: white;
+
+    font-size: 25px;
+
+    border: 4px solid #0d080c;
 
     box-shadow:
-        0 10px 30px
-        rgba(216, 79, 118, 0.4);
+        0 8px 30px
+        rgba(216, 79, 118, 0.45);
 
     animation:
         latido 1.5s infinite ease-in-out;
 
-    z-index: 5;
+    z-index: 10;
 }
 
+
+/* =========================================================
+   TÍTULO DE LA CARTA
+========================================================= */
+
 .carta h2 {
+    position: relative;
+
     font-family: Georgia, serif;
 
     text-align: center;
@@ -395,41 +405,132 @@ button:hover span {
 
     font-weight: 500;
 
-    line-height: 1.15;
+    line-height: 1.2;
 
-    margin-bottom: 30px;
+    color: #ffffff;
+
+    margin-bottom: 38px;
+
+    padding-bottom: 25px;
 }
 
-.carta p {
-    color: #c9bec2;
 
-    line-height: 1.9;
+/* DECORACIÓN */
+
+.carta h2::after {
+    content: "♥  ♡  ♥";
+
+    display: block;
+
+    margin-top: 18px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    letter-spacing: 8px;
+
+    color: #e98aa3;
+
+    opacity: 0.85;
+}
+
+
+/* =========================================================
+   TEXTO DE LA CARTA
+========================================================= */
+
+.carta p {
+    color: #d1c4c8;
+
+    line-height: 1.95;
 
     font-size: 14px;
 
-    margin-bottom: 18px;
+    margin-bottom: 20px;
+
+    text-align: justify;
 }
+
+
+/* PRIMERA LETRA */
+
+.carta p:not(.firma):first-of-type::first-letter {
+    font-family: Georgia, serif;
+
+    font-size: 42px;
+
+    color: #e98aa3;
+
+    float: left;
+
+    line-height: 0.9;
+
+    padding-right: 7px;
+
+    padding-top: 5px;
+}
+
+
+/* TEXTO DESTACADO */
 
 .carta strong {
     color: #e98aa3;
 }
 
+
+/* =========================================================
+   FIRMA
+========================================================= */
+
 .firma {
-    text-align: right;
+    text-align: right !important;
 
     font-family: Georgia, serif;
 
     font-size: 22px !important;
 
+    line-height: 1.5 !important;
+
     color: #e98aa3 !important;
 
-    margin-top: 30px;
+    margin-top: 35px !important;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid
+        rgba(255, 150, 180, 0.15);
 }
 
 
-/* =========================
+/* =========================================================
+   ANIMACIÓN CARTA
+========================================================= */
+
+@keyframes aparecerCarta {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
    CONTADOR
-========================= */
+========================================================= */
 
 .titulo-contador {
     font-family: Georgia, serif;
@@ -444,6 +545,7 @@ button:hover span {
 
 .fecha-inicio {
     color: #a99da2;
+
     font-size: 13px;
 }
 
@@ -511,9 +613,9 @@ button:hover span {
 }
 
 
-/* =========================
+/* =========================================================
    PANTALLA FINAL
-========================= */
+========================================================= */
 
 .final {
     max-width: 850px;
@@ -541,9 +643,9 @@ button:hover span {
 }
 
 
-/* =========================
+/* =========================================================
    ÁLBUM
-========================= */
+========================================================= */
 
 .album {
     display: grid;
@@ -590,9 +692,9 @@ button:hover span {
 }
 
 
-/* =========================
+/* =========================================================
    PRIMERA FOTO
-========================= */
+========================================================= */
 
 .foto-con-imagen {
     position: relative;
@@ -672,9 +774,9 @@ button:hover span {
 }
 
 
-/* =========================
+/* =========================================================
    FOTOS VACÍAS
-========================= */
+========================================================= */
 
 .foto-vacia > span {
     font-size: 30px;
@@ -693,9 +795,9 @@ button:hover span {
 }
 
 
-/* =========================
+/* =========================================================
    AGRADECIMIENTO
-========================= */
+========================================================= */
 
 .agradecimiento {
     margin-top: 40px;
@@ -742,9 +844,9 @@ button:hover span {
 }
 
 
-/* =========================
+/* =========================================================
    CORAZONES FLOTANTES
-========================= */
+========================================================= */
 
 .hearts {
     position: fixed;
@@ -803,9 +905,9 @@ button:hover span {
 }
 
 
-/* =========================
+/* =========================================================
    BRILLO DE FONDO
-========================= */
+========================================================= */
 
 .pantalla::after {
     content: "";
@@ -848,9 +950,9 @@ button:hover span {
 }
 
 
-/* =========================
+/* =========================================================
    RESPONSIVE
-========================= */
+========================================================= */
 
 @media (max-width: 700px) {
 
@@ -866,18 +968,17 @@ button:hover span {
         font-size: 50px;
     }
 
+
     /* CARTA EN CELULAR */
 
     #pantalla2 {
         display: block;
 
-        align-items: initial;
-
         padding:
-            50px 18px
-            40px;
+            55px 18px 45px;
 
         overflow-y: auto;
+        overflow-x: hidden;
     }
 
     #pantalla2 .contenido {
@@ -899,22 +1000,51 @@ button:hover span {
     .carta {
         width: 100%;
 
-        padding: 35px 25px;
+        padding:
+            60px 25px 35px;
 
-        margin-top: 20px;
+        margin-top: 15px;
+    }
+
+    .carta-corazon {
+        width: 52px;
+        height: 52px;
+
+        font-size: 22px;
+
+        top: -25px;
     }
 
     .carta h2 {
-        font-size: 35px;
+        font-size: 32px;
 
         line-height: 1.2;
+
+        margin-bottom: 30px;
+    }
+
+    .carta h2::after {
+        font-size: 13px;
+
+        letter-spacing: 5px;
     }
 
     .carta p {
         font-size: 13px;
 
         line-height: 1.9;
+
+        text-align: left;
     }
+
+    .firma {
+        font-size: 19px !important;
+
+        text-align: right !important;
+    }
+
+
+    /* CONTADOR */
 
     .contador {
         gap: 5px;
@@ -940,6 +1070,9 @@ button:hover span {
         font-size: 25px;
     }
 
+
+    /* ÁLBUM */
+
     .album {
         grid-template-columns:
             repeat(2, 1fr);
@@ -947,9 +1080,15 @@ button:hover span {
         gap: 10px;
     }
 
+
+    /* AGRADECIMIENTO */
+
     .agradecimiento {
         padding: 25px 10px;
     }
+
+
+    /* BOTONES */
 
     .navegacion {
         flex-wrap: wrap;
