@@ -125,7 +125,7 @@ body::before {
 }
 
 
-/* BARRA DE DESPLAZAMIENTO */
+/* SCROLL DE LA CARTA */
 
 #pantalla2::-webkit-scrollbar {
     width: 8px;
@@ -136,7 +136,7 @@ body::before {
 }
 
 #pantalla2::-webkit-scrollbar-thumb {
-    background: #d7193f;
+    background: #e6002d;
     border-radius: 20px;
 }
 
@@ -211,7 +211,7 @@ h1 span {
 
     margin-top: 30px;
 
-    color: #c5b7bc;
+    color: #b8aeb2;
 
     font-size: 15px;
 
@@ -264,7 +264,7 @@ button:hover {
 
     box-shadow:
         0 10px 30px
-        rgba(215, 25, 63, 0.4);
+        rgba(216, 79, 118, 0.4);
 }
 
 button:hover span {
@@ -334,7 +334,7 @@ button:hover span {
         rgba(0, 0, 0, 0.45),
 
         0 0 50px
-        rgba(255, 23, 68, 0.08);
+        rgba(255, 23, 68, 0.10);
 
     backdrop-filter: blur(15px);
 
@@ -346,7 +346,7 @@ button:hover span {
 
 
 /* =========================================================
-   CORAZÓN SOBRE LA CARTA
+   CORAZÓN SUPERIOR
 ========================================================= */
 
 .carta-corazon {
@@ -354,9 +354,6 @@ button:hover span {
 
     top: -28px;
     left: 50%;
-
-    transform:
-        translateX(-50%);
 
     width: 58px;
     height: 58px;
@@ -377,18 +374,18 @@ button:hover span {
 
     color: #ffffff;
 
-    font-size: 25px;
+    font-size: 26px;
 
     border: 4px solid #0d080c;
 
     box-shadow:
-        0 8px 30px
-        rgba(255, 23, 68, 0.6);
-
-    animation:
-        latidoRojo 1.2s infinite ease-in-out;
+        0 0 15px #ff1744,
+        0 0 35px rgba(255, 23, 68, 0.7);
 
     z-index: 10;
+
+    animation:
+        latidoCarta 1.1s infinite ease-in-out;
 }
 
 
@@ -396,7 +393,7 @@ button:hover span {
    TÍTULO DE LA CARTA
 ========================================================= */
 
-.carta h2 {
+.titulo-carta {
     position: relative;
 
     font-family: Georgia, serif;
@@ -407,30 +404,28 @@ button:hover span {
 
     font-weight: 500;
 
-    line-height: 1.2;
+    line-height: 1.25;
 
-    color: #ffd1dc;
+    color: #f5dce3;
 
-    margin-bottom: 38px;
+    margin-bottom: 45px;
 
-    padding-bottom: 25px;
-
-    text-shadow:
-        0 0 18px
-        rgba(255, 80, 120, 0.15);
+    padding-bottom: 10px;
 }
 
 
-/* PALABRAS PRINCIPALES */
+/* TEXTO PRINCIPAL DEL TÍTULO */
 
-.carta h2 span {
-    color: #ff5577;
+.titulo-carta span {
+    display: inline-block;
 
-    font-weight: 600;
+    color: #ff4164;
+
+    font-weight: bold;
 
     text-shadow:
-        0 0 15px
-        rgba(255, 30, 70, 0.35);
+        0 0 8px rgba(255, 23, 68, 0.5),
+        0 0 20px rgba(255, 23, 68, 0.25);
 }
 
 
@@ -438,30 +433,32 @@ button:hover span {
    CORAZONES DECORATIVOS
 ========================================================= */
 
-.carta h2::after {
-    content: "♥  ♡  ♥";
+.titulo-carta::after {
+    content: "♥   ♡   ♥";
 
     display: block;
 
-    margin-top: 20px;
+    margin-top: 22px;
 
     font-family: Arial, sans-serif;
 
-    font-size: 20px;
+    font-size: 24px;
 
-    letter-spacing: 12px;
+    font-weight: normal;
+
+    letter-spacing: 4px;
 
     color: #ff1744;
 
-    opacity: 1;
-
     text-shadow:
-        0 0 8px rgba(255, 23, 68, 0.9),
-        0 0 18px rgba(255, 23, 68, 0.65),
-        0 0 30px rgba(255, 23, 68, 0.35);
+        0 0 5px #ff1744,
+        0 0 12px #ff1744,
+        0 0 25px rgba(255, 23, 68, 0.8);
 
     animation:
-        corazonesLatido 1.4s infinite ease-in-out;
+        latidoCorazones 1.1s infinite ease-in-out;
+
+    transform-origin: center;
 }
 
 
@@ -469,24 +466,37 @@ button:hover span {
    ANIMACIÓN CORAZONES
 ========================================================= */
 
-@keyframes corazonesLatido {
+@keyframes latidoCorazones {
 
     0%,
     100% {
         transform: scale(1);
     }
 
-    50% {
+    15% {
         transform: scale(1.18);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.15);
+    }
+
+    60%,
+    100% {
+        transform: scale(1);
     }
 }
 
 
 /* =========================================================
-   ANIMACIÓN CORAZÓN PRINCIPAL DE LA CARTA
+   ANIMACIÓN CORAZÓN SUPERIOR
 ========================================================= */
 
-@keyframes latidoRojo {
+@keyframes latidoCarta {
 
     0%,
     100% {
@@ -495,10 +505,29 @@ button:hover span {
             scale(1);
     }
 
-    50% {
+    15% {
         transform:
             translateX(-50%)
             scale(1.18);
+    }
+
+    30% {
+        transform:
+            translateX(-50%)
+            scale(1);
+    }
+
+    45% {
+        transform:
+            translateX(-50%)
+            scale(1.12);
+    }
+
+    60%,
+    100% {
+        transform:
+            translateX(-50%)
+            scale(1);
     }
 }
 
@@ -519,10 +548,6 @@ button:hover span {
     text-align: justify;
 }
 
-.carta strong {
-    color: #ff6b8a;
-}
-
 
 /* PRIMERA LETRA */
 
@@ -531,7 +556,7 @@ button:hover span {
 
     font-size: 42px;
 
-    color: #ff5577;
+    color: #ff4164;
 
     float: left;
 
@@ -540,6 +565,13 @@ button:hover span {
     padding-right: 7px;
 
     padding-top: 5px;
+}
+
+
+/* TEXTO DESTACADO */
+
+.carta strong {
+    color: #ff4164;
 }
 
 
@@ -569,7 +601,7 @@ button:hover span {
 
 
 /* =========================================================
-   ANIMACIÓN CARTA
+   ANIMACIÓN DE LA CARTA
 ========================================================= */
 
 @keyframes aparecerCarta {
@@ -659,7 +691,7 @@ button:hover span {
 .separador {
     font-size: 40px;
 
-    color: #6d303e;
+    color: #59434b;
 
     margin-bottom: 20px;
 }
@@ -1035,7 +1067,7 @@ button:hover span {
     }
 
 
-    /* CARTA EN CELULAR */
+    /* CARTA */
 
     #pantalla2 {
         display: block;
@@ -1081,7 +1113,7 @@ button:hover span {
         top: -25px;
     }
 
-    .carta h2 {
+    .titulo-carta {
         font-size: 32px;
 
         line-height: 1.2;
@@ -1089,10 +1121,10 @@ button:hover span {
         margin-bottom: 30px;
     }
 
-    .carta h2::after {
-        font-size: 15px;
+    .titulo-carta::after {
+        font-size: 19px;
 
-        letter-spacing: 5px;
+        letter-spacing: 3px;
 
         margin-top: 16px;
     }
