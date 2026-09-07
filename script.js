@@ -1,9 +1,7 @@
 let pantallaActual = 1;
 const totalPantallas = 4;
 
-/* =========================================
-   CAMBIAR DE PANTALLA
-========================================= */
+/* NAVEGACIÓN DE PANTALLAS */
 function mostrarPantalla(numero) {
     if (numero < 1 || numero > totalPantallas) return;
 
@@ -30,38 +28,31 @@ function anteriorPantalla() {
     }
 }
 
-/* NAVEGACIÓN CON TECLAS DE FLECHA */
-document.addEventListener('keydown', function (e) {
-    if (e.key === "ArrowRight") siguientePantalla();
-    if (e.key === "ArrowLeft") anteriorPantalla();
-});
-
-/* =========================================
-   REPRODUCTOR DE MÚSICA
-========================================= */
+/* MÚSICA */
 let reproduciendo = false;
 const audio = document.getElementById('musicaFondo');
 
 function toggleMusica() {
+    if (!audio) return;
+
     if (reproduciendo) {
         audio.pause();
         document.getElementById('textoMusica').innerText = "Reproducir Música";
         document.getElementById('iconoMusica').innerText = "🎵";
     } else {
-        audio.play().catch(() => {
-            console.log("Auto-play prevenido por el navegador.");
+        audio.play().then(() => {
+            document.getElementById('textoMusica').innerText = "Pausar Música";
+            document.getElementById('iconoMusica').innerText = "🎶";
+        }).catch(err => {
+            console.log("Error al reproducir audio: ", err);
+            alert("Asegúrate de haber guardado el archivo como 'a-donde-vamos.mp3' en la misma carpeta.");
         });
-        document.getElementById('textoMusica').innerText = "Pausar Música";
-        document.getElementById('iconoMusica').innerText = "🎶";
     }
     reproduciendo = !reproduciendo;
 }
 
-/* =========================================
-   CONTADOR
-========================================= */
+/* CONTADOR */
 function actualizarContador() {
-    // Fecha de inicio: 8 de julio de 2026, 7:25 PM
     const inicio = new Date(2026, 6, 8, 19, 25, 0);
     const ahora = new Date();
 
@@ -87,9 +78,7 @@ function actualizarContador() {
 actualizarContador();
 setInterval(actualizarContador, 1000);
 
-/* =========================================
-   VISOR DE FOTOS (MODAL)
-========================================= */
+/* VISOR DE FOTOS (MODAL) */
 function abrirModal(src, texto) {
     const modal = document.getElementById("modalFoto");
     const imgModal = document.getElementById("imagenModal");
@@ -104,9 +93,7 @@ function cerrarModal() {
     document.getElementById("modalFoto").style.display = "none";
 }
 
-/* =========================================
-   CORAZONES FLOTANTES
-========================================= */
+/* CORAZONES FLOTANTES */
 function crearCorazon() {
     const contenedor = document.querySelector(".hearts");
     if (!contenedor) return;
@@ -125,9 +112,7 @@ function crearCorazon() {
 
     contenedor.appendChild(corazon);
 
-    setTimeout(function () {
-        corazon.remove();
-    }, duracion * 1000);
+    setTimeout(() => { corazon.remove(); }, duracion * 1000);
 }
 
 setInterval(crearCorazon, 400);
