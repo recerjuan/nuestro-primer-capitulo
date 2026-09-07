@@ -1,32 +1,29 @@
+/* ==========================================
+   NUESTRA HISTORIA
+   JavaScript
+========================================== */
+
+
+/* ==========================================
+   CAMBIO DE PANTALLAS
+========================================== */
+
 let pantallaActual = 1;
 
-const totalPantallas = 4;
-
-
-/* =========================================
-   CAMBIAR DE PANTALLA
-========================================= */
 
 function mostrarPantalla(numero) {
 
-    if (numero < 1 || numero > totalPantallas) {
-        return;
-    }
+    const pantallas = document.querySelectorAll(".pantalla");
 
+    pantallas.forEach(function(pantalla) {
 
-    document
-        .querySelectorAll(".pantalla")
-        .forEach(function (pantalla) {
+        pantalla.classList.remove("activa");
 
-            pantalla.classList.remove("activa");
-
-        });
+    });
 
 
     const nuevaPantalla =
-        document.getElementById(
-            "pantalla" + numero
-        );
+        document.getElementById("pantalla" + numero);
 
 
     if (nuevaPantalla) {
@@ -40,72 +37,65 @@ function mostrarPantalla(numero) {
 }
 
 
-/* =========================================
-   SIGUIENTE
-========================================= */
-
 function siguientePantalla() {
 
-    if (pantallaActual < totalPantallas) {
+    if (pantallaActual < 4) {
 
-        mostrarPantalla(
-            pantallaActual + 1
-        );
+        mostrarPantalla(pantallaActual + 1);
 
     }
 
 }
 
-
-/* =========================================
-   ANTERIOR
-========================================= */
 
 function anteriorPantalla() {
 
     if (pantallaActual > 1) {
 
-        mostrarPantalla(
-            pantallaActual - 1
-        );
+        mostrarPantalla(pantallaActual - 1);
 
     }
 
 }
 
 
-/* =========================================
-   CARTA INTERACTIVA
-========================================= */
+/* ==========================================
+   CARTA 3D
+========================================== */
 
-function voltearCarta() {
+document.addEventListener("DOMContentLoaded", function() {
 
     const carta =
-        document.querySelector(".carta-flip");
+        document.getElementById("cartaFlip");
 
 
-    if (!carta) {
-        return;
+    if (carta) {
+
+        carta.addEventListener("click", function() {
+
+            carta.classList.toggle("abierta");
+
+        });
+
     }
 
-
-    carta.classList.toggle("abierta");
-
-}
+});
 
 
-/* =========================================
+/* ==========================================
    CONTADOR
-========================================= */
+========================================== */
 
 function actualizarContador() {
 
     /*
+       Fecha en que comenzó la relación:
+
        8 de julio de 2026
        7:25 PM
     */
 
-    const inicio =
+    const fechaInicio =
         new Date(
             2026,
             6,
@@ -116,14 +106,18 @@ function actualizarContador() {
         );
 
 
-    const ahora =
-        new Date();
+    const ahora = new Date();
 
 
     let diferencia =
         ahora.getTime() -
-        inicio.getTime();
+        fechaInicio.getTime();
 
+
+    /*
+       Si la fecha todavía no ha llegado,
+       mostramos todo en cero.
+    */
 
     if (diferencia < 0) {
 
@@ -135,23 +129,18 @@ function actualizarContador() {
     const segundo =
         1000;
 
-
     const minuto =
         segundo * 60;
 
-
     const hora =
         minuto * 60;
-
 
     const dia =
         hora * 24;
 
 
     const dias =
-        Math.floor(
-            diferencia / dia
-        );
+        Math.floor(diferencia / dia);
 
 
     const horas =
@@ -172,26 +161,62 @@ function actualizarContador() {
         );
 
 
-    document.getElementById("dias").textContent =
-        dias;
+    const elementoDias =
+        document.getElementById("dias");
+
+    const elementoHoras =
+        document.getElementById("horas");
+
+    const elementoMinutos =
+        document.getElementById("minutos");
+
+    const elementoSegundos =
+        document.getElementById("segundos");
 
 
-    document.getElementById("horas").textContent =
-        String(horas).padStart(2, "0");
+    if (elementoDias) {
+
+        elementoDias.textContent = dias;
+
+    }
 
 
-    document.getElementById("minutos").textContent =
-        String(minutos).padStart(2, "0");
+    if (elementoHoras) {
+
+        elementoHoras.textContent =
+            horas.toString().padStart(2, "0");
+
+    }
 
 
-    document.getElementById("segundos").textContent =
-        String(segundos).padStart(2, "0");
+    if (elementoMinutos) {
+
+        elementoMinutos.textContent =
+            minutos.toString().padStart(2, "0");
+
+    }
+
+
+    if (elementoSegundos) {
+
+        elementoSegundos.textContent =
+            segundos.toString().padStart(2, "0");
+
+    }
 
 }
 
 
+/*
+   Actualizar inmediatamente
+*/
+
 actualizarContador();
 
+
+/*
+   Actualizar cada segundo
+*/
 
 setInterval(
     actualizarContador,
@@ -199,14 +224,47 @@ setInterval(
 );
 
 
-/* =========================================
-   CORAZONES
-========================================= */
+/* ==========================================
+   TECLADO
+========================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        /*
+           Flecha derecha
+        */
+
+        if (event.key === "ArrowRight") {
+
+            siguientePantalla();
+
+        }
+
+
+        /*
+           Flecha izquierda
+        */
+
+        if (event.key === "ArrowLeft") {
+
+            anteriorPantalla();
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   CORAZONES FLOTANTES
+========================================== */
 
 function crearCorazon() {
 
     const contenedor =
-        document.querySelector(".hearts");
+        document.getElementById("corazones");
 
 
     if (!contenedor) {
@@ -218,56 +276,65 @@ function crearCorazon() {
         document.createElement("div");
 
 
-    corazon.className =
-        "heart";
+    corazon.classList.add(
+        "corazon-flotante"
+    );
 
 
-    corazon.textContent =
-        Math.random() > 0.5
-            ? "♥"
-            : "♡";
+    corazon.textContent = "♥";
 
 
-    const posicion =
-        Math.random() * 100;
-
-
-    const tamaño =
-        10 + Math.random() * 18;
-
-
-    const duracion =
-        6 + Math.random() * 7;
-
+    /*
+       Posición horizontal aleatoria
+    */
 
     corazon.style.left =
-        posicion + "%";
+        Math.random() * 100 + "%";
+
+
+    /*
+       Tamaño aleatorio
+    */
+
+    const tamanio =
+        Math.random() * 20 + 12;
 
 
     corazon.style.fontSize =
-        tamaño + "px";
+        tamanio + "px";
+
+
+    /*
+       Duración aleatoria
+    */
+
+    const duracion =
+        Math.random() * 5 + 5;
 
 
     corazon.style.animationDuration =
         duracion + "s";
 
 
-    contenedor.appendChild(
-        corazon
-    );
+    contenedor.appendChild(corazon);
 
 
-    setTimeout(
-        function () {
+    /*
+       Eliminar después de la animación
+    */
 
-            corazon.remove();
+    setTimeout(function() {
 
-        },
-        duracion * 1000
-    );
+        corazon.remove();
+
+    }, duracion * 1000);
 
 }
 
+
+/*
+   Crear corazones periódicamente
+*/
 
 setInterval(
     crearCorazon,
@@ -275,26 +342,15 @@ setInterval(
 );
 
 
-/* =========================================
-   TECLADO
-========================================= */
+/* ==========================================
+   INICIAR ALGUNOS CORAZONES
+========================================== */
 
-document.addEventListener(
-    "keydown",
-    function (evento) {
+for (let i = 0; i < 8; i++) {
 
-        if (evento.key === "ArrowRight") {
+    setTimeout(
+        crearCorazon,
+        i * 300
+    );
 
-            siguientePantalla();
-
-        }
-
-
-        if (evento.key === "ArrowLeft") {
-
-            anteriorPantalla();
-
-        }
-
-    }
-);
+}
