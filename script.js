@@ -1,356 +1,133 @@
-/* ==========================================
-   NUESTRA HISTORIA
-   JavaScript
-========================================== */
-
-
-/* ==========================================
-   CAMBIO DE PANTALLAS
-========================================== */
-
 let pantallaActual = 1;
+const totalPantallas = 4;
 
-
+/* =========================================
+   CAMBIAR DE PANTALLA
+========================================= */
 function mostrarPantalla(numero) {
+    if (numero < 1 || numero > totalPantallas) return;
 
-    const pantallas = document.querySelectorAll(".pantalla");
-
-    pantallas.forEach(function(pantalla) {
-
+    document.querySelectorAll(".pantalla").forEach(function (pantalla) {
         pantalla.classList.remove("activa");
-
     });
 
-
-    const nuevaPantalla =
-        document.getElementById("pantalla" + numero);
-
-
+    const nuevaPantalla = document.getElementById("pantalla" + numero);
     if (nuevaPantalla) {
-
         nuevaPantalla.classList.add("activa");
-
         pantallaActual = numero;
-
     }
-
 }
-
 
 function siguientePantalla() {
-
-    if (pantallaActual < 4) {
-
+    if (pantallaActual < totalPantallas) {
         mostrarPantalla(pantallaActual + 1);
-
     }
-
 }
-
 
 function anteriorPantalla() {
-
     if (pantallaActual > 1) {
-
         mostrarPantalla(pantallaActual - 1);
-
     }
-
 }
 
-
-/* ==========================================
-   CARTA 3D
-========================================== */
-
-document.addEventListener("DOMContentLoaded", function() {
-
-    const carta =
-        document.getElementById("cartaFlip");
-
-
-    if (carta) {
-
-        carta.addEventListener("click", function() {
-
-            carta.classList.toggle("abierta");
-
-        });
-
-    }
-
+/* NAVEGACIÓN CON TECLAS DE FLECHA */
+document.addEventListener('keydown', function (e) {
+    if (e.key === "ArrowRight") siguientePantalla();
+    if (e.key === "ArrowLeft") anteriorPantalla();
 });
 
+/* =========================================
+   REPRODUCTOR DE MÚSICA
+========================================= */
+let reproduciendo = false;
+const audio = document.getElementById('musicaFondo');
 
-/* ==========================================
-   CONTADOR
-========================================== */
-
-function actualizarContador() {
-
-    /*
-       Fecha en que comenzó la relación:
-
-       8 de julio de 2026
-       7:25 PM
-    */
-
-    const fechaInicio =
-        new Date(
-            2026,
-            6,
-            8,
-            19,
-            25,
-            0
-        );
-
-
-    const ahora = new Date();
-
-
-    let diferencia =
-        ahora.getTime() -
-        fechaInicio.getTime();
-
-
-    /*
-       Si la fecha todavía no ha llegado,
-       mostramos todo en cero.
-    */
-
-    if (diferencia < 0) {
-
-        diferencia = 0;
-
+function toggleMusica() {
+    if (reproduciendo) {
+        audio.pause();
+        document.getElementById('textoMusica').innerText = "Reproducir Música";
+        document.getElementById('iconoMusica').innerText = "🎵";
+    } else {
+        audio.play().catch(() => {
+            console.log("Auto-play prevenido por el navegador.");
+        });
+        document.getElementById('textoMusica').innerText = "Pausar Música";
+        document.getElementById('iconoMusica').innerText = "🎶";
     }
-
-
-    const segundo =
-        1000;
-
-    const minuto =
-        segundo * 60;
-
-    const hora =
-        minuto * 60;
-
-    const dia =
-        hora * 24;
-
-
-    const dias =
-        Math.floor(diferencia / dia);
-
-
-    const horas =
-        Math.floor(
-            (diferencia % dia) / hora
-        );
-
-
-    const minutos =
-        Math.floor(
-            (diferencia % hora) / minuto
-        );
-
-
-    const segundos =
-        Math.floor(
-            (diferencia % minuto) / segundo
-        );
-
-
-    const elementoDias =
-        document.getElementById("dias");
-
-    const elementoHoras =
-        document.getElementById("horas");
-
-    const elementoMinutos =
-        document.getElementById("minutos");
-
-    const elementoSegundos =
-        document.getElementById("segundos");
-
-
-    if (elementoDias) {
-
-        elementoDias.textContent = dias;
-
-    }
-
-
-    if (elementoHoras) {
-
-        elementoHoras.textContent =
-            horas.toString().padStart(2, "0");
-
-    }
-
-
-    if (elementoMinutos) {
-
-        elementoMinutos.textContent =
-            minutos.toString().padStart(2, "0");
-
-    }
-
-
-    if (elementoSegundos) {
-
-        elementoSegundos.textContent =
-            segundos.toString().padStart(2, "0");
-
-    }
-
+    reproduciendo = !reproduciendo;
 }
 
+/* =========================================
+   CONTADOR
+========================================= */
+function actualizarContador() {
+    // Fecha de inicio: 8 de julio de 2026, 7:25 PM
+    const inicio = new Date(2026, 6, 8, 19, 25, 0);
+    const ahora = new Date();
 
-/*
-   Actualizar inmediatamente
-*/
+    let diferencia = ahora.getTime() - inicio.getTime();
+    if (diferencia < 0) diferencia = 0;
+
+    const segundo = 1000;
+    const minuto = segundo * 60;
+    const hora = minuto * 60;
+    const dia = hora * 24;
+
+    const dias = Math.floor(diferencia / dia);
+    const horas = Math.floor((diferencia % dia) / hora);
+    const minutos = Math.floor((diferencia % hora) / minuto);
+    const segundos = Math.floor((diferencia % minuto) / segundo);
+
+    document.getElementById("dias").textContent = dias;
+    document.getElementById("horas").textContent = String(horas).padStart(2, "0");
+    document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
+    document.getElementById("segundos").textContent = String(segundos).padStart(2, "0");
+}
 
 actualizarContador();
+setInterval(actualizarContador, 1000);
 
+/* =========================================
+   VISOR DE FOTOS (MODAL)
+========================================= */
+function abrirModal(src, texto) {
+    const modal = document.getElementById("modalFoto");
+    const imgModal = document.getElementById("imagenModal");
+    const caption = document.getElementById("captionModal");
 
-/*
-   Actualizar cada segundo
-*/
+    modal.style.display = "flex";
+    imgModal.src = src;
+    caption.innerText = texto;
+}
 
-setInterval(
-    actualizarContador,
-    1000
-);
+function cerrarModal() {
+    document.getElementById("modalFoto").style.display = "none";
+}
 
-
-/* ==========================================
-   TECLADO
-========================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        /*
-           Flecha derecha
-        */
-
-        if (event.key === "ArrowRight") {
-
-            siguientePantalla();
-
-        }
-
-
-        /*
-           Flecha izquierda
-        */
-
-        if (event.key === "ArrowLeft") {
-
-            anteriorPantalla();
-
-        }
-
-    }
-);
-
-
-/* ==========================================
-   CORAZONES FLOTANTES
-========================================== */
-
+/* =========================================
+   CORAZONES FLOTANTES (CORREGIDO)
+========================================= */
 function crearCorazon() {
+    const contenedor = document.querySelector(".hearts");
+    if (!contenedor) return;
 
-    const contenedor =
-        document.getElementById("corazones");
+    const corazon = document.createElement("div");
+    corazon.className = "heart";
+    corazon.textContent = Math.random() > 0.5 ? "♥" : "♡";
 
+    const posicion = Math.random() * 100;
+    const tamaño = 10 + Math.random() * 18;
+    const duracion = 6 + Math.random() * 7;
 
-    if (!contenedor) {
-        return;
-    }
-
-
-    const corazon =
-        document.createElement("div");
-
-
-    corazon.classList.add(
-        "corazon-flotante"
-    );
-
-
-    corazon.textContent = "♥";
-
-
-    /*
-       Posición horizontal aleatoria
-    */
-
-    corazon.style.left =
-        Math.random() * 100 + "%";
-
-
-    /*
-       Tamaño aleatorio
-    */
-
-    const tamanio =
-        Math.random() * 20 + 12;
-
-
-    corazon.style.fontSize =
-        tamanio + "px";
-
-
-    /*
-       Duración aleatoria
-    */
-
-    const duracion =
-        Math.random() * 5 + 5;
-
-
-    corazon.style.animationDuration =
-        duracion + "s";
-
+    corazon.style.left = posicion + "%";
+    corazon.style.fontSize = tamaño + "px";
+    corazon.style.animationDuration = duracion + "s";
 
     contenedor.appendChild(corazon);
 
-
-    /*
-       Eliminar después de la animación
-    */
-
-    setTimeout(function() {
-
+    setTimeout(function () {
         corazon.remove();
-
     }, duracion * 1000);
-
 }
 
-
-/*
-   Crear corazones periódicamente
-*/
-
-setInterval(
-    crearCorazon,
-    700
-);
-
-
-/* ==========================================
-   INICIAR ALGUNOS CORAZONES
-========================================== */
-
-for (let i = 0; i < 8; i++) {
-
-    setTimeout(
-        crearCorazon,
-        i * 300
-    );
-
-}
+setInterval(crearCorazon, 400);
