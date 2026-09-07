@@ -1,39 +1,24 @@
-let pantallaActual = 1;
-const totalPantallas = 5;
-
-/* NAVEGACIÓN DE PANTALLAS */
-function mostrarPantalla(numero) {
-    if (numero < 1 || numero > totalPantallas) return;
-
-    document.querySelectorAll(".pantalla").forEach(function (pantalla) {
-        pantalla.classList.remove("activa");
+/* NAVEGACIÓN DIRECTA ENTRE PANTALLAS */
+function cambiarPantalla(numeroPantalla) {
+    // Ocultar todas las pantallas
+    document.querySelectorAll('.pantalla').forEach(pantalla => {
+        pantalla.classList.remove('activa');
     });
 
-    const nuevaPantalla = document.getElementById("pantalla" + numero);
-    if (nuevaPantalla) {
-        nuevaPantalla.classList.add("activa");
-        pantallaActual = numero;
+    // Mostrar la pantalla solicitada
+    const pantallaDestino = document.getElementById('pantalla' + numeroPantalla);
+    if (pantallaDestino) {
+        pantallaDestino.classList.add('activa');
+        pantallaDestino.scrollTop = 0; // Reiniciar el scroll al inicio
     }
 }
 
-function siguientePantalla() {
-    if (pantallaActual < totalPantallas) {
-        mostrarPantalla(pantallaActual + 1);
-    }
-}
-
-function anteriorPantalla() {
-    if (pantallaActual > 1) {
-        mostrarPantalla(pantallaActual - 1);
-    }
-}
-
-/* REVELAR NOTAS SECRETAS */
+/* REVELAR TARJETAS SECRETAS */
 function revelarNota(elemento) {
     elemento.classList.toggle("revelada");
 }
 
-/* EVENTO DE APERTURA DE CARTA */
+/* APERTURA DE LA CARTA EN PANTALLA 2 */
 document.addEventListener("DOMContentLoaded", function () {
     const sobre = document.getElementById("contenedorSobre");
     const carta = document.getElementById("cartaEscribir");
@@ -46,13 +31,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 setTimeout(() => {
                     carta.classList.remove("oculta");
                     carta.classList.add("visible");
-                }, 400);
+                }, 300);
             }
         });
     }
 });
 
-/* MÚSICA */
+/* MÚSICA DE FONDO */
 let reproduciendo = false;
 const audio = document.getElementById('musicaFondo');
 
@@ -75,7 +60,7 @@ function toggleMusica() {
     reproduciendo = !reproduciendo;
 }
 
-/* CONTADOR DE TIEMPO */
+/* CONTADOR DE TIEMPO EN VIVO */
 function actualizarContador() {
     const inicio = new Date(2026, 6, 8, 19, 25, 0);
     const ahora = new Date();
@@ -120,7 +105,7 @@ function cerrarModal() {
     if (modal) modal.style.display = "none";
 }
 
-/* CORAZONES FLOTANTES */
+/* EFECTO DE CORAZONES FLOTANTES */
 function crearCorazon() {
     const contenedor = document.querySelector(".hearts");
     if (!contenedor) return;
