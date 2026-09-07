@@ -28,6 +28,23 @@ function anteriorPantalla() {
     }
 }
 
+/* ABRIR CARTA INTERACTIVA */
+function abrirCarta() {
+    const sobre = document.getElementById("contenedorSobre");
+    const carta = document.getElementById("cartaEscribir");
+
+    if (sobre && carta) {
+        // Ejecuta la animación de abrir la solapa
+        sobre.classList.add("abierto");
+
+        // Muestra la carta suavemente después de abrir el sobre
+        setTimeout(() => {
+            carta.classList.remove("oculta");
+            carta.classList.add("visible");
+        }, 600);
+    }
+}
+
 /* MÚSICA */
 let reproduciendo = false;
 const audio = document.getElementById('musicaFondo');
