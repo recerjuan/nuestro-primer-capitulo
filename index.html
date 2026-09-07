@@ -32,7 +32,7 @@
                 Hay cosas que no sé explicar con palabras, así que decidí intentar demostrártelas de una forma diferente.
                 Esta página guarda un pedacito de todo lo que siento por ti, de nuestros momentos, nuestros recuerdos y de todo lo que todavía nos falta por vivir juntos. ❤️
             </p>
-            <button onclick="cambiarPantalla(2)">
+            <button type="button" onclick="cambiarPantalla(2)">
                 Siguiente <span>→</span>
             </button>
         </div>
@@ -44,7 +44,7 @@
             <p class="pequeno">PARA EL AMOR DE MI VIDA</p>
             
             <!-- SOBRE INTERACTIVO -->
-            <div class="contenedor-sobre" id="contenedorSobre">
+            <div class="contenedor-sobre" id="contenedorSobre" onclick="abrirSobre()">
                 <div class="sobre" id="sobre">
                     <div class="solapa" id="solapa"></div>
                     <div class="solapa-derecha"></div>
@@ -90,8 +90,8 @@
             </div>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="cambiarPantalla(1)">← Regresar</button>
-                <button onclick="cambiarPantalla(3)">Siguiente <span>→</span></button>
+                <button type="button" class="boton-regresar" onclick="cambiarPantalla(1)">← Regresar</button>
+                <button type="button" onclick="cambiarPantalla(3)">Siguiente <span>→</span></button>
             </div>
         </div>
     </section>
@@ -110,17 +110,17 @@
                 </div>
                 <div class="separador">:</div>
                 <div class="tiempo">
-                    <span id="horas">0</span>
+                    <span id="horas">00</span>
                     <small>HORAS</small>
                 </div>
                 <div class="separador">:</div>
                 <div class="tiempo">
-                    <span id="minutos">0</span>
+                    <span id="minutos">00</span>
                     <small>MINUTOS</small>
                 </div>
                 <div class="separador">:</div>
                 <div class="tiempo">
-                    <span id="segundos">0</span>
+                    <span id="segundos">00</span>
                     <small>SEGUNDOS</small>
                 </div>
             </div>
@@ -130,8 +130,8 @@
             </p>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="cambiarPantalla(2)">← Regresar</button>
-                <button onclick="cambiarPantalla(4)">Siguiente <span>→</span></button>
+                <button type="button" class="boton-regresar" onclick="cambiarPantalla(2)">← Regresar</button>
+                <button type="button" onclick="cambiarPantalla(4)">Siguiente <span>→</span></button>
             </div>
         </div>
     </section>
@@ -141,7 +141,7 @@
         <div class="contenido">
             <p class="pequeno">PEQUEÑOS DETALLES QUE AMO DE TI</p>
             <h2>Razones por las que te amo 💌</h2>
-            <p class="descripcion">Haz clic en cada tarjeta para descubrir la frase secreta:</p>
+            <p class="descripcion">Haz clic en cada tarjeta para descubrir el mensaje:</p>
 
             <div class="grid-notas">
                 <div class="tarjeta-nota" onclick="revelarNota(this)">
@@ -183,8 +183,8 @@
             </div>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="cambiarPantalla(3)">← Regresar</button>
-                <button onclick="cambiarPantalla(5)">Ver Fotos <span>→</span></button>
+                <button type="button" class="boton-regresar" onclick="cambiarPantalla(3)">← Regresar</button>
+                <button type="button" onclick="cambiarPantalla(5)">Ver Fotos <span>→</span></button>
             </div>
         </div>
     </section>
@@ -237,7 +237,7 @@
             </div>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="cambiarPantalla(4)">← Regresar</button>
+                <button type="button" class="boton-regresar" onclick="cambiarPantalla(4)">← Regresar</button>
             </div>
         </div>
     </section>
