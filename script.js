@@ -28,22 +28,26 @@ function anteriorPantalla() {
     }
 }
 
-/* ABRIR CARTA INTERACTIVA */
-function abrirCarta() {
+/* EVENTO Y ANIMACIÓN PARA ABRIR EL SOBRE DE LA CARTA */
+document.addEventListener("DOMContentLoaded", function () {
     const sobre = document.getElementById("contenedorSobre");
     const carta = document.getElementById("cartaEscribir");
 
-    if (sobre && carta) {
-        // Ejecuta la animación de abrir la solapa
-        sobre.classList.add("abierto");
+    if (sobre) {
+        sobre.addEventListener("click", function () {
+            // Activa animación del sobre
+            sobre.classList.add("abierto");
 
-        // Muestra la carta suavemente después de abrir el sobre
-        setTimeout(() => {
-            carta.classList.remove("oculta");
-            carta.classList.add("visible");
-        }, 600);
+            // Muestra la carta
+            if (carta) {
+                setTimeout(() => {
+                    carta.classList.remove("oculta");
+                    carta.classList.add("visible");
+                }, 400);
+            }
+        });
     }
-}
+});
 
 /* MÚSICA */
 let reproduciendo = false;
@@ -68,7 +72,7 @@ function toggleMusica() {
     reproduciendo = !reproduciendo;
 }
 
-/* CONTADOR */
+/* CONTADOR DE TIEMPO */
 function actualizarContador() {
     const inicio = new Date(2026, 6, 8, 19, 25, 0);
     const ahora = new Date();
@@ -86,10 +90,10 @@ function actualizarContador() {
     const minutos = Math.floor((diferencia % hora) / minuto);
     const segundos = Math.floor((diferencia % minuto) / segundo);
 
-    document.getElementById("dias").textContent = dias;
-    document.getElementById("horas").textContent = String(horas).padStart(2, "0");
-    document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
-    document.getElementById("segundos").textContent = String(segundos).padStart(2, "0");
+    if(document.getElementById("dias")) document.getElementById("dias").textContent = dias;
+    if(document.getElementById("horas")) document.getElementById("horas").textContent = String(horas).padStart(2, "0");
+    if(document.getElementById("minutos")) document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
+    if(document.getElementById("segundos")) document.getElementById("segundos").textContent = String(segundos).padStart(2, "0");
 }
 
 actualizarContador();
@@ -101,13 +105,16 @@ function abrirModal(src, texto) {
     const imgModal = document.getElementById("imagenModal");
     const caption = document.getElementById("captionModal");
 
-    modal.style.display = "flex";
-    imgModal.src = src;
-    caption.innerText = texto;
+    if (modal && imgModal) {
+        modal.style.display = "flex";
+        imgModal.src = src;
+        if (caption) caption.innerText = texto;
+    }
 }
 
 function cerrarModal() {
-    document.getElementById("modalFoto").style.display = "none";
+    const modal = document.getElementById("modalFoto");
+    if (modal) modal.style.display = "none";
 }
 
 /* CORAZONES FLOTANTES */
