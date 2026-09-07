@@ -28,17 +28,15 @@ function anteriorPantalla() {
     }
 }
 
-/* EVENTO Y ANIMACIÓN PARA ABRIR EL SOBRE DE LA CARTA */
+/* EVENTO DE APERTURA DE CARTA */
 document.addEventListener("DOMContentLoaded", function () {
     const sobre = document.getElementById("contenedorSobre");
     const carta = document.getElementById("cartaEscribir");
 
     if (sobre) {
         sobre.addEventListener("click", function () {
-            // Activa animación del sobre
             sobre.classList.add("abierto");
 
-            // Muestra la carta
             if (carta) {
                 setTimeout(() => {
                     carta.classList.remove("oculta");
@@ -90,10 +88,10 @@ function actualizarContador() {
     const minutos = Math.floor((diferencia % hora) / minuto);
     const segundos = Math.floor((diferencia % minuto) / segundo);
 
-    if(document.getElementById("dias")) document.getElementById("dias").textContent = dias;
-    if(document.getElementById("horas")) document.getElementById("horas").textContent = String(horas).padStart(2, "0");
-    if(document.getElementById("minutos")) document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
-    if(document.getElementById("segundos")) document.getElementById("segundos").textContent = String(segundos).padStart(2, "0");
+    if (document.getElementById("dias")) document.getElementById("dias").textContent = dias;
+    if (document.getElementById("horas")) document.getElementById("horas").textContent = String(horas).padStart(2, "0");
+    if (document.getElementById("minutos")) document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
+    if (document.getElementById("segundos")) document.getElementById("segundos").textContent = String(segundos).padStart(2, "0");
 }
 
 actualizarContador();
