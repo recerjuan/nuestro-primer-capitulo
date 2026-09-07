@@ -1,5 +1,5 @@
 let pantallaActual = 1;
-const totalPantallas = 4;
+const totalPantallas = 5;
 
 /* NAVEGACIÓN DE PANTALLAS */
 function mostrarPantalla(numero) {
@@ -26,6 +26,11 @@ function anteriorPantalla() {
     if (pantallaActual > 1) {
         mostrarPantalla(pantallaActual - 1);
     }
+}
+
+/* REVELAR NOTAS SECRETAS */
+function revelarNota(elemento) {
+    elemento.classList.toggle("revelada");
 }
 
 /* EVENTO DE APERTURA DE CARTA */
