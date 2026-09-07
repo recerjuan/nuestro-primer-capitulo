@@ -105,7 +105,7 @@ function cerrarModal() {
 }
 
 /* =========================================
-   CORAZONES FLOTANTES (CORREGIDO)
+   CORAZONES FLOTANTES
 ========================================= */
 function crearCorazon() {
     const contenedor = document.querySelector(".hearts");
