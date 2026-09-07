@@ -6,7 +6,7 @@
 
 html, body {
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
 }
 
 body {
@@ -53,57 +53,38 @@ body::before {
     transform: scale(1.05);
 }
 
-/* PANTALLAS Y NAVEGACIÓN */
+/* SISTEMA DE PANTALLAS Y DESPLAZAMIENTO */
 .pantalla {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s;
-    overflow-x: hidden;
-}
-
-.pantalla.activa {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-}
-
-.contenido {
-    width: 100%;
-    max-width: 900px;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-}
-
-/* SCROLL INTERNO PARA PANTALLA 2, 4 Y 5 */
-#pantalla2, #pantalla4, #pantalla5 {
-    display: block;
+    display: none;
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 65px 30px 70px;
+    padding: 60px 20px 80px;
+    z-index: 2;
 }
 
-#pantalla2 .contenido, #pantalla4 .contenido, #pantalla5 .contenido {
+.pantalla.activa {
+    display: flex !important;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.contenido {
     width: 100%;
-    max-width: 750px;
-    margin: 0 auto;
-    padding-bottom: 30px;
+    max-width: 800px;
+    margin: auto 0;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 20px 0;
 }
 
-#pantalla2::-webkit-scrollbar, #pantalla4::-webkit-scrollbar, #pantalla5::-webkit-scrollbar { width: 8px; }
-#pantalla2::-webkit-scrollbar-track, #pantalla4::-webkit-scrollbar-track, #pantalla5::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
-#pantalla2::-webkit-scrollbar-thumb, #pantalla4::-webkit-scrollbar-thumb, #pantalla5::-webkit-scrollbar-thumb { background: #e6002d; border-radius: 20px; }
+.pantalla::-webkit-scrollbar { width: 8px; }
+.pantalla::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
+.pantalla::-webkit-scrollbar-thumb { background: #e6002d; border-radius: 20px; }
 
 /* ENCABEZADOS Y TEXTOS GENERALES */
 .corazon-principal {
@@ -128,16 +109,15 @@ body::before {
 
 h1 {
     font-family: Georgia, serif;
-    font-size: clamp(45px, 7vw, 85px);
+    font-size: clamp(40px, 7vw, 75px);
     font-weight: 500;
-    line-height: 0.95;
-    max-width: 850px;
+    line-height: 1.0;
 }
 
 h1 span { display: block; color: #ff6b8a; }
 
 .descripcion {
-    max-width: 500px;
+    max-width: 550px;
     margin: 20px auto;
     color: #b8aeb2;
     font-size: 15px;
@@ -145,7 +125,7 @@ h1 span { display: block; color: #ff6b8a; }
 }
 
 button {
-    margin-top: 30px;
+    margin-top: 25px;
     padding: 14px 30px;
     border: 1px solid rgba(255, 100, 130, 0.5);
     border-radius: 50px;
@@ -184,13 +164,9 @@ button:hover {
     justify-content: center;
     align-items: center;
     margin: 30px auto;
-    cursor: pointer !important;
+    cursor: pointer;
     perspective: 1000px;
-    position: relative;
-    z-index: 20;
 }
-
-.contenedor-sobre * { pointer-events: none; }
 
 .sobre {
     position: relative;
@@ -260,38 +236,23 @@ button:hover {
     color: #f5dce3;
 }
 
-.contenedor-sobre.abierto .solapa {
-    transform: rotateX(180deg) !important;
-    z-index: 1 !important;
-}
-
-.contenedor-sobre.abierto .corazon-sello,
-.contenedor-sobre.abierto .texto-sobre { opacity: 0; }
 .contenedor-sobre.abierto { display: none !important; }
 
 /* CARTA DE TEXTO */
 .carta {
     position: relative;
     width: 100%;
-    padding: 65px 40px 40px;
+    padding: 65px 30px 40px;
     border-radius: 25px;
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025));
     border: 1px solid rgba(255, 80, 110, 0.25);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), 0 0 50px rgba(255, 23, 68, 0.10);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(15px);
     text-align: left;
 }
 
 .carta.oculta { display: none; }
-.carta.visible {
-    display: block !important;
-    animation: aparecerCarta 0.8s ease forwards;
-}
-
-@keyframes aparecerCarta {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+.carta.visible { display: block !important; }
 
 .carta-corazon {
     position: absolute;
@@ -307,14 +268,13 @@ button:hover {
     font-size: 26px;
     border: 4px solid #0d080c;
     box-shadow: 0 0 15px #ff1744;
-    z-index: 10;
     transform: translateX(-50%);
 }
 
 .titulo-carta {
     font-family: Georgia, serif;
     text-align: center;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 500;
     line-height: 1.25;
     color: #f5dce3;
@@ -340,10 +300,10 @@ button:hover {
     border-top: 1px solid rgba(255, 80, 110, 0.2);
 }
 
-/* CONTADOR */
+/* CONTADOR DE TIEMPO */
 .titulo-contador {
     font-family: Georgia, serif;
-    font-size: clamp(38px, 6vw, 65px);
+    font-size: clamp(32px, 6vw, 60px);
     margin-bottom: 10px;
 }
 
@@ -358,13 +318,13 @@ button:hover {
     justify-content: center;
     align-items: center;
     gap: 15px;
-    margin-top: 45px;
+    margin-top: 40px;
 }
 
 .tiempo span {
     display: block;
     font-family: Georgia, serif;
-    font-size: 55px;
+    font-size: clamp(35px, 8vw, 55px);
     color: #ff6b8a;
 }
 
@@ -376,46 +336,50 @@ button:hover {
     color: #95888e;
 }
 
-.separador { font-size: 35px; color: #59434b; }
+.separador { font-size: 30px; color: #59434b; }
 
 .mensaje-contador {
-    margin-top: 40px;
+    margin-top: 35px;
     color: #b8aeb2;
     font-size: 15px;
 }
 
-/* NUEVA SECCIÓN: NOTAS SECRETAS */
+/* DISEÑO DISEÑADO Y BONITO DE LAS TARJETAS (NOTAS SECRETAS) */
 .grid-notas {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 15px;
     margin: 30px 0;
+    width: 100%;
 }
 
 .tarjeta-nota {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 80, 110, 0.25);
-    border-radius: 15px;
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 80, 110, 0.3);
+    border-radius: 16px;
+    padding: 22px 15px;
     min-height: 110px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
     text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .tarjeta-nota:hover {
     background: rgba(255, 54, 92, 0.15);
     border-color: #ff365c;
-    transform: translateY(-3px);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(255, 23, 68, 0.3);
 }
 
 .nota-frente {
     color: #ff6b8a;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 16px;
+    letter-spacing: 1px;
 }
 
 .nota-atras {
@@ -427,16 +391,13 @@ button:hover {
 }
 
 .tarjeta-nota.revelada {
-    background: rgba(255, 23, 68, 0.25) !important;
-    border-color: #ff1744 !important;
-    box-shadow: 0 0 15px rgba(255, 23, 68, 0.3);
+    background: linear-gradient(135deg, rgba(255, 23, 68, 0.35), rgba(133, 20, 43, 0.5));
+    border-color: #ff1744;
+    box-shadow: 0 0 20px rgba(255, 23, 68, 0.4);
 }
 
 .tarjeta-nota.revelada .nota-frente { display: none; }
-.tarjeta-nota.revelada .nota-atras {
-    display: block;
-    animation: aparecerCarta 0.5s ease forwards;
-}
+.tarjeta-nota.revelada .nota-atras { display: block; }
 
 /* ÁLBUM DE FOTOS */
 .album {
