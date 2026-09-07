@@ -258,6 +258,121 @@ button:hover {
     border-top: 1px solid rgba(255, 80, 110, 0.2);
 }
 
+/* ESTILOS DEL SOBRE INTERACTIVO */
+.contenedor-sobre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.sobre {
+    position: relative;
+    width: 320px;
+    height: 200px;
+    background: #a31d38;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 23, 68, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.4s ease;
+}
+
+.sobre:hover {
+    transform: scale(1.05);
+}
+
+.solapa {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-top: 110px solid #d72648;
+    transform-origin: top;
+    transition: transform 0.6s ease;
+    z-index: 3;
+}
+
+.solapa-izquierda {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 160px solid #85142b;
+    border-top: 100px solid transparent;
+    border-bottom: 100px solid #85142b;
+    border-radius: 0 0 0 10px;
+    z-index: 2;
+}
+
+.solapa-derecha {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-right: 160px solid #941832;
+    border-top: 100px solid transparent;
+    border-bottom: 100px solid #941832;
+    border-radius: 0 0 10px 0;
+    z-index: 2;
+}
+
+.corazon-sello {
+    position: absolute;
+    top: 85px;
+    z-index: 4;
+    font-size: 32px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: latido 1.5s infinite ease-in-out;
+}
+
+.texto-sobre {
+    position: absolute;
+    bottom: 15px;
+    z-index: 4;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #f5dce3;
+}
+
+/* ANIMACIÓN DE APERTURA */
+.contenedor-sobre.abierto .solapa {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.contenedor-sobre.abierto {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.8);
+    transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+    pointer-events: none;
+    height: 0;
+    margin: 0;
+}
+
+/* CARTA DESPLEGADA */
+.carta.oculta {
+    display: none;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.carta.visible {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
 /* CONTADOR */
 .titulo-contador {
     font-family: Georgia, serif;
