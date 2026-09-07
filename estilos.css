@@ -301,10 +301,10 @@ button:hover span {
 
 .carta p {
     color: #d1c4c8;
-    line-height: 1.95;
-    font-size: 14px;
-    margin-bottom: 20px;
-    text-align: justify;
+    line-height: 1.85;
+    font-size: 15px;
+    margin-bottom: 22px;
+    text-align: left;
 }
 
 .carta p:not(.firma):first-of-type::first-letter {
