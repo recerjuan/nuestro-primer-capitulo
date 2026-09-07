@@ -19,10 +19,10 @@
         <span id="iconoMusica">🎵</span> <span id="textoMusica">Reproducir Música</span>
     </button>
 
-    <!-- CORAZONES FLOTANTES -->
+    <!-- CORAZONES FLOTANTES DE FONDO -->
     <div class="hearts"></div>
 
-    <!-- PANTALLA 1 -->
+    <!-- PANTALLA 1: INICIO -->
     <section class="pantalla activa" id="pantalla1">
         <div class="contenido inicio">
             <div class="corazon-principal">♥</div>
@@ -38,13 +38,13 @@
         </div>
     </section>
 
-    <!-- PANTALLA 2 - CARTA INTERACTIVA CON SOBRE -->
+    <!-- PANTALLA 2: CARTA INTERACTIVA CON SOBRE -->
     <section class="pantalla" id="pantalla2">
         <div class="contenido carta-container">
             <p class="pequeno">PARA EL AMOR DE MI VIDA</p>
             
             <!-- SOBRE INTERACTIVO -->
-            <div class="contenedor-sobre" id="contenedorSobre" onclick="abrirCarta()">
+            <div class="contenedor-sobre" id="contenedorSobre">
                 <div class="sobre" id="sobre">
                     <div class="solapa" id="solapa"></div>
                     <div class="solapa-derecha"></div>
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <!-- CARTA OCULTA HASTA ABRIR -->
+            <!-- CARTA OCULTA QUE SE DESPLIEGA AL ABRIR -->
             <div class="carta oculta" id="cartaEscribir">
                 <div class="carta-corazon">♥</div>
                 <h2 class="titulo-carta">
@@ -96,7 +96,7 @@
         </div>
     </section>
 
-    <!-- PANTALLA 3 - CONTADOR -->
+    <!-- PANTALLA 3: CONTADOR DE TIEMPO -->
     <section class="pantalla" id="pantalla3">
         <div class="contenido">
             <p class="pequeno">DESDE QUE COMENZÓ NUESTRA HISTORIA</p>
@@ -136,7 +136,7 @@
         </div>
     </section>
 
-    <!-- PANTALLA 4 - ÁLBUM DE FOTOS -->
+    <!-- PANTALLA 4: ÁLBUM DE FOTOS -->
     <section class="pantalla" id="pantalla4">
         <div class="contenido final">
             <p class="pequeno">NUESTRA HISTORIA APENAS COMIENZA MI NEGRA</p>
@@ -189,7 +189,7 @@
         </div>
     </section>
 
-    <!-- LIGHTBOX MODAL -->
+    <!-- MODAL / VISOR DE FOTOS -->
     <div id="modalFoto" class="modal" onclick="cerrarModal()">
         <span class="cerrar-modal">&times;</span>
         <img class="contenido-modal" id="imagenModal">
