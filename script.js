@@ -1,43 +1,35 @@
-/* NAVEGACIÓN DIRECTA ENTRE PANTALLAS */
+/* CAMBIO DE PANTALLAS */
 function cambiarPantalla(numeroPantalla) {
-    // Ocultar todas las pantallas
-    document.querySelectorAll('.pantalla').forEach(pantalla => {
-        pantalla.classList.remove('activa');
+    const pantallas = document.querySelectorAll('.pantalla');
+    pantallas.forEach(function (p) {
+        p.classList.remove('activa');
     });
 
-    // Mostrar la pantalla solicitada
-    const pantallaDestino = document.getElementById('pantalla' + numeroPantalla);
-    if (pantallaDestino) {
-        pantallaDestino.classList.add('activa');
-        pantallaDestino.scrollTop = 0; // Reiniciar el scroll al inicio
+    const destino = document.getElementById('pantalla' + numeroPantalla);
+    if (destino) {
+        destino.classList.add('activa');
+        window.scrollTo(0, 0);
     }
 }
 
-/* REVELAR TARJETAS SECRETAS */
-function revelarNota(elemento) {
-    elemento.classList.toggle("revelada");
+/* ABRIR SOBRE DE LA CARTA */
+function abrirSobre() {
+    const sobre = document.getElementById('contenedorSobre');
+    const carta = document.getElementById('cartaEscribir');
+
+    if (sobre) sobre.classList.add('abierto');
+    if (carta) {
+        carta.classList.remove('oculta');
+        carta.classList.add('visible');
+    }
 }
 
-/* APERTURA DE LA CARTA EN PANTALLA 2 */
-document.addEventListener("DOMContentLoaded", function () {
-    const sobre = document.getElementById("contenedorSobre");
-    const carta = document.getElementById("cartaEscribir");
+/* REVELAR NOTAS SECRETAS */
+function revelarNota(tarjeta) {
+    tarjeta.classList.toggle('revelada');
+}
 
-    if (sobre) {
-        sobre.addEventListener("click", function () {
-            sobre.classList.add("abierto");
-
-            if (carta) {
-                setTimeout(() => {
-                    carta.classList.remove("oculta");
-                    carta.classList.add("visible");
-                }, 300);
-            }
-        });
-    }
-});
-
-/* MÚSICA DE FONDO */
+/* REPRODUCTOR DE MÚSICA */
 let reproduciendo = false;
 const audio = document.getElementById('musicaFondo');
 
@@ -54,13 +46,13 @@ function toggleMusica() {
             document.getElementById('iconoMusica').innerText = "🎶";
         }).catch(err => {
             console.log("Error al reproducir audio: ", err);
-            alert("Asegúrate de que el archivo de música se llame exactamente 'a-donde-vamos.mp3'.");
+            alert("Asegúrate de que el archivo de audio se llame 'a-donde-vamos.mp3'.");
         });
     }
     reproduciendo = !reproduciendo;
 }
 
-/* CONTADOR DE TIEMPO EN VIVO */
+/* CONTADOR DE TIEMPO */
 function actualizarContador() {
     const inicio = new Date(2026, 6, 8, 19, 25, 0);
     const ahora = new Date();
@@ -87,7 +79,7 @@ function actualizarContador() {
 actualizarContador();
 setInterval(actualizarContador, 1000);
 
-/* VISOR DE FOTOS (MODAL) */
+/* VISOR DE FOTOS */
 function abrirModal(src, texto) {
     const modal = document.getElementById("modalFoto");
     const imgModal = document.getElementById("imagenModal");
@@ -105,7 +97,7 @@ function cerrarModal() {
     if (modal) modal.style.display = "none";
 }
 
-/* EFECTO DE CORAZONES FLOTANTES */
+/* CORAZONES FLOTANTES DE FONDO */
 function crearCorazon() {
     const contenedor = document.querySelector(".hearts");
     if (!contenedor) return;
