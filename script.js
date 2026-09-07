@@ -13,6 +13,7 @@ function mostrarPantalla(numero) {
         return;
     }
 
+
     document
         .querySelectorAll(".pantalla")
         .forEach(function (pantalla) {
@@ -21,10 +22,12 @@ function mostrarPantalla(numero) {
 
         });
 
+
     const nuevaPantalla =
         document.getElementById(
             "pantalla" + numero
         );
+
 
     if (nuevaPantalla) {
 
@@ -33,6 +36,7 @@ function mostrarPantalla(numero) {
         pantallaActual = numero;
 
     }
+
 }
 
 
@@ -71,6 +75,26 @@ function anteriorPantalla() {
 
 
 /* =========================================
+   CARTA INTERACTIVA
+========================================= */
+
+function voltearCarta() {
+
+    const carta =
+        document.querySelector(".carta-flip");
+
+
+    if (!carta) {
+        return;
+    }
+
+
+    carta.classList.toggle("abierta");
+
+}
+
+
+/* =========================================
    CONTADOR
 ========================================= */
 
@@ -91,8 +115,10 @@ function actualizarContador() {
             0
         );
 
+
     const ahora =
         new Date();
+
 
     let diferencia =
         ahora.getTime() -
@@ -109,11 +135,14 @@ function actualizarContador() {
     const segundo =
         1000;
 
+
     const minuto =
         segundo * 60;
 
+
     const hora =
         minuto * 60;
+
 
     const dia =
         hora * 24;
@@ -124,15 +153,18 @@ function actualizarContador() {
             diferencia / dia
         );
 
+
     const horas =
         Math.floor(
             (diferencia % dia) / hora
         );
 
+
     const minutos =
         Math.floor(
             (diferencia % hora) / minuto
         );
+
 
     const segundos =
         Math.floor(
@@ -143,18 +175,23 @@ function actualizarContador() {
     document.getElementById("dias").textContent =
         dias;
 
+
     document.getElementById("horas").textContent =
         String(horas).padStart(2, "0");
+
 
     document.getElementById("minutos").textContent =
         String(minutos).padStart(2, "0");
 
+
     document.getElementById("segundos").textContent =
         String(segundos).padStart(2, "0");
+
 }
 
 
 actualizarContador();
+
 
 setInterval(
     actualizarContador,
@@ -171,14 +208,19 @@ function crearCorazon() {
     const contenedor =
         document.querySelector(".hearts");
 
+
     if (!contenedor) {
         return;
     }
 
+
     const corazon =
         document.createElement("div");
 
-    corazon.className = "heart";
+
+    corazon.className =
+        "heart";
+
 
     corazon.textContent =
         Math.random() > 0.5
@@ -189,8 +231,10 @@ function crearCorazon() {
     const posicion =
         Math.random() * 100;
 
+
     const tamaño =
         10 + Math.random() * 18;
+
 
     const duracion =
         6 + Math.random() * 7;
@@ -199,8 +243,10 @@ function crearCorazon() {
     corazon.style.left =
         posicion + "%";
 
+
     corazon.style.fontSize =
         tamaño + "px";
+
 
     corazon.style.animationDuration =
         duracion + "s";
@@ -219,6 +265,7 @@ function crearCorazon() {
         },
         duracion * 1000
     );
+
 }
 
 
@@ -241,6 +288,7 @@ document.addEventListener(
             siguientePantalla();
 
         }
+
 
         if (evento.key === "ArrowLeft") {
 
