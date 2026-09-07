@@ -10,8 +10,10 @@
 
 <body>
 
-    <!-- REPRODUCTOR DE MÚSICA (MORAT - A DÓNDE VAMOS) -->
-    <audio id="musicaFondo" loop src="a-donde-vamos.mp3"></audio>
+    <!-- REPRODUCTOR DE MÚSICA -->
+    <audio id="musicaFondo" loop preload="auto">
+        <source src="a-donde-vamos.mp3" type="audio/mpeg">
+    </audio>
 
     <button id="botonMusica" onclick="toggleMusica()" class="btn-flotante-musica" title="Música de fondo">
         <span id="iconoMusica">🎵</span> <span id="textoMusica">Reproducir Música</span>
@@ -20,9 +22,7 @@
     <!-- CORAZONES FLOTANTES -->
     <div class="hearts"></div>
 
-    <!-- =====================================================
-         PANTALLA 1
-    ====================================================== -->
+    <!-- PANTALLA 1 -->
     <section class="pantalla activa" id="pantalla1">
         <div class="contenido inicio">
             <div class="corazon-principal">♥</div>
@@ -38,9 +38,7 @@
         </div>
     </section>
 
-    <!-- =====================================================
-         PANTALLA 2 - CARTA
-    ====================================================== -->
+    <!-- PANTALLA 2 - CARTA ANIMADA -->
     <section class="pantalla" id="pantalla2">
         <div class="contenido carta-container">
             <p class="pequeno">PARA EL AMOR DE MI VIDA</p>
@@ -51,31 +49,31 @@
                     LAS PRIMERAS PALABRAS QUE DECIDÍ ESCRIBIRTE...
                 </h2>
 
-                <p>
+                <p class="parrafo-animado">
                     Carol Dayana, quiero aprovechar este momento para repetirte y expresarte algo que he sentido desde hace ratico, porque desde que llegaste a mi vida has logrado convertir muchos de mis días comunes en momentos verdaderamente especiales. Poco a poco te has ido ganando un lugar muy importante en mi corazón, y hoy quiero que sepas cuánto valoro cada instante que comparto contigo.
                 </p>
 
-                <p>
+                <p class="parrafo-animado">
                     Me encanta pasar tiempo a tu lado, porque cada conversación, cada sonrisa, cada mirada y cada momento que vivimos juntos tiene un significado muy especial para mí. No importa si se trata de algo sencillo o extraordinario, porque cuando estoy contigo todo parece tener un brillo diferente. Tu compañía tiene esa maravillosa capacidad de alegrar mis días, de transmitirme tranquilidad cuando la necesito y de regalarme recuerdos que guardo con muchísimo cariño.
                 </p>
 
-                <p>
+                <p class="parrafo-animado">
                     Además, quiero agradecerte sinceramente por cada una de las experiencias tan bonitas que hemos compartido, por tu tiempo, por tu forma de ser, por las risas que hemos disfrutado juntos, por las conversaciones que parecen durar solo unos minutos aunque pasen horas y por permitirme conocerte un poco más cada día. Cada recuerdo contigo se ha convertido en un tesoro que atesoro con mucho cariño, y aunque probablemente ya te lo he dicho muchas veces, quiero que nunca olvides que me gustas muchísimo.
                 </p>
 
-                <p>
+                <p class="parrafo-animado">
                     Me gusta tu manera de pensar, la forma en que ves la vida, tu personalidad, tu nobleza, tu esencia y cada uno de esos pequeños detalles que te hacen una mujer única y especial. Admiro la forma en que eres capaz de iluminar un lugar con tu presencia y cómo, sin darte cuenta, haces que las personas que te rodean se sientan bien. Con el paso del tiempo te has convertido en alguien con quien disfruto compartir mis alegrías, mis pensamientos, mis sueños y hasta esos pequeños momentos del día que parecen insignificantes, pero que contigo adquieren un valor inmenso.
                 </p>
 
-                <p>
+                <p class="parrafo-animado">
                     Por eso, deseo de corazón que podamos seguir construyendo recuerdos hermosos, seguir conociéndonos cada vez más y continuar compartiendo momentos que nos hagan felices, porque me ilusiona pensar en todo lo que aún nos queda por vivir, en todas las conversaciones pendientes, en las risas que aún no hemos compartido y en cada nueva experiencia que podamos descubrir juntos.
                 </p>
 
-                <p>
+                <p class="parrafo-animado">
                     Gracias por estar en mi vida, por hacer que cada momento a tu lado sea tan especial y por permitirme sentir tantas emociones bonitas. Espero poder seguir compartiendo contigo mi tiempo, mis experiencias, mis sueños y una parte cada vez más grande de mi vida, porque sinceramente disfruto tenerte cerca y porque cada día encuentro más razones para agradecer que estés en mi vida.
                 </p>
 
-                <p class="firma">Con todo mi amor para la mujer que más amo. ❤️</p>
+                <p class="firma parrafo-animado">Con todo mi amor para la mujer que más amo. ❤️</p>
             </div>
 
             <div class="navegacion">
@@ -85,9 +83,7 @@
         </div>
     </section>
 
-    <!-- =====================================================
-         PANTALLA 3 - CONTADOR
-    ====================================================== -->
+    <!-- PANTALLA 3 - CONTADOR -->
     <section class="pantalla" id="pantalla3">
         <div class="contenido">
             <p class="pequeno">DESDE QUE COMENZÓ NUESTRA HISTORIA</p>
@@ -127,9 +123,7 @@
         </div>
     </section>
 
-    <!-- =====================================================
-         PANTALLA 4 - ÁLBUM & FINAL
-    ====================================================== -->
+    <!-- PANTALLA 4 - ÁLBUM DE FOTOS -->
     <section class="pantalla" id="pantalla4">
         <div class="contenido final">
             <p class="pequeno">NUESTRA HISTORIA APENAS COMIENZA MI NEGRA</p>
@@ -139,7 +133,7 @@
             </p>
 
             <div class="album">
-                <!-- PRIMERA FOTO -->
+                <!-- FOTO 1 -->
                 <div class="foto-vacia foto-con-imagen" onclick="abrirModal('primera-foto.jpg', 'Nuestra primera foto ❤️')">
                     <img src="primera-foto.jpg" alt="Nuestra primera foto">
                     <div class="texto-foto">
@@ -147,7 +141,7 @@
                     </div>
                 </div>
 
-                <!-- SEGUNDA FOTO -->
+                <!-- FOTO 2 (ACTUALIZADA) -->
                 <div class="foto-vacia foto-con-imagen" onclick="abrirModal('segunda-foto.jpg', 'Un momento inolvidable juntos 💖')">
                     <img src="segunda-foto.jpg" alt="Un momento inolvidable">
                     <div class="texto-foto">
@@ -155,13 +149,13 @@
                     </div>
                 </div>
 
-                <!-- FOTO 3 (POR CARGAR) -->
+                <!-- FOTO 3 -->
                 <div class="foto-vacia">
                     <span>📷</span>
                     <p>Una aventura juntos</p>
                 </div>
 
-                <!-- FOTO 4 (POR CARGAR) -->
+                <!-- FOTO 4 -->
                 <div class="foto-vacia">
                     <span>📷</span>
                     <p>Lo que viene...</p>
@@ -182,7 +176,7 @@
         </div>
     </section>
 
-    <!-- VISOR DE FOTOS / LIGHTBOX (MODAL) -->
+    <!-- LIGHTBOX MODAL -->
     <div id="modalFoto" class="modal" onclick="cerrarModal()">
         <span class="cerrar-modal">&times;</span>
         <img class="contenido-modal" id="imagenModal">
