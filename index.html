@@ -1,4 +1,44 @@
-<!-- PANTALLA 2 - CARTA INTERACTIVA -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Historia ❤️</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+    <!-- REPRODUCTOR DE MÚSICA -->
+    <audio id="musicaFondo" loop preload="auto">
+        <source src="a-donde-vamos.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="botonMusica" onclick="toggleMusica()" class="btn-flotante-musica" title="Música de fondo">
+        <span id="iconoMusica">🎵</span> <span id="textoMusica">Reproducir Música</span>
+    </button>
+
+    <!-- CORAZONES FLOTANTES -->
+    <div class="hearts"></div>
+
+    <!-- PANTALLA 1 -->
+    <section class="pantalla activa" id="pantalla1">
+        <div class="contenido inicio">
+            <div class="corazon-principal">♥</div>
+            <p class="pequeno">PARA EL AMOR DE MI VIDA</p>
+            <h1>Esta es una <span>muestra de mi amor.</span></h1>
+            <p class="descripcion">
+                Hay cosas que no sé explicar con palabras, así que decidí intentar demostrártelas de una forma diferente.
+                Esta página guarda un pedacito de todo lo que siento por ti, de nuestros momentos, nuestros recuerdos y de todo lo que todavía nos falta por vivir juntos. ❤️
+            </p>
+            <button onclick="siguientePantalla()">
+                Siguiente <span>→</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 2 - CARTA INTERACTIVA CON SOBRE -->
     <section class="pantalla" id="pantalla2">
         <div class="contenido carta-container">
             <p class="pequeno">PARA EL AMOR DE MI VIDA</p>
@@ -55,3 +95,108 @@
             </div>
         </div>
     </section>
+
+    <!-- PANTALLA 3 - CONTADOR -->
+    <section class="pantalla" id="pantalla3">
+        <div class="contenido">
+            <p class="pequeno">DESDE QUE COMENZÓ NUESTRA HISTORIA</p>
+            <h2 class="titulo-contador">El tiempo que llevamos juntos ❤️</h2>
+            <p class="fecha-inicio">Desde el 8 de julio de 2026 · 7:25 PM</p>
+
+            <div class="contador">
+                <div class="tiempo">
+                    <span id="dias">0</span>
+                    <small>DÍAS</small>
+                </div>
+                <div class="separador">:</div>
+                <div class="tiempo">
+                    <span id="horas">0</span>
+                    <small>HORAS</small>
+                </div>
+                <div class="separador">:</div>
+                <div class="tiempo">
+                    <span id="minutos">0</span>
+                    <small>MINUTOS</small>
+                </div>
+                <div class="separador">:</div>
+                <div class="tiempo">
+                    <span id="segundos">0</span>
+                    <small>SEGUNDOS</small>
+                </div>
+            </div>
+
+            <p class="mensaje-contador">
+                Y cada segundo que pasa, es otro segundo que agradezco tenerte en mi vida.
+            </p>
+
+            <div class="navegacion">
+                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
+                <button onclick="siguientePantalla()">Siguiente <span>→</span></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PANTALLA 4 - ÁLBUM DE FOTOS -->
+    <section class="pantalla" id="pantalla4">
+        <div class="contenido final">
+            <p class="pequeno">NUESTRA HISTORIA APENAS COMIENZA MI NEGRA</p>
+            <h2>LA TENEMOS QUE TERMINAR JUNTOS...</h2>
+            <p class="final-texto">
+                Porque todavía nos faltan muchas cosas por vivir, muchos lugares por conocer, muchas risas por compartir y muchísimas fotos por tomarnos juntos.
+            </p>
+
+            <div class="album">
+                <!-- FOTO 1 -->
+                <div class="foto-vacia foto-con-imagen" onclick="abrirModal('primera-foto.jpg', 'Nuestra primera foto ❤️')">
+                    <img src="primera-foto.jpg" alt="Nuestra primera foto">
+                    <div class="texto-foto">
+                        <p>Nuestra primera foto ❤️</p>
+                    </div>
+                </div>
+
+                <!-- FOTO 2 -->
+                <div class="foto-vacia foto-con-imagen" onclick="abrirModal('segunda-foto.jpg', 'Un momento inolvidable juntos 💖')">
+                    <img src="segunda-foto.jpg" alt="Un momento inolvidable">
+                    <div class="texto-foto">
+                        <p>Un momento inolvidable 💖</p>
+                    </div>
+                </div>
+
+                <!-- FOTO 3 -->
+                <div class="foto-vacia">
+                    <span>📷</span>
+                    <p>Una aventura juntos</p>
+                </div>
+
+                <!-- FOTO 4 -->
+                <div class="foto-vacia">
+                    <span>📷</span>
+                    <p>Lo que viene...</p>
+                </div>
+            </div>
+
+            <div class="agradecimiento">
+                <p>
+                    Gracias por todos estos días juntos, por cada momento hermoso, por las risas, por las conversaciones y por hacer que esos días sean tan especiales, por tenerte en mi vida.
+                </p>
+                <h3>NO TIENES IDEA DE LO FELIZ QUE SOY A TU LADO MI AMOR ❤️</h3>
+                <p class="final-frase">Esto apenas comienza Carol Dayana...</p>
+            </div>
+
+            <div class="navegacion">
+                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="modalFoto" class="modal" onclick="cerrarModal()">
+        <span class="cerrar-modal">&times;</span>
+        <img class="contenido-modal" id="imagenModal">
+        <div id="captionModal"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
