@@ -79,7 +79,7 @@
                 </p>
 
                 <p class="parrafo-animado">
-                    Por eso, deseo de corazón que podamos seguir construyendo recuerdos hermosos, seguir conociéndonos cada vez más y continuar compartiendo momentos que nos hagan felices, porque me ilusiona pensar en todo lo que aún nos queda por vivir, en todas las conversaciones pendientes, en las risas que aún no hemos compartido y en cada nueva experiencia que podamos descubrir juntos.
+                    Por eso, deseo de corazón que podamos seguir construyendo recuerdos hermosos, seguir conociéndonos cada vez más y continuar compartiendo momentos que nos hagan felices, porque me ilusiona pensar en todo lo que aún nos queda por vivir, en todas las conversaciones pendientes, in las risas que aún no hemos compartido y en cada nueva experiencia que podamos descubrir juntos.
                 </p>
 
                 <p class="parrafo-animado">
@@ -136,8 +136,61 @@
         </div>
     </section>
 
-    <!-- PANTALLA 4: ÁLBUM DE FOTOS -->
+    <!-- PANTALLA 4: NOTAS SECRETAS (NUEVA PANTALLA) -->
     <section class="pantalla" id="pantalla4">
+        <div class="contenido">
+            <p class="pequeno">PEQUEÑOS DETALLES QUE AMO DE TI</p>
+            <h2>Haz clic en cada tarjeta 💌</h2>
+            <p class="descripcion">Toca cada una para descubrir una razón de por qué eres tan especial para mí:</p>
+
+            <div class="grid-notas">
+                <div class="tarjeta-nota" onclick="revelarNota(this)">
+                    <div class="nota-frente">✨ Razón #1</div>
+                    <div class="nota-atras">Tu sonrisa, porque siempre logra alegrarme el día.</div>
+                </div>
+                <div class="tarjeta-nota" onclick="revelarNota(this)">
+                    <div class="nota-frente">✨ Razón #2</div>
+                    <div class="nota-atras">La forma en que me miras y haces que me olvide de todo.</div>
+                </div>
+                <div class="tarjeta-nota" onclick="revelarNota(this)">
+                    <div class="nota-frente">✨ Razón #3</div>
+                    <div class="nota-atras">Cada momento contigo, incluso los más sencillos.</div>
+                </div>
+                <div class="tarjeta-nota" onclick="revelarNota(this)">
+                    <div class="nota-frente">✨ Razón #4</div>
+                    <div class="nota-atras">Tus abrazos, porque en ellos siento que estoy donde quiero estar.</div>
+                </div>
+                <div class="tarjeta-nota" onclick="revelarNota(this)">
+                    <div class="nota-frente">✨ Razón #5</div>
+                    <div class="nota-atras">La manera en que te preocupas por mí y por cómo me siento.</div>
+                </div>
+                <div class="tarjeta-nota" onclick="revelarNota(this)">
+                    <div class="nota-frente">✨ Razón #6</div>
+                    <div class="nota-atras">Nuestras conversaciones, porque nunca me canso de escucharte.</div>
+                </div>
+                <div class="tarjeta-nota" onclick="revelarNota(this)">
+                    <div class="nota-frente">✨ Razón #7</div>
+                    <div class="nota-atras">Cada recuerdo que hemos construido juntos y todos los que aún nos faltan.</div>
+                </div>
+                <div class="tarjeta-nota" onclick="revelarNota(this)">
+                    <div class="nota-frente">✨ Razón #8</div>
+                    <div class="nota-atras">La felicidad que siento simplemente por tenerte en mi vida.</div>
+                </div>
+                <div class="tarjeta-nota" onclick="revelarNota(this)">
+                    <div class="nota-frente">✨ Razón Extra</div>
+                    <div class="nota-atras">Lo especial que haces sentir a mi corazón cada día. ❤️</div>
+                </div>
+            </div>
+
+            <div class="navegacion">
+                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
+                <button onclick="siguientePantalla()">Siguiente <span>→</span></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PANTALLA 5: ÁLBUM DE FOTOS -->
+    <section class="pantalla" id="pantalla5">
         <div class="contenido final">
             <p class="pequeno">NUESTRA HISTORIA APENAS COMIENZA MI NEGRA</p>
             <h2>LA TENEMOS QUE TERMINAR JUNTOS...</h2>
