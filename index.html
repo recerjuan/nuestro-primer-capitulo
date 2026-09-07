@@ -32,7 +32,7 @@
                 Hay cosas que no sé explicar con palabras, así que decidí intentar demostrártelas de una forma diferente.
                 Esta página guarda un pedacito de todo lo que siento por ti, de nuestros momentos, nuestros recuerdos y de todo lo que todavía nos falta por vivir juntos. ❤️
             </p>
-            <button onclick="siguientePantalla()">
+            <button onclick="cambiarPantalla(2)">
                 Siguiente <span>→</span>
             </button>
         </div>
@@ -79,7 +79,7 @@
                 </p>
 
                 <p class="parrafo-animado">
-                    Por eso, deseo de corazón que podamos seguir construyendo recuerdos hermosos, seguir conociéndonos cada vez más y continuar compartiendo momentos que nos hagan felices, porque me ilusiona pensar en todo lo que aún nos queda por vivir, en todas las conversaciones pendientes, in las risas que aún no hemos compartido y en cada nueva experiencia que podamos descubrir juntos.
+                    Por eso, deseo de corazón que podamos seguir construyendo recuerdos hermosos, seguir conociéndonos cada vez más y continuar compartiendo momentos que nos hagan felices, porque me ilusiona pensar en todo lo que aún nos queda por vivir, en todas las conversaciones pendientes, en las risas que aún no hemos compartido y en cada nueva experiencia que podamos descubrir juntos.
                 </p>
 
                 <p class="parrafo-animado">
@@ -90,8 +90,8 @@
             </div>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button onclick="siguientePantalla()">Siguiente <span>→</span></button>
+                <button class="boton-regresar" onclick="cambiarPantalla(1)">← Regresar</button>
+                <button onclick="cambiarPantalla(3)">Siguiente <span>→</span></button>
             </div>
         </div>
     </section>
@@ -130,18 +130,18 @@
             </p>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button onclick="siguientePantalla()">Siguiente <span>→</span></button>
+                <button class="boton-regresar" onclick="cambiarPantalla(2)">← Regresar</button>
+                <button onclick="cambiarPantalla(4)">Siguiente <span>→</span></button>
             </div>
         </div>
     </section>
 
-    <!-- PANTALLA 4: NOTAS SECRETAS (NUEVA PANTALLA) -->
+    <!-- PANTALLA 4: NOTAS SECRETAS -->
     <section class="pantalla" id="pantalla4">
         <div class="contenido">
             <p class="pequeno">PEQUEÑOS DETALLES QUE AMO DE TI</p>
-            <h2>Haz clic en cada tarjeta 💌</h2>
-            <p class="descripcion">Toca cada una para descubrir una razón de por qué eres tan especial para mí:</p>
+            <h2>Razones por las que te amo 💌</h2>
+            <p class="descripcion">Haz clic en cada tarjeta para descubrir la frase secreta:</p>
 
             <div class="grid-notas">
                 <div class="tarjeta-nota" onclick="revelarNota(this)">
@@ -183,8 +183,8 @@
             </div>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button onclick="siguientePantalla()">Siguiente <span>→</span></button>
+                <button class="boton-regresar" onclick="cambiarPantalla(3)">← Regresar</button>
+                <button onclick="cambiarPantalla(5)">Ver Fotos <span>→</span></button>
             </div>
         </div>
     </section>
@@ -237,7 +237,7 @@
             </div>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
+                <button class="boton-regresar" onclick="cambiarPantalla(4)">← Regresar</button>
             </div>
         </div>
     </section>
