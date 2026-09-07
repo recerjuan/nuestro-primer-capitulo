@@ -45,7 +45,7 @@ function toggleMusica() {
             document.getElementById('iconoMusica').innerText = "🎶";
         }).catch(err => {
             console.log("Error al reproducir audio: ", err);
-            alert("Asegúrate de haber guardado el archivo como 'a-donde-vamos.mp3' en la misma carpeta.");
+            alert("Asegúrate de que el archivo de música se llame exactamente 'a-donde-vamos.mp3'.");
         });
     }
     reproduciendo = !reproduciendo;
