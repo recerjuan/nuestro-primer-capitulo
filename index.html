@@ -19,7 +19,7 @@
     <div class="reproductor-flotante">
         <div class="info-cancion">
             <span id="iconoMusica">🎵</span>
-            <span id="tituloCancion">A Dónde Vamos - Morat</span>
+            <span id="tituloCancion">Selecciona una canción</span>
         </div>
         <div class="controles-musica">
             <button onclick="cancionAnterior()" title="Anterior">⏮️</button>
@@ -27,7 +27,7 @@
             <button onclick="siguienteCancion()" title="Siguiente">⏭️</button>
         </div>
     </div>
-    <audio id="musicaFondo" src="a-donde-vamos.mp3" loop></audio>
+    <audio id="musicaFondo" loop></audio>
 
     <!-- =====================================================
          PANTALLA 1 - BIENVENIDA
@@ -40,20 +40,31 @@
             <p class="descripcion">
                 Bienvenida a este pequeño rincón digital que creé especialmente para ti, para recordar lo maravillosa que eres y lo mucho que significas en mi vida.
             </p>
-            <button onclick="siguientePantalla()">Comenzar recorrido <span>→</span></button>
+            <button class="btn-principal" onclick="siguientePantalla()">Comenzar recorrido <span>→</span></button>
         </div>
     </section>
 
     <!-- =====================================================
-         PANTALLA 2 - CARTA DE AMOR
+         PANTALLA 2 - CARTA DE AMOR INTERACTIVA
     ====================================================== -->
     <section class="pantalla" id="pantalla2">
         <div class="contenido carta-container">
             <p class="pequeno">DE MI CORAZÓN PARA TI</p>
             
-            <div class="carta">
-                <div class="carta-sello">♥</div>
-                
+            <!-- SOBRE ANIMADO INTERACTIVO -->
+            <div class="envelope-wrapper" id="envelopeWrapper" onclick="abrirCarta()">
+                <div class="envelope">
+                    <div class="flap"></div>
+                    <div class="pocket"></div>
+                    <div class="letter-preview">
+                        <div class="sello-cera">♥</div>
+                        <p class="click-instruccion">Toca para abrir la carta ✨</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENIDO DE LA CARTA (SE DESPLEGA AL ABRIR) -->
+            <div class="carta-desplegada" id="cartaDesplegada">
                 <h2 class="titulo-carta">
                     <span>Para la mujer que amo</span><br>
                     Las primeras palabras que decidí escribirte...
@@ -85,14 +96,12 @@
                     </p>
                 </div>
 
-                <p class="firma">
-                    Con todo mi amor, siempre. ❤️
-                </p>
+                <p class="firma">Con todo mi amor, siempre. ❤️</p>
             </div>
 
             <div class="navegacion">
                 <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button onclick="siguientePantalla()">Siguiente <span>→</span></button>
+                <button class="btn-principal" onclick="siguientePantalla()">Siguiente <span>→</span></button>
             </div>
         </div>
     </section>
@@ -130,7 +139,7 @@
 
             <div class="navegacion">
                 <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button onclick="siguientePantalla()">Siguiente <span>→</span></button>
+                <button class="btn-principal" onclick="siguientePantalla()">Siguiente <span>→</span></button>
             </div>
         </div>
     </section>
@@ -165,7 +174,7 @@
 
             <div class="navegacion">
                 <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button onclick="siguientePantalla()">Siguiente <span>→</span></button>
+                <button class="btn-principal" onclick="siguientePantalla()">Siguiente <span>→</span></button>
             </div>
         </div>
     </section>
@@ -215,13 +224,13 @@
 
             <div class="navegacion">
                 <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button onclick="siguientePantalla()">Siguiente <span>→</span></button>
+                <button class="btn-principal" onclick="siguientePantalla()">Siguiente <span>→</span></button>
             </div>
         </div>
     </section>
 
     <!-- =====================================================
-         PANTALLA 6 - PANTALLA DE MÚSICA DEDICADA
+         PANTALLA 6 - MÚSICA DEDICADA (SEGUNDA PLAYLIST)
     ====================================================== -->
     <section class="pantalla" id="pantalla6">
         <div class="contenido">
