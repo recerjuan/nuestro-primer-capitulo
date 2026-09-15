@@ -136,45 +136,30 @@
     </section>
 
     <!-- =====================================================
-         PANTALLA 4 - PANTALLA EXCLUSIVA DE MÚSICA DEDICADA
+         PANTALLA 4 - GALERÍA DE FOTOS
     ====================================================== -->
     <section class="pantalla" id="pantalla4">
         <div class="contenido">
-            <p class="pequeno">NUESTRA PLAYLIST ESPECIAL</p>
-            <h2>Canciones que nos hemos dedicado 🎶</h2>
-            <p class="descripcion">Cada una de estas canciones me recuerda un momento único a tu lado. Toca cualquier canción para escucharla:</p>
+            <p class="pequeno">GALERÍA DE NUESTROS MOMENTOS</p>
+            <h2>Cada imagen guarda un recuerdo inolvidable 📸</h2>
+            <p class="descripcion">Lugares, sonrisas y momentos que siempre llevaré en mi corazón:</p>
             
-            <div class="lista-dedicatorias">
-                <div class="item-cancion" onclick="reproducirEspecifica(0)">
-                    <div class="icon-play">▶️</div>
-                    <div class="detalles-cancion">
-                        <span class="titulo-pista">A Dónde Vamos</span>
-                        <span class="artista-pista">Morat</span>
-                    </div>
+            <div class="grid-fotos">
+                <div class="tarjeta-foto">
+                    <img src="foto1.jpg" alt="Foto 1">
+                    <div class="pie-foto">Nuestro primer momento especial ❤️</div>
                 </div>
-
-                <div class="item-cancion" onclick="reproducirEspecifica(1)">
-                    <div class="icon-play">▶️</div>
-                    <div class="detalles-cancion">
-                        <span class="titulo-pista">Cesantías de Amor</span>
-                        <span class="artista-pista">Música Colombiana</span>
-                    </div>
+                <div class="tarjeta-foto">
+                    <img src="foto2.jpg" alt="Foto 2">
+                    <div class="pie-foto">Esa sonrisa única ✨</div>
                 </div>
-
-                <div class="item-cancion" onclick="reproducirEspecifica(2)">
-                    <div class="icon-play">▶️</div>
-                    <div class="detalles-cancion">
-                        <span class="titulo-pista">La Persona de Mi Vida</span>
-                        <span class="artista-pista">Iván Villazón</span>
-                    </div>
+                <div class="tarjeta-foto">
+                    <img src="foto3.jpg" alt="Foto 3">
+                    <div class="pie-foto">Un día inolvidable juntos 🌹</div>
                 </div>
-
-                <div class="item-cancion" onclick="reproducirEspecifica(3)">
-                    <div class="icon-play">▶️</div>
-                    <div class="detalles-cancion">
-                        <span class="titulo-pista">Siempre Seré</span>
-                        <span class="artista-pista">Tito Rojas / Giro</span>
-                    </div>
+                <div class="tarjeta-foto">
+                    <img src="foto4.jpg" alt="Foto 4">
+                    <div class="pie-foto">Creando recuerdos 💫</div>
                 </div>
             </div>
 
@@ -225,6 +210,56 @@
                 <div class="tarjeta-nota" onclick="revelarNota(this)">
                     <span class="nota-frente">✨ Toca para descubrir</span>
                     <span class="nota-atras">La felicidad que siento simplemente por tenerte en mi vida.</span>
+                </div>
+            </div>
+
+            <div class="navegacion">
+                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
+                <button onclick="siguientePantalla()">Siguiente <span>→</span></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         PANTALLA 6 - PANTALLA DE MÚSICA DEDICADA
+    ====================================================== -->
+    <section class="pantalla" id="pantalla6">
+        <div class="contenido">
+            <p class="pequeno">NUESTRA PLAYLIST ESPECIAL</p>
+            <h2>Canciones que nos hemos dedicado 🎶</h2>
+            <p class="descripcion">Cada una de estas canciones me recuerda un momento único a tu lado. Toca cualquier canción para escucharla:</p>
+            
+            <div class="lista-dedicatorias">
+                <div class="item-cancion" onclick="reproducirEspecifica(0)">
+                    <div class="icon-play">▶️</div>
+                    <div class="detalles-cancion">
+                        <span class="titulo-pista">A Dónde Vamos</span>
+                        <span class="artista-pista">Morat</span>
+                    </div>
+                </div>
+
+                <div class="item-cancion" onclick="reproducirEspecifica(1)">
+                    <div class="icon-play">▶️</div>
+                    <div class="detalles-cancion">
+                        <span class="titulo-pista">Cesantías de Amor</span>
+                        <span class="artista-pista">Música Colombiana</span>
+                    </div>
+                </div>
+
+                <div class="item-cancion" onclick="reproducirEspecifica(2)">
+                    <div class="icon-play">▶️</div>
+                    <div class="detalles-cancion">
+                        <span class="titulo-pista">La Persona de Mi Vida</span>
+                        <span class="artista-pista">Iván Villazón</span>
+                    </div>
+                </div>
+
+                <div class="item-cancion" onclick="reproducirEspecifica(3)">
+                    <div class="icon-play">▶️</div>
+                    <div class="detalles-cancion">
+                        <span class="titulo-pista">Siempre Seré</span>
+                        <span class="artista-pista">Tito Rojas / Giro</span>
+                    </div>
                 </div>
             </div>
 
