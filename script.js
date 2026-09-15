@@ -1,60 +1,93 @@
-/* CAMBIO DE PANTALLAS */
-function cambiarPantalla(numeroPantalla) {
-    const pantallas = document.querySelectorAll('.pantalla');
-    pantallas.forEach(function (p) {
-        p.classList.remove('activa');
+let pantallaActual = 1;
+const totalPantallas = 5;
+
+function mostrarPantalla(numero) {
+    if (numero < 1 || numero > totalPantallas) return;
+
+    document.querySelectorAll(".pantalla").forEach(function (p) {
+        p.classList.remove("activa");
     });
 
-    const destino = document.getElementById('pantalla' + numeroPantalla);
-    if (destino) {
-        destino.classList.add('activa');
-        window.scrollTo(0, 0);
+    const nuevaPantalla = document.getElementById("pantalla" + numero);
+    if (nuevaPantalla) {
+        nuevaPantalla.classList.add("activa");
+        pantallaActual = numero;
     }
 }
 
-/* ABRIR SOBRE DE LA CARTA */
-function abrirSobre() {
-    const sobre = document.getElementById('contenedorSobre');
-    const carta = document.getElementById('cartaEscribir');
-
-    if (sobre) sobre.classList.add('abierto');
-    if (carta) {
-        carta.classList.remove('oculta');
-        carta.classList.add('visible');
+function siguientePantalla() {
+    if (pantallaActual < totalPantallas) {
+        mostrarPantalla(pantallaActual + 1);
     }
 }
 
-/* REVELAR NOTAS SECRETAS */
-function revelarNota(tarjeta) {
-    tarjeta.classList.toggle('revelada');
+function anteriorPantalla() {
+    if (pantallaActual > 1) {
+        mostrarPantalla(pantallaActual - 1);
+    }
 }
 
-/* REPRODUCTOR DE MÚSICA */
+document.addEventListener('keydown', function (e) {
+    if (e.key === "ArrowRight") siguientePantalla();
+    if (e.key === "ArrowLeft") anteriorPantalla();
+});
+
+const listaCanciones = [
+    { titulo: "A Dónde Vamos - Morat", archivo: "a-donde-vamos.mp3" },
+    { titulo: "Cesantías de Amor", archivo: "cesantias-de-amor.mp3" },
+    { titulo: "La Persona de Mi Vida - Iván Villazón", archivo: "la-persona-de-mi-vida.mp3" },
+    { titulo: "Siempre Seré - Tito Rojas", archivo: "siempre-sere.mp3" }
+];
+
+let indiceCancionActual = 0;
 let reproduciendo = false;
 const audio = document.getElementById('musicaFondo');
+
+function cargarCancion(indice) {
+    if (!audio) return;
+    audio.src = listaCanciones[indice].archivo;
+    document.getElementById('tituloCancion').innerText = listaCanciones[indice].titulo;
+}
 
 function toggleMusica() {
     if (!audio) return;
 
     if (reproduciendo) {
         audio.pause();
-        document.getElementById('textoMusica').innerText = "Reproducir Música";
+        document.getElementById('btnPlayPause').innerText = "▶️ Reproducir";
         document.getElementById('iconoMusica').innerText = "🎵";
     } else {
         audio.play().then(() => {
-            document.getElementById('textoMusica').innerText = "Pausar Música";
+            document.getElementById('btnPlayPause').innerText = "⏸️ Pausar";
             document.getElementById('iconoMusica').innerText = "🎶";
         }).catch(err => {
-            console.log("Error al reproducir audio: ", err);
-            alert("Asegúrate de que el archivo de audio se llame 'a-donde-vamos.mp3'.");
+            console.log("Error de audio: ", err);
         });
     }
     reproduciendo = !reproduciendo;
 }
 
-/* CONTADOR DE TIEMPO */
+function reproducirEspecifica(indice) {
+    indiceCancionActual = indice;
+    cargarCancion(indiceCancionActual);
+    reproduciendo = false;
+    toggleMusica();
+}
+
+function siguienteCancion() {
+    indiceCancionActual = (indiceCancionActual + 1) % listaCanciones.length;
+    cargarCancion(indiceCancionActual);
+    if (reproduciendo) audio.play();
+}
+
+function cancionAnterior() {
+    indiceCancionActual = (indiceCancionActual - 1 + listaCanciones.length) % listaCanciones.length;
+    cargarCancion(indiceCancionActual);
+    if (reproduciendo) audio.play();
+}
+
 function actualizarContador() {
-    const inicio = new Date(2026, 6, 8, 19, 25, 0);
+    const inicio = new Date(2026, 6, 8, 19, 25, 0); 
     const ahora = new Date();
 
     let diferencia = ahora.getTime() - inicio.getTime();
@@ -64,12 +97,15 @@ function actualizarContador() {
     const minuto = segundo * 60;
     const hora = minuto * 60;
     const dia = hora * 24;
+    const mesPromedio = dia * 30.4375;
 
-    const dias = Math.floor(diferencia / dia);
+    const meses = Math.floor(diferencia / mesPromedio);
+    const dias = Math.floor((diferencia % mesPromedio) / dia);
     const horas = Math.floor((diferencia % dia) / hora);
     const minutos = Math.floor((diferencia % hora) / minuto);
     const segundos = Math.floor((diferencia % minuto) / segundo);
 
+    if (document.getElementById("meses")) document.getElementById("meses").textContent = meses;
     if (document.getElementById("dias")) document.getElementById("dias").textContent = dias;
     if (document.getElementById("horas")) document.getElementById("horas").textContent = String(horas).padStart(2, "0");
     if (document.getElementById("minutos")) document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
@@ -79,25 +115,21 @@ function actualizarContador() {
 actualizarContador();
 setInterval(actualizarContador, 1000);
 
-/* VISOR DE FOTOS */
-function abrirModal(src, texto) {
-    const modal = document.getElementById("modalFoto");
-    const imgModal = document.getElementById("imagenModal");
-    const caption = document.getElementById("captionModal");
+function revelarNota(elemento) {
+    const frente = elemento.querySelector('.nota-frente');
+    const atras = elemento.querySelector('.nota-atras');
 
-    if (modal && imgModal) {
-        modal.style.display = "flex";
-        imgModal.src = src;
-        if (caption) caption.innerText = texto;
+    if (atras.style.display === 'block') {
+        atras.style.display = 'none';
+        frente.style.display = 'block';
+        elemento.classList.remove('revelada');
+    } else {
+        frente.style.display = 'none';
+        atras.style.display = 'block';
+        elemento.classList.add('revelada');
     }
 }
 
-function cerrarModal() {
-    const modal = document.getElementById("modalFoto");
-    if (modal) modal.style.display = "none";
-}
-
-/* CORAZONES FLOTANTES DE FONDO */
 function crearCorazon() {
     const contenedor = document.querySelector(".hearts");
     if (!contenedor) return;
@@ -107,8 +139,8 @@ function crearCorazon() {
     corazon.textContent = Math.random() > 0.5 ? "♥" : "♡";
 
     const posicion = Math.random() * 100;
-    const tamaño = 10 + Math.random() * 18;
-    const duracion = 6 + Math.random() * 7;
+    const tamaño = 12 + Math.random() * 16;
+    const duracion = 6 + Math.random() * 6;
 
     corazon.style.left = posicion + "%";
     corazon.style.fontSize = tamaño + "px";
@@ -116,7 +148,9 @@ function crearCorazon() {
 
     contenedor.appendChild(corazon);
 
-    setTimeout(() => { corazon.remove(); }, duracion * 1000);
+    setTimeout(() => {
+        corazon.remove();
+    }, duracion * 1000);
 }
 
-setInterval(crearCorazon, 400);
+setInterval(crearCorazon, 450);
