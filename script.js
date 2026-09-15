@@ -1,5 +1,5 @@
 let pantallaActual = 1;
-const totalPantallas = 5;
+const totalPantallas = 6;
 
 function mostrarPantalla(numero) {
     if (numero < 1 || numero > totalPantallas) return;
