@@ -32,6 +32,16 @@ document.addEventListener('keydown', function (e) {
     if (e.key === "ArrowLeft") anteriorPantalla();
 });
 
+// ABRIR CARTA INTERACTIVA
+function abrirCarta() {
+    const wrapper = document.getElementById('envelopeWrapper');
+    const carta = document.getElementById('cartaDesplegada');
+
+    if (wrapper) wrapper.style.display = 'none';
+    if (carta) carta.classList.add('abierta');
+}
+
+// SISTEMA DE MÚSICA
 const listaCanciones = [
     { titulo: "A Dónde Vamos - Morat", archivo: "a-donde-vamos.mp3" },
     { titulo: "Cesantías de Amor", archivo: "cesantias-de-amor.mp3" },
@@ -52,6 +62,11 @@ function cargarCancion(indice) {
 function toggleMusica() {
     if (!audio) return;
 
+    // Si aún no hay canción seleccionada, asignamos la primera
+    if (!audio.src || audio.src.endsWith("#") || audio.src === "") {
+        cargarCancion(0);
+    }
+
     if (reproduciendo) {
         audio.pause();
         document.getElementById('btnPlayPause').innerText = "▶️ Reproducir";
@@ -61,7 +76,7 @@ function toggleMusica() {
             document.getElementById('btnPlayPause').innerText = "⏸️ Pausar";
             document.getElementById('iconoMusica').innerText = "🎶";
         }).catch(err => {
-            console.log("Error de audio: ", err);
+            console.log("Error al reproducir audio: ", err);
         });
     }
     reproduciendo = !reproduciendo;
@@ -86,6 +101,7 @@ function cancionAnterior() {
     if (reproduciendo) audio.play();
 }
 
+// CONTADOR DE TIEMPO REAL
 function actualizarContador() {
     const inicio = new Date(2026, 6, 8, 19, 25, 0); 
     const ahora = new Date();
@@ -115,6 +131,7 @@ function actualizarContador() {
 actualizarContador();
 setInterval(actualizarContador, 1000);
 
+// NOTAS SECRETAS
 function revelarNota(elemento) {
     const frente = elemento.querySelector('.nota-frente');
     const atras = elemento.querySelector('.nota-atras');
@@ -130,6 +147,7 @@ function revelarNota(elemento) {
     }
 }
 
+// CORAZONES DE FONDO
 function crearCorazon() {
     const contenedor = document.querySelector(".hearts");
     if (!contenedor) return;
