@@ -109,7 +109,7 @@ h2 {
     font-weight: 300;
 }
 
-/* PANTALLA 1: ANIMACIONES DE BIENVENIDA */
+/* PANTALLA 1: ANIMACIONES */
 .corazon-animado-entrada {
     font-size: 80px;
     margin-bottom: 20px;
@@ -142,7 +142,7 @@ h2 {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* PANTALLA 2: SOBRE Y CARTA ANIMADA */
+/* PANTALLA 2: SOBRE Y CARTA */
 .carta-container {
     max-width: 760px !important;
 }
@@ -327,7 +327,7 @@ h2 {
 
 .tarjeta-foto img {
     width: 100%;
-    height: 260px;
+    height: 280px;
     object-fit: cover;
     border-radius: 14px;
     display: block;
@@ -382,7 +382,7 @@ h2 {
     border-color: rgba(232, 165, 152, 0.7) !important;
 }
 
-/* PANTALLA 6: REPRODUCTOR EXCLUSIVO */
+/* PANTALLA 6: REPRODUCTOR */
 .reproductor-pantalla6 {
     background: rgba(20, 8, 14, 0.8);
     border: 1px solid var(--glass-border);
