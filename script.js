@@ -12,6 +12,7 @@ function mostrarPantalla(numero) {
     if (nuevaPantalla) {
         nuevaPantalla.classList.add("activa");
         pantallaActual = numero;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
@@ -41,12 +42,12 @@ function abrirCarta() {
     if (carta) carta.classList.add('abierta');
 }
 
-// SISTEMA DE MÚSICA (EXCLUSIVO PANTALLA 6)
+// MÚSICA CONFIGURADA PARA GITHUB PAGES Y ARCHIVOS LOCALES
 const listaCanciones = [
-    { titulo: "A Dónde Vamos - Morat", archivo: "a-donde-vamos.mp3" },
-    { titulo: "Cesantías de Amor", archivo: "cesantias-de-amor.mp3" },
-    { titulo: "La Persona de Mi Vida - Iván Villazón", archivo: "la-persona-de-mi-vida.mp3" },
-    { titulo: "Siempre Seré - Tito Rojas", archivo: "siempre-sere.mp3" }
+    { titulo: "A Dónde Vamos - Morat", archivo: "./a-donde-vamos.mp3" },
+    { titulo: "Cesantías de Amor", archivo: "./cesantias-de-amor.mp3" },
+    { titulo: "La Persona de Mi Vida - Iván Villazón", archivo: "./la-persona-de-mi-vida.mp3" },
+    { titulo: "Siempre Seré - Tito Rojas", archivo: "./siempre-sere.mp3" }
 ];
 
 let indiceCancionActual = 0;
@@ -76,7 +77,8 @@ function toggleMusica() {
         audio.play().then(() => {
             if (btn) btn.innerText = "⏸️ Pausar";
         }).catch(err => {
-            console.log("Error de reproducción: ", err);
+            console.log("No se pudo iniciar reproducción autómata o archivo no encontrado:", err);
+            alert("Selecciona la canción desde la Pantalla 6 para comenzar la música.");
         });
     }
     reproduciendo = !reproduciendo;
@@ -101,7 +103,7 @@ function cancionAnterior() {
     if (reproduciendo) audio.play();
 }
 
-// CONTADOR DE TIEMPO REAL
+// CONTADOR DE TIEMPO
 function actualizarContador() {
     const inicio = new Date(2026, 6, 8, 19, 25, 0); 
     const ahora = new Date();
