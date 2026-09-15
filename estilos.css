@@ -23,7 +23,6 @@ html, body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-main);
-    overflow-x: hidden;
 }
 
 body::before {
@@ -39,37 +38,34 @@ body::before {
 }
 
 .pantalla {
-    position: fixed;
-    inset: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100vh;
-    padding: 30px 20px;
-    display: flex;
-    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+    display: none;
+    align-items: flex-start;
     justify-content: center;
     opacity: 0;
-    visibility: hidden;
-    transform: translateY(30px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                visibility 0.6s;
-    overflow-y: auto;
+    transition: opacity 0.5s ease;
     z-index: 1;
 }
 
 .pantalla.activa {
+    display: flex;
     opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
 }
 
 .contenido {
     width: 100%;
     max-width: 850px;
-    margin: 0 auto;
+    margin: auto 0;
     text-align: center;
     position: relative;
     z-index: 2;
+    padding-top: 20px;
+    padding-bottom: 40px;
 }
 
 h1, h2, h3, .titulo-carta {
@@ -113,9 +109,7 @@ h2 {
     font-weight: 300;
 }
 
-/* =====================================================
-   PANTALLA 1: ANIMACIONES DE BIENVENIDA
-====================================================== */
+/* PANTALLA 1: ANIMACIONES DE BIENVENIDA */
 .corazon-animado-entrada {
     font-size: 80px;
     margin-bottom: 20px;
@@ -148,9 +142,7 @@ h2 {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* =====================================================
-   PANTALLA 2: SOBRE Y CARTA ANIMADA
-====================================================== */
+/* PANTALLA 2: SOBRE Y CARTA ANIMADA */
 .carta-container {
     max-width: 760px !important;
 }
@@ -177,6 +169,7 @@ h2 {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(232, 165, 152, 0.25);
     border: 1px solid var(--glass-border);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -193,7 +186,7 @@ h2 {
     font-size: 24px;
     box-shadow: 0 4px 18px rgba(163, 34, 56, 0.7);
     border: 2px solid rgba(232, 165, 152, 0.6);
-    margin: 0 auto 10px;
+    margin-bottom: 10px;
     animation: pulsoSello 2s infinite;
 }
 
@@ -211,14 +204,14 @@ h2 {
 .carta-desplegada {
     display: none;
     opacity: 0;
-    transform: translateY(30px) scale(0.95);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    background: linear-gradient(145deg, rgba(28, 12, 18, 0.92), rgba(16, 7, 11, 0.96));
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+    background: linear-gradient(145deg, rgba(28, 12, 18, 0.95), rgba(16, 7, 11, 0.98));
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
-    padding: 45px 35px;
+    padding: 35px 25px;
     margin: 20px auto;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
     text-align: left;
@@ -227,7 +220,7 @@ h2 {
 .carta-desplegada.abierta {
     display: block;
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
 }
 
 .titulo-carta {
@@ -261,9 +254,7 @@ h2 {
     margin-top: 25px;
 }
 
-/* =====================================================
-   PANTALLA 3: CONTADOR NEUMÓRFICO MEJORADO
-====================================================== */
+/* PANTALLA 3: CONTADOR */
 .contador-contenedor {
     display: flex;
     justify-content: center;
@@ -310,9 +301,7 @@ h2 {
     display: block;
 }
 
-/* =====================================================
-   PANTALLA 4: GALERÍA DE FOTOS (2 FOTOS)
-====================================================== */
+/* PANTALLA 4: GALERÍA DE FOTOS */
 .grid-fotos.dos-fotos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -350,9 +339,7 @@ h2 {
     margin-top: 12px;
 }
 
-/* =====================================================
-   PANTALLA 5: NOTAS SECRETAS
-====================================================== */
+/* PANTALLA 5: NOTAS SECRETAS */
 .grid-notas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -395,9 +382,7 @@ h2 {
     border-color: rgba(232, 165, 152, 0.7) !important;
 }
 
-/* =====================================================
-   PANTALLA 6: REPRODUCTOR DE MÚSICA EXCLUSIVO
-====================================================== */
+/* PANTALLA 6: REPRODUCTOR EXCLUSIVO */
 .reproductor-pantalla6 {
     background: rgba(20, 8, 14, 0.8);
     border: 1px solid var(--glass-border);
@@ -501,7 +486,7 @@ button:hover, .btn-principal:hover {
     color: var(--text-muted);
 }
 
-/* CORAZONES FLOTANTES DE FONDO */
+/* CORAZONES FLOTANTES */
 .hearts {
     position: fixed;
     inset: 0;
