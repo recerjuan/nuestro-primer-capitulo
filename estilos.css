@@ -1,133 +1,348 @@
+:root {
+    --bg-dark: #0a0608;
+    --rose-gold: #e8a598;
+    --rose-gold-light: #f4c2c2;
+    --wine-dark: #2a0810;
+    --wine-accent: #a32238;
+    --text-main: #f8f0f2;
+    --text-muted: #c4b5b9;
+    --glass-bg: rgba(255, 255, 255, 0.035);
+    --glass-border: rgba(232, 165, 152, 0.22);
+    --glass-hover: rgba(232, 165, 152, 0.08);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #0d080c;
-    color: #ffffff;
+html, body {
+    width: 100%;
     min-height: 100vh;
-    position: relative;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
 }
 
-/* FONDO DE LUZ */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     background:
-        radial-gradient(circle at 20% 20%, rgba(180, 30, 80, 0.18), transparent 35%),
-        radial-gradient(circle at 80% 80%, rgba(255, 30, 70, 0.12), transparent 35%);
+        radial-gradient(circle at 15% 20%, rgba(163, 34, 56, 0.22), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(232, 165, 152, 0.15), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(10, 6, 8, 0.85), #0a0608);
     pointer-events: none;
     z-index: 0;
 }
 
-/* BOTÓN FLOTANTE DE MÚSICA */
-.btn-flotante-musica {
+.pantalla {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999;
-    padding: 10px 18px;
-    background: rgba(255, 23, 68, 0.45);
-    border: 1px solid rgba(255, 54, 92, 0.8);
-    box-shadow: 0 4px 15px rgba(255, 23, 68, 0.4);
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 40px 20px 90px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    border-radius: 50px;
-    cursor: pointer;
-    color: white;
-}
-
-.btn-flotante-musica:hover {
-    background: #ff365c;
-    transform: scale(1.05);
-}
-
-/* SISTEMA DE PANTALLAS */
-.pantalla {
-    display: none;
-    width: 100%;
-    min-height: 100vh;
-    padding: 40px 20px 80px;
-    position: relative;
-    z-index: 2;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.7s;
+    overflow-y: auto;
+    z-index: 1;
 }
 
 .pantalla.activa {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .contenido {
     width: 100%;
-    max-width: 800px;
+    max-width: 850px;
     margin: 0 auto;
     text-align: center;
     position: relative;
     z-index: 2;
 }
 
-/* ENCABEZADOS Y TEXTOS */
-.corazon-principal {
-    font-size: 75px;
-    margin-bottom: 20px;
-    color: #ff1744;
-    animation: latido 1.5s infinite ease-in-out;
-    filter: drop-shadow(0 0 20px rgba(255, 23, 68, 0.7));
-}
-
-@keyframes latido {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
-}
-
-.pequeno {
-    font-size: 12px;
-    letter-spacing: 4px;
-    color: #e98aa3;
-    margin-bottom: 15px;
+h1, h2, h3, .titulo-carta {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
 }
 
 h1 {
-    font-family: Georgia, serif;
-    font-size: clamp(36px, 6vw, 70px);
-    font-weight: 500;
-    line-height: 1.1;
+    font-size: clamp(36px, 5.5vw, 68px);
+    line-height: 1.15;
+    color: var(--text-main);
 }
 
-h1 span { display: block; color: #ff6b8a; }
+h1 span {
+    display: block;
+    font-style: italic;
+    color: var(--rose-gold);
+    background: linear-gradient(135deg, #f4c2c2 0%, #e8a598 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    font-size: clamp(24px, 3.5vw, 38px);
+    color: var(--rose-gold-light);
+    margin-bottom: 10px;
+}
+
+.pequeno {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: var(--rose-gold);
+    margin-bottom: 18px;
+    opacity: 0.9;
+}
 
 .descripcion {
-    max-width: 550px;
-    margin: 20px auto;
-    color: #b8aeb2;
+    max-width: 560px;
+    margin: 15px auto 25px;
+    color: var(--text-muted);
     font-size: 15px;
     line-height: 1.8;
+    font-weight: 300;
+}
+
+.carta-container {
+    max-width: 720px !important;
+}
+
+.carta {
+    background: rgba(22, 12, 16, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 50px 40px 40px;
+    margin: 20px auto;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    position: relative;
+    text-align: left;
+}
+
+.carta-sello {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--wine-accent);
+    color: var(--rose-gold-light);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(163, 34, 56, 0.5);
+    border: 1px solid rgba(232, 165, 152, 0.4);
+}
+
+.titulo-carta {
+    text-align: center;
+    font-size: clamp(22px, 3vw, 30px);
+    margin-bottom: 30px;
+    line-height: 1.3;
+}
+
+.titulo-carta span {
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--rose-gold);
+}
+
+.cuerpo-texto p {
+    color: var(--text-muted);
+    line-height: 1.85;
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.firma {
+    text-align: right !important;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--rose-gold) !important;
+    margin-top: 30px;
+}
+
+.contador-contenedor {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 35px auto;
+    max-width: 650px;
+}
+
+.caja-tiempo {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    padding: 20px 15px;
+    min-width: 95px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.caja-tiempo:hover {
+    transform: translateY(-4px);
+    border-color: rgba(232, 165, 152, 0.4);
+}
+
+.caja-tiempo span {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--rose-gold-light);
+}
+
+.caja-tiempo small {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 4px;
+    display: block;
+}
+
+.lista-dedicatorias {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 500px;
+    margin: 25px auto;
+}
+
+.item-cancion {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.item-cancion:hover {
+    background: var(--glass-hover);
+    border-color: var(--rose-gold);
+    transform: translateX(5px);
+}
+
+.icon-play {
+    font-size: 1.2rem;
+}
+
+.detalles-cancion {
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-pista {
+    font-weight: 500;
+    color: var(--rose-gold-light);
+    font-size: 1rem;
+}
+
+.artista-pista {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.grid-notas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 30px 0;
+}
+
+.tarjeta-nota {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 22px 18px;
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.35s ease;
+}
+
+.tarjeta-nota:hover {
+    background: var(--glass-hover);
+    border-color: var(--rose-gold);
+    transform: translateY(-3px);
+}
+
+.nota-frente {
+    color: var(--rose-gold);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.nota-atras {
+    display: none;
+    color: var(--text-main);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.tarjeta-nota.revelada {
+    background: rgba(163, 34, 56, 0.2) !important;
+    border-color: rgba(232, 165, 152, 0.5) !important;
 }
 
 button {
-    margin-top: 20px;
-    padding: 14px 28px;
-    border: 1px solid rgba(255, 100, 130, 0.5);
+    margin-top: 25px;
+    padding: 13px 28px;
+    border: 1px solid var(--glass-border);
     border-radius: 50px;
-    background: rgba(255, 255, 255, 0.05);
-    color: white;
-    font-size: 14px;
+    background: var(--glass-bg);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
     cursor: pointer;
-    transition: 0.3s;
+    backdrop-filter: blur(10px);
+    transition: all 0.35s ease;
 }
 
 button:hover {
-    background: #d7193f;
-    border-color: #ff365c;
+    background: rgba(232, 165, 152, 0.15);
+    border-color: var(--rose-gold);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(216, 79, 118, 0.4);
+    box-shadow: 0 10px 25px rgba(232, 165, 152, 0.15);
 }
 
 .navegacion {
@@ -136,363 +351,84 @@ button:hover {
     align-items: center;
     gap: 15px;
     margin-top: 30px;
+    flex-wrap: wrap;
 }
 
 .boton-regresar {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.2);
-    color: #b8aeb2;
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
 }
 
-/* SOBRE Y CARTA */
-.contenedor-sobre {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 30px auto;
-    cursor: pointer;
-}
-
-.sobre {
-    position: relative;
-    width: 290px;
-    height: 180px;
-    background: #a31d38;
-    border-radius: 10px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 23, 68, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.solapa {
-    position: absolute;
-    top: 0; left: 0;
-    width: 0; height: 0;
-    border-left: 145px solid transparent;
-    border-right: 145px solid transparent;
-    border-top: 100px solid #d72648;
-    z-index: 3;
-}
-
-.solapa-izquierda {
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 0; height: 0;
-    border-left: 145px solid #85142b;
-    border-top: 90px solid transparent;
-    border-bottom: 90px solid #85142b;
-    border-radius: 0 0 0 10px;
-    z-index: 2;
-}
-
-.solapa-derecha {
-    position: absolute;
-    bottom: 0; right: 0;
-    width: 0; height: 0;
-    border-right: 145px solid #941832;
-    border-top: 90px solid transparent;
-    border-bottom: 90px solid #941832;
-    border-radius: 0 0 10px 0;
-    z-index: 2;
-}
-
-.corazon-sello {
-    position: absolute;
-    top: 75px;
-    z-index: 4;
-    font-size: 28px;
-    color: #ffffff;
-}
-
-.texto-sobre {
-    position: absolute;
-    bottom: 12px;
-    z-index: 4;
-    font-size: 12px;
-    letter-spacing: 1px;
-    color: #f5dce3;
-}
-
-.contenedor-sobre.abierto { display: none !important; }
-
-.carta {
-    position: relative;
-    width: 100%;
-    padding: 50px 25px 30px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 80, 110, 0.25);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    text-align: left;
-}
-
-.carta.oculta { display: none; }
-.carta.visible { display: block !important; }
-
-.carta-corazon {
-    position: absolute;
-    top: -25px;
-    left: 50%;
-    width: 50px; height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #ff365c;
-    color: #ffffff;
-    font-size: 22px;
-    border: 3px solid #0d080c;
-    transform: translateX(-50%);
-}
-
-.titulo-carta {
-    font-family: Georgia, serif;
-    text-align: center;
-    font-size: 24px;
-    color: #f5dce3;
-    margin-bottom: 25px;
-}
-
-.titulo-carta span { color: #ff4164; }
-
-.carta p {
-    color: #d1c4c8;
-    line-height: 1.8;
-    font-size: 15px;
-    margin-bottom: 18px;
-}
-
-.firma {
-    text-align: right !important;
-    font-family: Georgia, serif;
-    font-size: 18px !important;
-    color: #ff6b8a !important;
-    margin-top: 25px !important;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 80, 110, 0.2);
-}
-
-/* CONTADOR */
-.titulo-contador {
-    font-family: Georgia, serif;
-    font-size: clamp(28px, 5vw, 50px);
-    margin-bottom: 10px;
-}
-
-.fecha-inicio {
-    color: #e98aa3;
-    font-size: 13px;
-}
-
-.contador {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin-top: 30px;
-}
-
-.tiempo span {
-    display: block;
-    font-family: Georgia, serif;
-    font-size: clamp(32px, 7vw, 50px);
-    color: #ff6b8a;
-}
-
-.tiempo small {
-    display: block;
-    margin-top: 4px;
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: #95888e;
-}
-
-.separador { font-size: 25px; color: #59434b; }
-
-.mensaje-contador {
-    margin-top: 30px;
-    color: #b8aeb2;
-    font-size: 14px;
-}
-
-/* NOTAS SECRETAS DISEÑO TARJETAS CERRADAS CON BORDE */
-.grid-notas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin: 25px 0;
-    width: 100%;
-}
-
-.tarjeta-nota {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 80, 110, 0.4);
-    border-radius: 12px;
-    padding: 20px 15px;
-    min-height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    text-align: center;
-    transition: background 0.3s, border-color 0.3s;
-}
-
-.tarjeta-nota:hover {
-    background: rgba(255, 54, 92, 0.2);
-    border-color: #ff365c;
-}
-
-.nota-frente {
-    color: #ff6b8a;
-    font-weight: bold;
-    font-size: 15px;
-}
-
-.nota-atras {
-    display: none;
-    color: #ffffff;
-    font-size: 14px;
-    line-height: 1.5;
-    font-family: Georgia, serif;
-}
-
-.tarjeta-nota.revelada {
-    background: rgba(255, 23, 68, 0.3) !important;
-    border-color: #ff1744 !important;
-}
-
-.tarjeta-nota.revelada .nota-frente { display: none !important; }
-.tarjeta-nota.revelada .nota-atras { display: block !important; }
-
-/* ÁLBUM DE FOTOS Y VISOR */
-.album {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin: 25px 0;
-}
-
-.foto-vacia {
-    position: relative;
-    width: 100%;
-    padding-top: 100%; /* Aspect Ratio 1:1 */
-    border-radius: 12px;
-    border: 1px dashed rgba(255, 100, 130, 0.4);
-    background: rgba(255, 255, 255, 0.03);
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.foto-vacia span, .foto-vacia p {
-    position: absolute;
-    z-index: 1;
-}
-
-.foto-vacia span {
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-}
-
-.foto-vacia p {
-    bottom: 15px;
-    left: 10px;
-    right: 10px;
-    text-align: center;
-    font-size: 12px;
-    color: #b8aeb2;
-}
-
-.foto-con-imagen img {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.texto-foto {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    padding: 8px;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 2;
-    text-align: center;
-}
-
-.texto-foto p {
-    position: static !important;
-    font-size: 11px !important;
-    color: white !important;
-}
-
-.agradecimiento h3 {
-    color: #ff365c;
-    font-family: Georgia, serif;
-    margin: 15px 0 8px;
-    font-size: 18px;
-}
-
-.final-frase { color: #e98aa3; font-size: 13px; }
-
-.modal {
-    display: none;
+.reproductor-flotante {
     position: fixed;
-    z-index: 10000;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.9);
-    align-items: center;
-    justify-content: center;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(14, 8, 11, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 25px;
+    padding: 10px 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 6px;
 }
 
-.contenido-modal {
-    max-width: 85%;
-    max-height: 75vh;
-    border-radius: 12px;
-    border: 2px solid #ff365c;
+.info-cancion {
+    font-size: 0.78rem;
+    color: var(--rose-gold-light);
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-#captionModal {
-    margin-top: 15px;
-    color: #f5dce3;
-    font-family: Georgia, serif;
+.controles-musica {
+    display: flex;
+    gap: 6px;
 }
 
-.cerrar-modal {
-    position: absolute;
-    top: 20px; right: 30px;
-    color: #fff;
-    font-size: 35px;
-    cursor: pointer;
+.controles-musica button {
+    margin-top: 0;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    border-radius: 15px;
 }
 
-/* CORAZONES FLOTANTES */
 .hearts {
     position: fixed;
     inset: 0;
     pointer-events: none;
+    z-index: 0;
     overflow: hidden;
-    z-index: 1;
 }
 
 .heart {
     position: absolute;
-    bottom: -30px;
-    color: #ff1744;
-    opacity: 0;
-    animation: subir linear forwards;
+    bottom: -20px;
+    color: var(--rose-gold);
+    opacity: 0.5;
+    animation: flotar linear infinite;
 }
 
-@keyframes subir {
-    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-    10% { opacity: 0.6; }
-    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+@keyframes flotar {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+    100% { transform: translateY(-105vh) rotate(360deg); opacity: 0; }
 }
 
-@media (min-width: 600px) {
-    .album { grid-template-columns: repeat(4, 1fr); }
+.corazon-principal {
+    font-size: 70px;
+    margin-bottom: 20px;
+    color: var(--rose-gold);
+    animation: latido 1.8s infinite ease-in-out;
+    filter: drop-shadow(0 0 15px rgba(232, 165, 152, 0.5));
 }
+
+@keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+}
+
