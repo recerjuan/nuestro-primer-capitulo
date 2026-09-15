@@ -41,7 +41,7 @@ function abrirCarta() {
     if (carta) carta.classList.add('abierta');
 }
 
-// SISTEMA DE MÚSICA
+// SISTEMA DE MÚSICA (EXCLUSIVO PANTALLA 6)
 const listaCanciones = [
     { titulo: "A Dónde Vamos - Morat", archivo: "a-donde-vamos.mp3" },
     { titulo: "Cesantías de Amor", archivo: "cesantias-de-amor.mp3" },
@@ -56,27 +56,27 @@ const audio = document.getElementById('musicaFondo');
 function cargarCancion(indice) {
     if (!audio) return;
     audio.src = listaCanciones[indice].archivo;
-    document.getElementById('tituloCancion').innerText = listaCanciones[indice].titulo;
+    const label = document.getElementById('tituloCancionActual');
+    if (label) label.innerText = listaCanciones[indice].titulo;
 }
 
 function toggleMusica() {
     if (!audio) return;
 
-    // Si aún no hay canción seleccionada, asignamos la primera
-    if (!audio.src || audio.src.endsWith("#") || audio.src === "") {
+    if (!audio.src || audio.src === "" || audio.src.endsWith("#")) {
         cargarCancion(0);
     }
 
+    const btn = document.getElementById('btnPlayPause');
+
     if (reproduciendo) {
         audio.pause();
-        document.getElementById('btnPlayPause').innerText = "▶️ Reproducir";
-        document.getElementById('iconoMusica').innerText = "🎵";
+        if (btn) btn.innerText = "▶️ Reproducir";
     } else {
         audio.play().then(() => {
-            document.getElementById('btnPlayPause').innerText = "⏸️ Pausar";
-            document.getElementById('iconoMusica').innerText = "🎶";
+            if (btn) btn.innerText = "⏸️ Pausar";
         }).catch(err => {
-            console.log("Error al reproducir audio: ", err);
+            console.log("Error de reproducción: ", err);
         });
     }
     reproduciendo = !reproduciendo;
