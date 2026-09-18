@@ -1,4 +1,4 @@
-// CONTROL DE PANTALLAS
+// CONTROL DE NAVEGACIÓN ENTRE PANTALLAS
 let pantallaActual = 1;
 const totalPantallas = 8;
 
@@ -77,8 +77,8 @@ function seleccionarCancion(indice) {
     if (btnPlayPause) btnPlayPause.textContent = "⏸️";
 }
 
-// CONTADOR EN TIEMPO REAL (DESDE 8 DE JULIO DE 2026 7:25 PM)
-const fechaInicio = new Date(2026, 6, 8, 19, 25, 0); // Mes 6 = Julio en JS
+// CONTADOR DESDE 8 JULIO 2026 7:25 PM
+const fechaInicio = new Date(2026, 6, 8, 19, 25, 0);
 
 function actualizarContador() {
     const ahora = new Date();
@@ -133,24 +133,24 @@ function cerrarLightbox() {
     if (lightbox) lightbox.style.display = "none";
 }
 
-// PANTALLA 8: PREGUNTA Y BOTÓN ESQUIVO
+// PANTALLA 8: ESQUIVAR BOTÓN NO
 function esquivarBoton() {
     const btnNo = document.getElementById("btnNo");
     if (!btnNo) return;
 
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+    const x = Math.random() * (window.innerWidth - 90);
+    const y = Math.random() * (window.innerHeight - 40);
 
     btnNo.style.position = "fixed";
-    btnNo.style.left = `${x}px`;
-    btnNo.style.top = `${y}px`;
+    btnNo.style.left = `${Math.max(10, x)}px`;
+    btnNo.style.top = `${Math.max(10, y)}px`;
 }
 
+// PANTALLA 8: CELEBRACIÓN SÍ
 function aceptarPropuesta() {
     const mensaje = document.getElementById("mensajeFinalCelebracion");
     if (mensaje) mensaje.style.display = "block";
 
-    // Disparar confeti de corazones
     if (typeof confetti === "function") {
         confetti({
             particleCount: 100,
@@ -159,54 +159,3 @@ function aceptarPropuesta() {
         });
     }
 }
-
-// FONDO ANIMADO DE CORAZONES (CANVAS)
-const canvas = document.getElementById("canvasCorazones");
-if (canvas) {
-    const ctx = canvas.getContext("2d");
-    let corazones = [];
-
-    function redimensionarCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    window.addEventListener("resize", redimensionarCanvas);
-    redimensionarCanvas();
-
-    class Corazon {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = canvas.height + Math.random() * 100;
-            this.size = Math.random() * 12 + 6;
-            this.speedY = Math.random() * 1.5 + 0.5;
-            this.opacity = Math.random() * 0.5 + 0.3;
-        }
-        update() {
-            this.y -= this.speedY;
-            if (this.y < -20) {
-                this.y = canvas.height + 20;
-                this.x = Math.random() * canvas.width;
-            }
-        }
-        draw() {
-            ctx.fillStyle = `rgba(232, 165, 152, ${this.opacity})`;
-            ctx.font = `${this.size}px serif`;
-            ctx.fillText("❤️", this.x, this.y);
-        }
-    }
-
-    for (let i = 0; i < 25; i++) {
-        corazones.push(new Corazon());
-    }
-
-    function animar() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        corazones.forEach(c => {
-            c.update();
-            c.draw();
-        });
-        requestAnimationFrame(animar);
-    }
-    animar();
-}
-  
