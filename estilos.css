@@ -1,11 +1,10 @@
 :root {
-    --primary: #e8a598;
-    --primary-glow: rgba(232, 165, 152, 0.4);
-    --bg-dark: #140816;
-    --glass: rgba(255, 255, 255, 0.08);
-    --border: rgba(232, 165, 152, 0.3);
-    --text: #ffffff;
-    --text-muted: rgba(255, 255, 255, 0.75);
+    --primary: #f2a6b2;
+    --primary-glow: rgba(242, 166, 178, 0.4);
+    --bg-gradient: linear-gradient(135deg, #1f081d 0%, #0b020c 100%);
+    --glass-bg: rgba(255, 255, 255, 0.07);
+    --glass-border: rgba(242, 166, 178, 0.25);
+    --text-color: #ffffff;
 }
 
 * {
@@ -16,192 +15,249 @@
 }
 
 body {
-    background: radial-gradient(circle at center, #2b112c 0%, #0c040d 100%);
-    color: var(--text);
+    background: var(--bg-gradient);
+    color: var(--text-color);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px 15px 90px;
-    position: relative;
     overflow-x: hidden;
 }
 
-.fondo-particulas {
+/* FONDO ANIMADO */
+.fondo-animado {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 1;
+    z-index: 1; pointer-events: none;
 }
 
-.particula {
+.burbuja {
     position: absolute;
-    width: 6px; height: 6px;
-    background: var(--primary);
+    width: 20px; height: 20px;
+    background: var(--primary-glow);
     border-radius: 50%;
-    box-shadow: 0 0 10px var(--primary);
-    animation: flotar 8s infinite ease-in-out;
+    animation: flotar 10s infinite ease-in-out;
 }
 
-.particula:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
-.particula:nth-child(2) { top: 65%; left: 85%; animation-delay: 2s; }
-.particula:nth-child(3) { top: 45%; left: 80%; animation-delay: 4s; }
-.particula:nth-child(4) { top: 85%; left: 15%; animation-delay: 1s; }
-.particula:nth-child(5) { top: 25%; left: 70%; animation-delay: 3s; }
+.burbuja:nth-child(1) { top: 80%; left: 10%; animation-duration: 8s; }
+.burbuja:nth-child(2) { top: 60%; left: 85%; animation-duration: 12s; }
+.burbuja:nth-child(3) { top: 40%; left: 70%; animation-duration: 9s; }
+.burbuja:nth-child(4) { top: 90%; left: 40%; animation-duration: 11s; }
 
 @keyframes flotar {
-    0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
-    50% { transform: translateY(-25px) scale(1.3); opacity: 0.8; }
+    0% { transform: translateY(0) scale(0.8); opacity: 0.2; }
+    50% { transform: translateY(-100px) scale(1.2); opacity: 0.6; }
+    100% { transform: translateY(-200px) scale(0.8); opacity: 0; }
 }
-
-/* REPRODUCTOR */
-.reproductor-flotante {
-    position: fixed;
-    bottom: 15px; left: 50%;
-    transform: translateX(-50%);
-    width: 90%; max-width: 460px;
-    background: rgba(20, 8, 22, 0.93);
-    backdrop-filter: blur(15px);
-    border: 1px solid var(--border);
-    padding: 10px 18px;
-    border-radius: 30px;
-    display: flex; align-items: center; justify-content: space-between;
-    z-index: 1000;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-}
-
-.info-musica { display: flex; align-items: center; gap: 8px; max-width: 65%; overflow: hidden; }
-.marquee-texto { font-size: 0.8rem; color: var(--primary); white-space: nowrap; }
-.controles-musica button { background: none; border: none; cursor: pointer; font-size: 1.1rem; }
 
 /* CONTENEDOR */
-.wrapper-principal { width: 100%; max-width: 580px; z-index: 10; }
-.pantalla { display: none; opacity: 0; transition: opacity 0.35s ease; }
-.pantalla.activa { display: block; opacity: 1; }
+.contenedor-principal {
+    width: 100%;
+    max-width: 520px;
+    z-index: 10;
+}
+
+.pantalla {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.pantalla.activa {
+    display: block;
+    opacity: 1;
+}
 
 .glass-card {
-    background: var(--glass);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
     border-radius: 24px;
-    padding: 28px 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.45);
+    padding: 30px 22px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.centro-texto { text-align: center; }
-.titulo-principal { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--primary); margin: 12px 0; }
-.titulo-seccion { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--primary); margin-bottom: 6px; }
-.subtitulo { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; }
+.centro { text-align: center; }
+.titulo-romantico { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--primary); text-shadow: 0 0 10px var(--primary-glow); }
+.titulo-seccion { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--primary); margin-bottom: 8px; }
+.subtitulo, .instruccion { font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 20px; }
 
-.icono-corazon-pulsante { font-size: 3.2rem; animation: pulso 1.3s infinite ease-in-out; }
-@keyframes pulso { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.18); } }
-
-/* CARTA */
-.contenedor-sobre {
-    width: 200px; height: 120px;
-    background: #bd7364; border-radius: 8px;
-    margin: 20px auto; position: relative;
-    cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+.corazon-latido {
+    font-size: 3.5rem;
+    animation: latido 1.2s infinite ease-in-out;
 }
 
-.solapa {
-    position: absolute; top: 0; left: 0;
-    border-left: 100px solid transparent; border-right: 100px solid transparent;
-    border-top: 75px solid #a35d4f;
-    transition: transform 0.4s ease; transform-origin: top;
+@keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
 }
 
-.sello-cera {
-    position: absolute; top: 50px; left: 50%; transform: translateX(-50%);
-    width: 36px; height: 36px; background: #8a212a; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; font-size: 1rem;
+/* CARTA CON ANIMACIÓN */
+.wrapper-sobre {
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    cursor: pointer;
 }
 
-.contenedor-sobre.abierto .solapa { transform: rotateX(180deg); }
-
-.papel-carta {
-    display: none;
-    background: rgba(255, 255, 255, 0.96); color: #222;
-    padding: 20px; border-radius: 14px; margin-top: 15px; text-align: left;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+.sobre {
+    width: 260px;
+    height: 160px;
+    background: #d88391;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
 }
 
-.papel-carta.visible { display: block; }
-.carta-titulo { font-family: 'Playfair Display', serif; color: #8a212a; font-size: 1.1rem; margin-bottom: 8px; }
-.carta-cuerpo { font-size: 0.88rem; line-height: 1.6; color: #333; }
-.carta-firma { margin-top: 12px; font-weight: 600; color: #8a212a; font-size: 0.85rem; }
-
-.btn-accion {
-    background: var(--primary); color: #120914; border: none;
-    padding: 10px 22px; border-radius: 20px; font-weight: 600;
-    margin: 15px 0 5px; cursor: pointer;
+.solapa-superior {
+    position: absolute;
+    top: 0; left: 0;
+    border-left: 130px solid transparent;
+    border-right: 130px solid transparent;
+    border-top: 90px solid #b86573;
+    transform-origin: top;
+    transition: transform 0.5s ease;
+    z-index: 3;
 }
+
+.contenido-carta {
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    background: #fff;
+    color: #333;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(0);
+    transition: all 0.5s ease;
+    z-index: 2;
+    overflow-y: auto;
+}
+
+.sobre.abierto .solapa-superior {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.sobre.abierto .contenido-carta {
+    opacity: 1;
+    transform: translateY(-80px);
+    height: 220px;
+    z-index: 4;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.firma-carta-titulo { font-family: 'Playfair Display', serif; color: #b86573; margin-bottom: 6px; }
+.firma-final { margin-top: 10px; font-weight: 600; color: #b86573; }
 
 /* CONTADOR */
-.contador-grid { display: flex; justify-content: center; gap: 8px; margin: 20px 0; flex-wrap: wrap; }
-.contador-caja { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); padding: 12px 8px; border-radius: 14px; min-width: 65px; }
-.contador-caja span { display: block; font-size: 1.3rem; font-weight: 700; color: var(--primary); }
-.contador-caja small { font-size: 0.7rem; color: var(--text-muted); }
-.fecha-inicio-texto { font-size: 0.82rem; color: var(--primary); margin-top: 10px; }
+.contador-grid { display: flex; justify-content: center; gap: 8px; margin: 20px 0; }
+.caja-tiempo { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); padding: 10px; border-radius: 12px; min-width: 60px; }
+.caja-tiempo span { display: block; font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+.caja-tiempo small { font-size: 0.65rem; color: rgba(255, 255, 255, 0.6); }
+.fecha-base { font-size: 0.8rem; color: var(--primary); }
 
-/* SANTA MARTA */
-.tarjeta-promesa-principal { background: rgba(232, 165, 152, 0.1); border: 1px solid var(--primary); border-radius: 16px; padding: 18px; margin-bottom: 16px; }
-.banner-promesa { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-.banner-promesa h3 { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.1rem; }
-.texto-promesa-especial { font-size: 0.88rem; line-height: 1.55; color: rgba(255, 255, 255, 0.9); }
-
-.grid-vivencias { display: flex; flex-direction: column; gap: 10px; }
-.tarjeta-vivencia { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); border-radius: 12px; padding: 12px 15px; cursor: pointer; }
-.tarjeta-vivencia h4 { font-size: 0.9rem; color: var(--primary); }
-.detalle-vivencia { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
-
-/* CANCIONES */
-.lista-canciones { display: flex; flex-direction: column; gap: 10px; }
-.item-cancion { display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); padding: 12px 14px; border-radius: 14px; cursor: pointer; }
-.numero-cancion { font-weight: 700; color: var(--primary); }
-.info-item-cancion h4 { font-size: 0.9rem; }
-.info-item-cancion p { font-size: 0.78rem; color: var(--text-muted); }
-.btn-reproducir-item { margin-left: auto; font-size: 0.9rem; }
-
-/* NOTAS SECRETAS */
-.grid-notas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.nota-card {
-    background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
-    border-radius: 14px; padding: 14px 10px; min-height: 90px;
-    display: flex; align-items: center; justify-content: center; text-align: center;
-    cursor: pointer; transition: all 0.3s;
+/* TARJETAS 3D (RAZONES DE MI AMOR) */
+.grid-razones {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 15px;
 }
 
-.nota-card .reverso { display: none; font-size: 0.8rem; color: #fff; }
-.nota-card .frente span { font-weight: 700; font-size: 1.1rem; color: var(--primary); }
-.nota-card .frente p { font-size: 0.72rem; color: var(--text-muted); }
+.card-3d {
+    height: 100px;
+    perspective: 1000px;
+    cursor: pointer;
+}
 
-.nota-card.revelada { background: rgba(232, 165, 152, 0.25); border-color: var(--primary); }
-.nota-card.revelada .frente { display: none; }
-.nota-card.revelada .reverso { display: block; }
+.card-inner {
+    position: relative;
+    width: 100%; height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
 
-/* GALERÍA */
-.galeria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
-.foto-card { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; height: 200px; background: rgba(0,0,0,0.3); }
-.foto-card img { width: 100%; height: 100%; object-fit: cover; }
-.foto-info { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.85)); padding: 10px 8px; font-size: 0.78rem; text-align: center; }
+.card-3d.flipped .card-inner {
+    transform: rotateY(180deg);
+}
 
-/* LIGHTBOX */
-.lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 2000; justify-content: center; align-items: center; flex-direction: column; padding: 20px; }
-.lightbox img { max-width: 90%; max-height: 70vh; border-radius: 12px; }
-.lightbox p { margin-top: 14px; color: var(--primary); font-size: 0.92rem; }
-.cerrar-lightbox { position: absolute; top: 20px; right: 25px; font-size: 2.2rem; color: #fff; cursor: pointer; }
+.card-front, .card-back {
+    position: absolute;
+    width: 100%; height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 0.82rem;
+    border: 1px solid var(--glass-border);
+}
 
-/* PREGUNTA */
-.texto-pregunta { font-size: 0.98rem; line-height: 1.6; margin-bottom: 25px; }
-.contenedor-botones-pregunta { display: flex; justify-content: center; gap: 15px; min-height: 50px; }
-.btn-si, .btn-no { padding: 10px 24px; border-radius: 25px; border: none; font-weight: 600; cursor: pointer; }
-.btn-si { background: var(--primary); color: #120914; }
-.btn-no { background: rgba(255, 255, 255, 0.12); color: #fff; }
-.mensaje-final-oculto { display: none; margin-top: 25px; }
-.mensaje-final-oculto h3 { color: var(--primary); font-size: 1.25rem; margin-bottom: 6px; }
-.frase-cierre { font-size: 0.85rem; color: var(--text-muted); }
+.card-front {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--primary);
+    font-weight: 600;
+}
 
-/* BOTONES NAVEGACIÓN */
-.btn-principal, .btn-nav { background: rgba(232, 165, 152, 0.15); border: 1px solid var(--primary); color: var(--text); padding: 9px 20px; border-radius: 22px; cursor: pointer; font-size: 0.85rem; }
-.navegacion-pantalla { display: flex; justify-content: space-between; margin-top: 25px; }
-.margin-top-40 { margin-top: 35px; }
+.card-back {
+    background: rgba(242, 166, 178, 0.2);
+    color: #fff;
+    transform: rotateY(180deg);
+}
+
+/* CANCIONES Y GALERÍA */
+.lista-canciones { display: flex; flex-direction: column; gap: 10px; margin: 15px 0; }
+.cancion-card { display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.05); padding: 12px 15px; border-radius: 12px; border: 1px solid var(--glass-border); cursor: pointer; font-size: 0.85rem; }
+.cancion-card button { background: none; border: none; cursor: pointer; }
+
+.caja-promesa { background: rgba(242, 166, 178, 0.1); border: 1px solid var(--primary); padding: 18px; border-radius: 16px; margin: 15px 0; text-align: left; font-size: 0.88rem; line-height: 1.5; }
+
+.galeria-fotos { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+.marco-foto { background: rgba(0, 0, 0, 0.3); border-radius: 14px; overflow: hidden; border: 1px solid var(--glass-border); }
+.marco-foto img { width: 100%; height: 180px; object-fit: cover; display: block; }
+.marco-foto p { padding: 10px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.8); }
+
+/* REPRODUCTOR FLOTANTE */
+.reproductor-flotante {
+    position: fixed;
+    bottom: 12px; left: 50%;
+    transform: translateX(-50%);
+    width: 90%; max-width: 440px;
+    background: rgba(15, 4, 16, 0.92);
+    border: 1px solid var(--glass-border);
+    padding: 10px 18px;
+    border-radius: 30px;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 100;
+}
+
+.info-musica { font-size: 0.78rem; color: var(--primary); display: flex; align-items: center; gap: 6px; }
+.controles-musica button { background: none; border: none; cursor: pointer; font-size: 1rem; }
+
+/* BOTONES */
+.btn-elegante, .btn-nav, .btn-si, .btn-no {
+    background: rgba(242, 166, 178, 0.2);
+    border: 1px solid var(--primary);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+}
+
+.btn-elegante:hover, .btn-nav:hover { background: var(--primary); color: #000; }
+.nav-botones { display: flex; justify-content: space-between; margin-top: 20px; }
+.zona-botones { display: flex; justify-content: center; gap: 15px; margin: 20px 0; position: relative; }
+.oculto { display: none; margin-top: 15px; color: var(--primary); }
+.margin-top { margin-top: 30px; }
