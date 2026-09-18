@@ -1,175 +1,176 @@
-// NAVEGACIÓN ENTRE PANTALLAS
-function irAPantalla(num) {
-    document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("activa"));
-    const objetivo = document.getElementById("pantalla" + num);
-    if (objetivo) {
-        objetivo.classList.add("activa");
+let pantallaActual = 1;
+const totalPantallas = 6;
+
+function mostrarPantalla(numero) {
+    if (numero < 1 || numero > totalPantallas) return;
+
+    document.querySelectorAll(".pantalla").forEach(function (p) {
+        p.classList.remove("activa");
+    });
+
+    const nuevaPantalla = document.getElementById("pantalla" + numero);
+    if (nuevaPantalla) {
+        nuevaPantalla.classList.add("activa");
+        pantallaActual = numero;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
-// CARTA MODAL EN PANTALLA COMPLETA
-function abrirModalCarta() {
-    const modal = document.getElementById("modalCarta");
-    if (modal) modal.classList.add("activo");
-}
-
-function cerrarModalCarta() {
-    const modal = document.getElementById("modalCarta");
-    if (modal) modal.classList.remove("activo");
-}
-
-// VOLTEAR TARJETAS 3D
-function voltearTarjeta(card) {
-    card.classList.toggle("volteada");
-}
-
-// CARGA ROBUSTA DE IMÁGENES (.jpeg, .jpg, .png, etc.)
-function asegurarCargaImagen(idElem, nombreBase) {
-    const exts = ['jpeg', 'jpg', 'png', 'pgeg', 'pge', 'JPG', 'JPEG', 'PNG'];
-    const carpetas = ['imagenes/', ''];
-    let intentos = [];
-
-    carpetas.forEach(c => {
-        exts.forEach(ext => intentos.push(`${c}${nombreBase}.${ext}`));
-    });
-
-    const img = document.getElementById(idElem);
-    if (!img) return;
-
-    let i = 0;
-    function probarNext() {
-        if (i < intentos.length) {
-            img.src = intentos[i];
-            i++;
-        }
+function siguientePantalla() {
+    if (pantallaActual < totalPantallas) {
+        mostrarPantalla(pantallaActual + 1);
     }
-    img.onerror = probarNext;
-    probarNext();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    asegurarCargaImagen("foto1", "foto1");
-    asegurarCargaImagen("foto2", "foto2");
+function anteriorPantalla() {
+    if (pantallaActual > 1) {
+        mostrarPantalla(pantallaActual - 1);
+    }
+}
+
+document.addEventListener('keydown', function (e) {
+    if (e.key === "ArrowRight") siguientePantalla();
+    if (e.key === "ArrowLeft") anteriorPantalla();
 });
 
-// REPRODUCTOR DE MÚSICA CON DIOMEDES DÍAZ
-const canciones = [
-    { titulo: "Morat - A Dónde Vamos", base: "cancion1" },
-    { titulo: "Diomedes Díaz - Cesantías de Amor", base: "cancion2" },
-    { titulo: "Iván Villazón - La Persona de Mi Vida", base: "cancion3" },
-    { titulo: "Tito Rojas - Siempre Seré", base: "cancion4" }
+// ABRIR CARTA INTERACTIVA
+function abrirCarta() {
+    const wrapper = document.getElementById('envelopeWrapper');
+    const carta = document.getElementById('cartaDesplegada');
+
+    if (wrapper) wrapper.style.display = 'none';
+    if (carta) carta.classList.add('abierta');
+}
+
+// CONFIGURACIÓN DE AUDIO
+const listaCanciones = [
+    { titulo: "A Dónde Vamos - Morat", archivo: "a-donde-vamos.mp3" },
+    { titulo: "Cesantías de Amor", archivo: "cesantias-de-amor.mp3" },
+    { titulo: "La Persona de Mi Vida - Iván Villazón", archivo: "la-persona-de-mi-vida.mp3" },
+    { titulo: "Siempre Seré - Tito Rojas", archivo: "siempre-sere.mp3" }
 ];
 
-let indiceActual = 0;
-const audio = document.getElementById("audioPlayer");
-const titulo = document.getElementById("tituloCancion");
-const btnPlay = document.getElementById("btnPlay");
+let indiceCancionActual = 0;
+let reproduciendo = false;
+const audio = document.getElementById('musicaFondo');
 
-function resolverRutaMusica(nombreBase, callback) {
-    const exts = ['mp3', 'MP3', 'wav', 'm4a'];
-    const carpetas = ['musica/', ''];
-    let rutas = [];
-
-    carpetas.forEach(c => {
-        exts.forEach(ext => rutas.push(`${c}${nombreBase}.${ext}`));
-    });
-
-    let i = 0;
-    function probarRuta() {
-        if (i >= rutas.length) return;
-        const tempAudio = new Audio();
-        tempAudio.src = rutas[i];
-        tempAudio.oncanplaythrough = () => callback(rutas[i]);
-        tempAudio.onerror = () => { i++; probarRuta(); };
-    }
-    probarRuta();
-}
-
-function cargarCancion(idx) {
-    indiceActual = idx;
-    if (titulo) titulo.textContent = canciones[idx].titulo;
-
-    resolverRutaMusica(canciones[idx].base, (rutaCorrecta) => {
-        if (audio) {
-            audio.src = rutaCorrecta;
-            audio.play().then(() => {
-                if (btnPlay) btnPlay.textContent = "⏸️";
-            }).catch(() => {
-                if (btnPlay) btnPlay.textContent = "▶️";
-            });
-        }
-    });
-}
-
-function toggleAudio() {
+function cargarCancion(indice) {
     if (!audio) return;
-    if (!audio.src) {
+    audio.src = listaCanciones[indice].archivo;
+    const label = document.getElementById('tituloCancionActual');
+    if (label) label.innerText = listaCanciones[indice].titulo;
+}
+
+function toggleMusica() {
+    if (!audio) return;
+
+    if (!audio.src || audio.src === "" || audio.src.endsWith("#")) {
         cargarCancion(0);
-        return;
     }
-    if (audio.paused) {
-        audio.play();
-        if (btnPlay) btnPlay.textContent = "⏸️";
-    } else {
+
+    const btn = document.getElementById('btnPlayPause');
+
+    if (reproduciendo) {
         audio.pause();
-        if (btnPlay) btnPlay.textContent = "▶️";
+        if (btn) btn.innerText = "▶️ Reproducir";
+    } else {
+        audio.play().then(() => {
+            if (btn) btn.innerText = "⏸️ Pausar";
+        }).catch(err => {
+            console.log("Bloqueo de reproducción automática o archivo no encontrado:", err);
+            alert("Toca la canción directamente para dar el permiso al navegador.");
+        });
     }
+    reproduciendo = !reproduciendo;
 }
 
-function cambiarCancion(dir) {
-    indiceActual = (indiceActual + dir + canciones.length) % canciones.length;
-    cargarCancion(indiceActual);
+function reproducirEspecifica(indice) {
+    indiceCancionActual = indice;
+    cargarCancion(indiceCancionActual);
+    reproduciendo = false;
+    toggleMusica();
 }
 
-function reproducirIndice(idx) {
-    cargarCancion(idx);
+function siguienteCancion() {
+    indiceCancionActual = (indiceCancionActual + 1) % listaCanciones.length;
+    cargarCancion(indiceCancionActual);
+    if (reproduciendo) audio.play();
 }
 
-// CRONÓMETRO DE TIEMPO JUNTOS
-const fechaInicio = new Date(2026, 6, 8, 19, 25, 0);
+function cancionAnterior() {
+    indiceCancionActual = (indiceCancionActual - 1 + listaCanciones.length) % listaCanciones.length;
+    cargarCancion(indiceCancionActual);
+    if (reproduciendo) audio.play();
+}
 
+// CONTADOR EN TIEMPO REAL
 function actualizarContador() {
+    const inicio = new Date(2026, 6, 8, 19, 25, 0); 
     const ahora = new Date();
-    const dif = ahora - fechaInicio;
-    if (dif < 0) return;
 
-    const seg = Math.floor(dif / 1000);
-    const min = Math.floor(seg / 60);
-    const hrs = Math.floor(min / 60);
-    const diasTotales = Math.floor(hrs / 24);
+    let diferencia = ahora.getTime() - inicio.getTime();
+    if (diferencia < 0) diferencia = 0;
 
-    if (document.getElementById("meses")) document.getElementById("meses").textContent = Math.floor(diasTotales / 30);
-    if (document.getElementById("dias")) document.getElementById("dias").textContent = diasTotales % 30;
-    if (document.getElementById("horas")) document.getElementById("horas").textContent = hrs % 24;
-    if (document.getElementById("minutos")) document.getElementById("minutos").textContent = min % 60;
-    if (document.getElementById("segundos")) document.getElementById("segundos").textContent = seg % 60;
+    const segundo = 1000;
+    const minuto = segundo * 60;
+    const hora = minuto * 60;
+    const dia = hora * 24;
+    const mesPromedio = dia * 30.4375;
+
+    const meses = Math.floor(diferencia / mesPromedio);
+    const dias = Math.floor((diferencia % mesPromedio) / dia);
+    const horas = Math.floor((diferencia % dia) / hora);
+    const minutos = Math.floor((diferencia % hora) / minuto);
+    const segundos = Math.floor((diferencia % minuto) / segundo);
+
+    if (document.getElementById("meses")) document.getElementById("meses").textContent = meses;
+    if (document.getElementById("dias")) document.getElementById("dias").textContent = dias;
+    if (document.getElementById("horas")) document.getElementById("horas").textContent = String(horas).padStart(2, "0");
+    if (document.getElementById("minutos")) document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
+    if (document.getElementById("segundos")) document.getElementById("segundos").textContent = String(segundos).padStart(2, "0");
 }
+
+actualizarContador();
 setInterval(actualizarContador, 1000);
 
-// BOTÓN ESCURRIDIZO QUE JUEGA DENTRO DE LA PANTALLA
-function moverBotonNo() {
-    const btnNo = document.getElementById("btnNo");
-    const contenedor = document.getElementById("areaJuego");
-    if (!btnNo || !contenedor) return;
+// REVELAR NOTAS
+function revelarNota(elemento) {
+    const frente = elemento.querySelector('.nota-frente');
+    const atras = elemento.querySelector('.nota-atras');
 
-    const rect = contenedor.getBoundingClientRect();
-    const maxX = rect.width - btnNo.offsetWidth - 20;
-    const maxY = rect.height - btnNo.offsetHeight;
-
-    const randomX = Math.random() * maxX;
-    const randomY = (Math.random() - 0.5) * 40;
-
-    btnNo.style.position = "relative";
-    btnNo.style.left = `${randomX - (rect.width / 4)}px`;
-    btnNo.style.top = `${randomY}px`;
-}
-
-// CELEBRACIÓN DE ACEPTACIÓN
-function celebrarAceptacion() {
-    const mensaje = document.getElementById("mensajeCelebracion");
-    if (mensaje) mensaje.style.display = "block";
-    if (typeof confetti === "function") {
-        confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+    if (atras.style.display === 'block') {
+        atras.style.display = 'none';
+        frente.style.display = 'block';
+        elemento.classList.remove('revelada');
+    } else {
+        frente.style.display = 'none';
+        atras.style.display = 'block';
+        elemento.classList.add('revelada');
     }
 }
+
+// CORAZONES DE FONDO
+function crearCorazon() {
+    const contenedor = document.querySelector(".hearts");
+    if (!contenedor) return;
+
+    const corazon = document.createElement("div");
+    corazon.className = "heart";
+    corazon.textContent = Math.random() > 0.5 ? "♥" : "♡";
+
+    const posicion = Math.random() * 100;
+    const tamaño = 12 + Math.random() * 16;
+    const duracion = 6 + Math.random() * 6;
+
+    corazon.style.left = posicion + "%";
+    corazon.style.fontSize = tamaño + "px";
+    corazon.style.animationDuration = duracion + "s";
+
+    contenedor.appendChild(corazon);
+
+    setTimeout(() => {
+        corazon.remove();
+    }, duracion * 1000);
+}
+
+setInterval(crearCorazon, 450);
