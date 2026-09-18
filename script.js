@@ -1,11 +1,11 @@
 // Cambiar de pantallas
 function cambiarPantalla(num) {
-    const pantallas = document.querySelectorAll('.pantalla');
-    pantallas.forEach(pantalla => {
-        pantalla.classList.remove('activa');
-    });
+    var pantallas = document.querySelectorAll('.pantalla');
+    for (var i = 0; i < pantallas.length; i++) {
+        pantallas[i].classList.remove('activa');
+    }
 
-    const destino = document.getElementById('pantalla' + num);
+    var destino = document.getElementById('pantalla' + num);
     if (destino) {
         destino.classList.add('activa');
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -14,47 +14,47 @@ function cambiarPantalla(num) {
 
 // Abrir el sobre para mostrar la carta
 function abrirSobre() {
-    const sobre = document.getElementById('sobreElemento');
-    const contenedor = document.getElementById('contenedorSobre');
-    const carta = document.getElementById('cartaEscribir');
+    var sobre = document.getElementById('sobreElemento');
+    var contenedor = document.getElementById('contenedorSobre');
+    var carta = document.getElementById('cartaEscribir');
 
     if (sobre) {
         sobre.classList.add('abriendo');
     }
 
-    setTimeout(() => {
+    setTimeout(function() {
         if (contenedor) contenedor.classList.add('oculto-total');
         if (carta) carta.classList.remove('oculto-total');
     }, 600);
 }
 
-// Revelar notas de amor
+// Revelar notas de amor incógnitas
 function revelarNota(elemento) {
     elemento.classList.toggle('revelada');
 }
 
-// Contador de tiempo (desde el 8 de Julio de 2026, 7:25 PM)
-const fechaInicio = new Date(2026, 6, 8, 19, 25, 0);
+// Contador de tiempo (desde el 8 de Julio de 2024, 7:25 PM)
+var fechaInicio = new Date(2024, 6, 8, 19, 25, 0);
 
 function actualizarContador() {
-    const ahora = new Date();
-    const diferencia = ahora - fechaInicio;
+    var ahora = new Date();
+    var diferencia = ahora - fechaInicio;
 
     if (diferencia < 0) return;
 
-    const segundosTotal = Math.floor(diferencia / 1000);
-    const minutosTotal = Math.floor(segundosTotal / 60);
-    const horasTotal = Math.floor(minutosTotal / 60);
-    const dias = Math.floor(horasTotal / 24);
+    var segundosTotal = Math.floor(diferencia / 1000);
+    var minutosTotal = Math.floor(segundosTotal / 60);
+    var horasTotal = Math.floor(minutosTotal / 60);
+    var dias = Math.floor(horasTotal / 24);
 
-    const horas = horasTotal % 24;
-    const minutos = minutosTotal % 60;
-    const segundos = segundosTotal % 60;
+    var horas = horasTotal % 24;
+    var minutos = minutosTotal % 60;
+    var segundos = segundosTotal % 60;
 
-    const eDias = document.getElementById('dias');
-    const eHoras = document.getElementById('horas');
-    const eMinutos = document.getElementById('minutos');
-    const eSegundos = document.getElementById('segundos');
+    var eDias = document.getElementById('dias');
+    var eHoras = document.getElementById('horas');
+    var eMinutos = document.getElementById('minutos');
+    var eSegundos = document.getElementById('segundos');
 
     if (eDias) eDias.innerText = dias;
     if (eHoras) eHoras.innerText = String(horas).padStart(2, '0');
@@ -62,39 +62,44 @@ function actualizarContador() {
     if (eSegundos) eSegundos.innerText = String(segundos).padStart(2, '0');
 }
 
-// Controles de audio
-function reproducirAudio(index) {
-    for (let i = 0; i < 4; i++) {
-        const audio = document.getElementById('audio-' + i);
-        const card = document.getElementById('card-' + i);
-        if (audio) audio.pause();
-        if (card) card.classList.remove('activa');
+// Reproductor de música unificado
+function toggleAudio(index) {
+    for (var i = 0; i < 4; i++) {
+        var audioEl = document.getElementById('audio-' + i);
+        var cardEl = document.getElementById('card-' + i);
+        var btnEl = cardEl ? cardEl.querySelector('.btn-play') : null;
+
+        if (i !== index && audioEl) {
+            audioEl.pause();
+            if (cardEl) cardEl.classList.remove('activa');
+            if (btnEl) btnEl.innerText = '▶ Play';
+        }
     }
 
-    const audioSeleccionado = document.getElementById('audio-' + index);
-    const cardSeleccionada = document.getElementById('card-' + index);
+    var audioActual = document.getElementById('audio-' + index);
+    var cardActual = document.getElementById('card-' + index);
+    var btnActual = cardActual ? cardActual.querySelector('.btn-play') : null;
 
-    if (audioSeleccionado) {
-        audioSeleccionado.play();
-        if (cardSeleccionada) cardSeleccionada.classList.add('activa');
+    if (audioActual) {
+        if (audioActual.paused) {
+            audioActual.play();
+            if (cardActual) cardActual.classList.add('activa');
+            if (btnActual) btnActual.innerText = '⏸ Pausa';
+        } else {
+            audioActual.pause();
+            if (cardActual) cardActual.classList.remove('activa');
+            if (btnActual) btnActual.innerText = '▶ Play';
+        }
     }
 }
 
-function pausarAudio(index) {
-    const audioSeleccionado = document.getElementById('audio-' + index);
-    const cardSeleccionada = document.getElementById('card-' + index);
-
-    if (audioSeleccionado) audioSeleccionado.pause();
-    if (cardSeleccionada) cardSeleccionada.classList.remove('activa');
-}
-
-// Inicialización de efectos al cargar
-window.onload = () => {
-    const contenedorCorazones = document.getElementById('heartsContainer');
+// Inicializar efectos al cargar
+window.onload = function() {
+    var contenedorCorazones = document.getElementById('heartsContainer');
     if (contenedorCorazones) {
-        const simbolos = ['♥️', '✨', '🌹'];
-        for (let i = 0; i < 20; i++) {
-            const corazon = document.createElement('div');
+        var simbolos = ['♥️', '✨', '🌹'];
+        for (var i = 0; i < 20; i++) {
+            var corazon = document.createElement('div');
             corazon.className = 'corazon-flotante';
             corazon.innerText = simbolos[Math.floor(Math.random() * simbolos.length)];
             corazon.style.left = (Math.random() * 100) + '%';
