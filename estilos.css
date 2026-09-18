@@ -3,7 +3,7 @@
     --color-rojo-oscuro: #800014;
     --color-rojo-brillante: #ff1a40;
     --color-fondo: #0a0204;
-    --color-tarjeta: rgba(25, 5, 12, 0.75);
+    --color-tarjeta: rgba(25, 5, 12, 0.88);
     --color-texto: #fff0f3;
     --fuente-titulo: 'Alex Brush', cursive;
     --fuente-subtitulo: 'Playfair Display', serif;
@@ -26,6 +26,7 @@ body {
     position: relative;
 }
 
+/* CORAZONES FLOTANTES DE FONDO */
 .hearts-container {
     position: fixed;
     top: 0;
@@ -51,7 +52,7 @@ body {
     100% { transform: translateY(-10vh) scale(1.3) rotate(360deg); opacity: 0; }
 }
 
-/* PANTALLAS CONTROLADAS POR CLASES DIRECTAS */
+/* CONTROL DE PANTALLAS */
 .pantalla {
     display: none;
     min-height: 100vh;
@@ -63,7 +64,7 @@ body {
 }
 
 .pantalla.activa {
-    display: flex !important;
+    display: flex;
 }
 
 .contenido {
@@ -79,6 +80,7 @@ body {
     box-shadow: 0 15px 45px rgba(230, 0, 38, 0.25);
 }
 
+/* TIPOGRAFÍA Y ESTILOS ELEGANTES */
 .subtitulo-romantico {
     font-size: 0.8rem;
     letter-spacing: 3px;
@@ -130,6 +132,7 @@ body {
     100% { transform: scale(1); }
 }
 
+/* BOTONES DE NAVEGACIÓN */
 .btn-principal {
     background: linear-gradient(45deg, #e60026, #ff1a40);
     color: white;
@@ -145,6 +148,7 @@ body {
 
 .btn-principal:hover {
     transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 26, 64, 0.7);
 }
 
 .boton-regresar {
@@ -154,6 +158,12 @@ body {
     padding: 12px 24px;
     border-radius: 30px;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.boton-regresar:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
 }
 
 .navegacion {
@@ -163,14 +173,13 @@ body {
     margin-top: 30px;
 }
 
-/* SOBRE Y CARTA ANIMADA */
+/* ANIMACIÓN SOBRE Y CARTA */
 .contenedor-sobre {
     position: relative;
     width: 260px;
     height: 160px;
     margin: 25px auto;
     cursor: pointer;
-    perspective: 1000px;
 }
 
 .sobre {
@@ -185,11 +194,11 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: transform 0.4s ease;
+    transition: transform 0.3s ease;
 }
 
-.contenedor-sobre:hover .sobre {
-    transform: scale(1.04);
+.sobre:hover {
+    transform: scale(1.03);
 }
 
 .solapa {
@@ -224,12 +233,8 @@ body {
     font-weight: 600;
 }
 
-.contenedor-sobre.ocultar {
+.oculto-total {
     display: none !important;
-}
-
-.carta.oculta {
-    display: none;
 }
 
 .carta {
@@ -241,13 +246,13 @@ body {
     margin-top: 15px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
     line-height: 1.8;
-    animation: desplegarCarta 0.8s ease forwards;
     border-left: 5px solid var(--color-rojo-pasion);
+    animation: aparecerCarta 0.8s ease forwards;
 }
 
-@keyframes desplegarCarta {
-    from { opacity: 0; transform: translateY(40px) scale(0.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+@keyframes aparecerCarta {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .carta-encabezado {
@@ -347,7 +352,7 @@ body {
     font-weight: 500;
 }
 
-/* NOTAS SECRETAS */
+/* NOTAS INTERACTIVAS */
 .grid-notas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -365,6 +370,7 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .nota-frente { font-size: 0.85rem; color: #ff85a1; }
@@ -378,7 +384,7 @@ body {
 .tarjeta-nota.revelada .nota-frente { display: none; }
 .tarjeta-nota.revelada .nota-atras { display: block; }
 
-/* REPRODUCTOR MÚSICA */
+/* REPRODUCTOR DE MÚSICA */
 .lista-dedicatorias {
     display: flex;
     flex-direction: column;
@@ -395,7 +401,6 @@ body {
     align-items: center;
     justify-content: space-between;
     text-align: left;
-    transition: all 0.3s ease;
 }
 
 .item-cancion.activa {
@@ -435,15 +440,9 @@ body {
     font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
-.btn-pause {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.btn-play:hover { background: var(--color-rojo-brillante); }
-.btn-pause:hover { background: rgba(255, 255, 255, 0.4); }
+.btn-pause { background: rgba(255, 255, 255, 0.2); }
 
 .seccion-final { margin-top: 35px; }
 
