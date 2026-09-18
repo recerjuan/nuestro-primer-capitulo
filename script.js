@@ -1,36 +1,63 @@
-// CONTROL DE NAVEGACIÓN ENTRE PANTALLAS
+// CONTROL DE NAVEGACIÓN (1 a 8)
 let pantallaActual = 1;
-const totalPantallas = 8;
 
 function mostrarPantalla(numero) {
-    if (numero < 1 || numero > totalPantallas) return;
-
-    document.querySelectorAll(".pantalla").forEach(p => {
-        p.classList.remove("activa");
-    });
-
-    const nuevaPantalla = document.getElementById("pantalla" + numero);
-    if (nuevaPantalla) {
-        nuevaPantalla.classList.add("activa");
+    document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("activa"));
+    const pantalla = document.getElementById("pantalla" + numero);
+    if (pantalla) {
+        pantalla.classList.add("activa");
         pantallaActual = numero;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
-// CARTA DE AMOR (PANTALLA 2)
-function abrirCarta() {
+// CARTA DE AMOR
+function toggleCarta() {
     const sobre = document.getElementById("contenedorSobre");
-    if (sobre) {
-        sobre.classList.toggle("abierto");
-    }
+    const papel = document.getElementById("papelCarta");
+    if (sobre) sobre.classList.toggle("abierto");
+    if (papel) papel.classList.toggle("visible");
 }
 
-// REPRODUCTOR GLOBAL DE MÚSICA
+// DETECTOR AUTOMÁTICO DE FORMATO DE IMÁGENES
+function cargarImagenRobusta(idElemento, nombreBase) {
+    const extensiones = ['jpeg', 'jpg', 'jfif', 'png', 'JPEG', 'JPG', 'PNG', 'pge', 'pgeg'];
+    const carpetas = ['imagenes/', ''];
+    let intentos = [];
+
+    carpetas.forEach(c => {
+        extensiones.forEach(ext => {
+            intentos.push(`${c}${nombreBase}.${ext}`);
+        });
+    });
+
+    const img = document.getElementById(idElemento);
+    if (!img) return;
+
+    let index = 0;
+    function probarSiguiente() {
+        if (index < intentos.length) {
+            img.src = intentos[index];
+            index++;
+        }
+    }
+
+    img.onerror = probarSiguiente;
+    probarSiguiente();
+}
+
+// Cargar foto1 y foto2 automáticamente al iniciar
+document.addEventListener("DOMContentLoaded", () => {
+    cargarImagenRobusta("imgFoto1", "foto1");
+    cargarImagenRobusta("imgFoto2", "foto2");
+});
+
+// REPRODUCTOR DE MÚSICA ROBUSTO
 const listaCanciones = [
-    { titulo: "Morat - A Dónde Vamos", src: "musica/cancion1.mp3" },
-    { titulo: "Silvestre Dangond - Cesantías de Amor", src: "musica/cancion2.mp3" },
-    { titulo: "Iván Villazón - La Persona de Mi Vida", src: "musica/cancion3.mp3" },
-    { titulo: "Tito Rojas - Siempre Seré", src: "musica/cancion4.mp3" }
+    { titulo: "Morat - A Dónde Vamos", base: "cancion1" },
+    { titulo: "Silvestre Dangond - Cesantías de Amor", base: "cancion2" },
+    { titulo: "Iván Villazón - La Persona de Mi Vida", base: "cancion3" },
+    { titulo: "Tito Rojas - Siempre Seré", base: "cancion4" }
 ];
 
 let indiceCancion = 0;
@@ -38,16 +65,54 @@ const audioGlobal = document.getElementById("audioGlobal");
 const tituloCancion = document.getElementById("tituloCancion");
 const btnPlayPause = document.getElementById("btnPlayPause");
 
+function resolverRutaAudio(nombreBase, callback) {
+    const extensiones = ['mp3', 'MP3', 'wav', 'm4a', 'aac'];
+    const carpetas = ['musica/', ''];
+    let rutas = [];
+
+    carpetas.forEach(c => {
+        extensiones.forEach(ext => {
+            rutas.push(`${c}${nombreBase}.${ext}`);
+        });
+    });
+
+    let index = 0;
+    function probarAudio() {
+        if (index >= rutas.length) return;
+        const tempAudio = new Audio();
+        tempAudio.src = rutas[index];
+        tempAudio.oncanplaythrough = () => callback(rutas[index]);
+        tempAudio.onerror = () => {
+            index++;
+            probarAudio();
+        };
+    }
+    probarAudio();
+}
+
 function cargarCancion(indice) {
     indiceCancion = indice;
-    if (audioGlobal && tituloCancion) {
-        audioGlobal.src = listaCanciones[indice].src;
-        tituloCancion.textContent = listaCanciones[indice].titulo;
-    }
+    const cancion = listaCanciones[indice];
+    if (tituloCancion) tituloCancion.textContent = cancion.titulo;
+
+    resolverRutaAudio(cancion.base, (rutaCorrecta) => {
+        if (audioGlobal) {
+            audioGlobal.src = rutaCorrecta;
+            audioGlobal.play().then(() => {
+                if (btnPlayPause) btnPlayPause.textContent = "⏸️";
+            }).catch(() => {
+                if (btnPlayPause) btnPlayPause.textContent = "▶️";
+            });
+        }
+    });
 }
 
 function togglePlayPause() {
     if (!audioGlobal) return;
+    if (!audioGlobal.src) {
+        cargarCancion(0);
+        return;
+    }
     if (audioGlobal.paused) {
         audioGlobal.play();
         if (btnPlayPause) btnPlayPause.textContent = "⏸️";
@@ -60,102 +125,79 @@ function togglePlayPause() {
 function siguienteCancion() {
     indiceCancion = (indiceCancion + 1) % listaCanciones.length;
     cargarCancion(indiceCancion);
-    if (audioGlobal) audioGlobal.play();
-    if (btnPlayPause) btnPlayPause.textContent = "⏸️";
 }
 
 function cancionAnterior() {
     indiceCancion = (indiceCancion - 1 + listaCanciones.length) % listaCanciones.length;
     cargarCancion(indiceCancion);
-    if (audioGlobal) audioGlobal.play();
-    if (btnPlayPause) btnPlayPause.textContent = "⏸️";
 }
 
 function seleccionarCancion(indice) {
     cargarCancion(indice);
-    if (audioGlobal) audioGlobal.play();
-    if (btnPlayPause) btnPlayPause.textContent = "⏸️";
 }
 
-// CONTADOR DESDE 8 JULIO 2026 7:25 PM
+// CONTADOR DESDE EL 8 JULIO 2026 7:25 PM
 const fechaInicio = new Date(2026, 6, 8, 19, 25, 0);
 
 function actualizarContador() {
     const ahora = new Date();
-    const diferencia = ahora - fechaInicio;
+    const dif = ahora - fechaInicio;
+    if (dif < 0) return;
 
-    if (diferencia < 0) return;
+    const seg = Math.floor(dif / 1000);
+    const min = Math.floor(seg / 60);
+    const hrs = Math.floor(min / 60);
+    const diasTotales = Math.floor(hrs / 24);
 
-    const segundosTotales = Math.floor(diferencia / 1000);
-    const minutosTotales = Math.floor(segundosTotales / 60);
-    const horasTotales = Math.floor(minutosTotales / 60);
-    const diasTotales = Math.floor(horasTotales / 24);
-
-    const meses = Math.floor(diasTotales / 30);
-    const dias = diasTotales % 30;
-    const horas = horasTotales % 24;
-    const minutos = minutosTotales % 60;
-    const segundos = segundosTotales % 60;
-
-    if (document.getElementById("meses")) document.getElementById("meses").textContent = meses;
-    if (document.getElementById("dias")) document.getElementById("dias").textContent = dias;
-    if (document.getElementById("horas")) document.getElementById("horas").textContent = horas;
-    if (document.getElementById("minutos")) document.getElementById("minutos").textContent = minutos;
-    if (document.getElementById("segundos")) document.getElementById("segundos").textContent = segundos;
+    if (document.getElementById("meses")) document.getElementById("meses").textContent = Math.floor(diasTotales / 30);
+    if (document.getElementById("dias")) document.getElementById("dias").textContent = diasTotales % 30;
+    if (document.getElementById("horas")) document.getElementById("horas").textContent = hrs % 24;
+    if (document.getElementById("minutos")) document.getElementById("minutos").textContent = min % 60;
+    if (document.getElementById("segundos")) document.getElementById("segundos").textContent = seg % 60;
 }
-
 setInterval(actualizarContador, 1000);
 
-// PANTALLA 4: TOGGLE VIVENCIAS
-function toggleVivencia(elemento) {
-    elemento.classList.toggle("activa");
+// REVELAR NOTAS SECRETAS
+function revelarNota(card) {
+    card.classList.toggle("revelada");
 }
 
-// PANTALLA 6: VOLTEAR TARJETAS 3D
-function voltearTarjeta(tarjeta) {
-    tarjeta.classList.toggle("volteada");
-}
-
-// PANTALLA 7: LIGHTBOX FOTOS
-function abrirLightbox(src, texto) {
+// VISOR LIGHTBOX
+function abrirVisor(card) {
+    const img = card.querySelector("img");
+    const info = card.querySelector(".foto-info p");
     const lightbox = document.getElementById("lightbox");
-    const img = document.getElementById("imgLightbox");
-    const txt = document.getElementById("textoLightbox");
-    if (lightbox && img && txt) {
-        img.src = src;
-        txt.textContent = texto;
+    const imgLightbox = document.getElementById("imgLightbox");
+    const txtLightbox = document.getElementById("textoLightbox");
+
+    if (lightbox && imgLightbox && img) {
+        imgLightbox.src = img.src;
+        if (txtLightbox && info) txtLightbox.textContent = info.textContent;
         lightbox.style.display = "flex";
     }
 }
 
-function cerrarLightbox() {
+function cerrarVisor() {
     const lightbox = document.getElementById("lightbox");
     if (lightbox) lightbox.style.display = "none";
 }
 
-// PANTALLA 8: ESQUIVAR BOTÓN NO
+// ESQUIVAR BOTÓN NO
 function esquivarBoton() {
     const btnNo = document.getElementById("btnNo");
     if (!btnNo) return;
-
-    const x = Math.random() * (window.innerWidth - 90);
-    const y = Math.random() * (window.innerHeight - 40);
-
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
     btnNo.style.position = "fixed";
     btnNo.style.left = `${Math.max(10, x)}px`;
     btnNo.style.top = `${Math.max(10, y)}px`;
 }
 
-// PANTALLA 8: CELEBRACIÓN SÍ
+// CELEBRACIÓN SÍ
 function aceptarPropuesta() {
     const mensaje = document.getElementById("mensajeFinalCelebracion");
     if (mensaje) mensaje.style.display = "block";
-
     if (typeof confetti === "function") {
-        confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.6 }
-        });
+        confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
     }
 }
