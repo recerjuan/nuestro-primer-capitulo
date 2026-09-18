@@ -10,8 +10,8 @@
 </head>
 <body>
 
-    <!-- REPRODUCTOR SUPERIOR FIJO -->
-    <header class="reproductor-fijo">
+    <!-- REPRODUCTOR FLOTANTE EN LA PARTE SUPERIOR -->
+    <div class="reproductor-superior">
         <div class="info-musica">
             <span class="icono-vinilo">🎵</span>
             <div class="marquee-contenedor">
@@ -19,14 +19,14 @@
             </div>
         </div>
         <div class="controles-musica">
-            <button onclick="cambiarCancion(-1)" aria-label="Anterior">⏮️</button>
-            <button id="btnPlay" onclick="toggleAudio()" aria-label="Reproducir o Pausar">▶️</button>
-            <button onclick="cambiarCancion(1)" aria-label="Siguiente">⏭️</button>
+            <button onclick="cambiarCancion(-1)" title="Anterior">⏮️</button>
+            <button id="btnPlay" onclick="toggleAudio()" title="Reproducir/Pausar">▶️</button>
+            <button onclick="cambiarCancion(1)" title="Siguiente">⏭️</button>
         </div>
         <audio id="audioPlayer"></audio>
-    </header>
+    </div>
 
-    <!-- FONDO Y PARTICULAS -->
+    <!-- FONDO ANIMADO DE DESTELLOS -->
     <div class="fondo-particulas">
         <div class="particula"></div>
         <div class="particula"></div>
@@ -34,7 +34,6 @@
         <div class="particula"></div>
     </div>
 
-    <!-- CONTENEDOR PRINCIPAL -->
     <main class="contenedor-principal">
 
         <!-- PANTALLA 1: BIENVENIDA -->
@@ -44,22 +43,22 @@
                 <h1 class="titulo-nombre">Carol Dayana</h1>
                 <p class="subtitulo-romantico">Una experiencia hecha con todo mi corazón, solo para ti...</p>
                 <button class="btn-experiencia" onclick="irAPantalla(2)">
-                    Iniciar Experiencia ✨
+                    <span>Iniciar Experiencia ✨</span>
                 </button>
             </div>
         </section>
 
-        <!-- PANTALLA 2: CARTA INTERACTIVA -->
+        <!-- PANTALLA 2: CARTA INTERACTIVA DE PANTALLA COMPLETA -->
         <section class="pantalla" id="pantalla2">
             <div class="glass-card centro">
                 <h2 class="titulo-seccion">Para la Mujer de Mi Vida 💌</h2>
-                <p class="instruccion">Presiona para abrir tu carta especial</p>
+                <p class="instruccion">Presiona el botón para desplegar tu carta de amor</p>
 
                 <div class="escena-sobre-interactivo" onclick="abrirModalCarta()">
                     <div class="sobre-preview">
                         <div class="solapa-preview"></div>
                         <div class="sello-preview">❤️</div>
-                        <p class="texto-preview-sobre">Toca para abrir</p>
+                        <p class="texto-preview-sobre">Haz clic para abrir</p>
                     </div>
                 </div>
 
@@ -74,7 +73,7 @@
             </div>
         </section>
 
-        <!-- PANTALLA 3: CRONÓMETRO -->
+        <!-- PANTALLA 3: CRONÓMETRO ROMÁNTICO -->
         <section class="pantalla" id="pantalla3">
             <div class="glass-card centro">
                 <h2 class="titulo-seccion">Nuestro Tiempo Juntos ⏳</h2>
@@ -102,9 +101,8 @@
                         <small>Segundos</small>
                     </div>
                 </div>
-
                 <div class="insignia-fecha">
-                    ✨ Desde el 8 de Julio · 7:25 PM ✨
+                    ✨ Desde el 8 de Julio de 2026 · 7:25 PM ✨
                 </div>
 
                 <div class="nav-botones">
@@ -114,7 +112,7 @@
             </div>
         </section>
 
-        <!-- PANTALLA 4: SANTA MARTA -->
+        <!-- PANTALLA 4: DESTINO SANTA MARTA -->
         <section class="pantalla" id="pantalla4">
             <div class="glass-card">
                 <h2 class="titulo-seccion centro">Nuestra Próxima Aventura 🏖️</h2>
@@ -148,11 +146,11 @@
             </div>
         </section>
 
-        <!-- PANTALLA 5: CANCIONES -->
+        <!-- PANTALLA 5: CANCIONES DEDICADAS -->
         <section class="pantalla" id="pantalla5">
             <div class="glass-card">
                 <h2 class="titulo-seccion centro">Nuestras Canciones 🎶</h2>
-                <p class="instruccion centro">Toca cualquier canción para escucharla</p>
+                <p class="instruccion centro">Toca cualquier canción para reproducirla</p>
 
                 <div class="lista-canciones-elegante">
                     <div class="item-cancion" onclick="reproducirIndice(0)">
@@ -199,7 +197,7 @@
             </div>
         </section>
 
-        <!-- PANTALLA 6: RAZONES -->
+        <!-- PANTALLA 6: RAZONES DE MI AMOR -->
         <section class="pantalla" id="pantalla6">
             <div class="glass-card">
                 <h2 class="titulo-seccion centro">Razones de Mi Amor 💖</h2>
@@ -208,37 +206,37 @@
                 <div class="grid-razones-3d">
                     <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
                         <div class="card-flip-inner">
-                            <div class="card-frente"><span>1</span><p>Toca aquí</p></div>
+                            <div class="card-frente"><span>1</span><p>Toca para abrir</p></div>
                             <div class="card-dorso"><p>Por tu sonrisa que ilumina mis días. 😊</p></div>
                         </div>
                     </div>
                     <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
                         <div class="card-flip-inner">
-                            <div class="card-frente"><span>2</span><p>Toca aquí</p></div>
+                            <div class="card-frente"><span>2</span><p>Toca para abrir</p></div>
                             <div class="card-dorso"><p>Por la dulzura con la que me tratas. 🌸</p></div>
                         </div>
                     </div>
                     <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
                         <div class="card-flip-inner">
-                            <div class="card-frente"><span>3</span><p>Toca aquí</p></div>
+                            <div class="card-frente"><span>3</span><p>Toca para abrir</p></div>
                             <div class="card-dorso"><p>Por cada risa espontánea que compartimos. ✨</p></div>
                         </div>
                     </div>
                     <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
                         <div class="card-flip-inner">
-                            <div class="card-frente"><span>4</span><p>Toca aquí</p></div>
+                            <div class="card-frente"><span>4</span><p>Toca para abrir</p></div>
                             <div class="card-dorso"><p>Por ser mi lugar seguro y mi tranquilidad. 🏡</p></div>
                         </div>
                     </div>
                     <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
                         <div class="card-flip-inner">
-                            <div class="card-frente"><span>5</span><p>Toca aquí</p></div>
+                            <div class="card-frente"><span>5</span><p>Toca para abrir</p></div>
                             <div class="card-dorso"><p>Por la complicidad única entre los dos. 🤝</p></div>
                         </div>
                     </div>
                     <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
                         <div class="card-flip-inner">
-                            <div class="card-frente"><span>6</span><p>Toca aquí</p></div>
+                            <div class="card-frente"><span>6</span><p>Toca para abrir</p></div>
                             <div class="card-dorso"><p>Por la forma hermosa en la que me miras. 👀❤️</p></div>
                         </div>
                     </div>
@@ -251,7 +249,7 @@
             </div>
         </section>
 
-        <!-- PANTALLA 7: GALERÍA -->
+        <!-- PANTALLA 7: GALERÍA DE FOTOS -->
         <section class="pantalla" id="pantalla7">
             <div class="glass-card centro">
                 <h2 class="titulo-seccion">Nuestros Recuerdos 📸</h2>
@@ -280,7 +278,7 @@
             </div>
         </section>
 
-        <!-- PANTALLA 8: PREGUNTA CON BOTÓN ESCURRIDIZO -->
+        <!-- PANTALLA 8: PREGUNTA ESPECIAL CON BOTÓN ESCURRIDIZO -->
         <section class="pantalla" id="pantalla8">
             <div class="glass-card centro">
                 <h2 class="titulo-seccion">Una Última Pregunta... ❤️</h2>
@@ -306,7 +304,7 @@
 
     </main>
 
-    <!-- MODAL CARTA GRANDE -->
+    <!-- MODAL CARTA DESPLEGABLE EN PANTALLA COMPLETA -->
     <div class="modal-carta-overlay" id="modalCarta">
         <div class="modal-carta-contenido">
             <button class="btn-cerrar-modal" onclick="cerrarModalCarta()">✖</button>
