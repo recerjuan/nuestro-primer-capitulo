@@ -1,10 +1,11 @@
+// CONTROL DE PANTALLAS
 let pantallaActual = 1;
-const totalPantallas = 6;
+const totalPantallas = 8;
 
 function mostrarPantalla(numero) {
     if (numero < 1 || numero > totalPantallas) return;
 
-    document.querySelectorAll(".pantalla").forEach(function (p) {
+    document.querySelectorAll(".pantalla").forEach(p => {
         p.classList.remove("activa");
     });
 
@@ -16,161 +17,196 @@ function mostrarPantalla(numero) {
     }
 }
 
-function siguientePantalla() {
-    if (pantallaActual < totalPantallas) {
-        mostrarPantalla(pantallaActual + 1);
-    }
-}
-
-function anteriorPantalla() {
-    if (pantallaActual > 1) {
-        mostrarPantalla(pantallaActual - 1);
-    }
-}
-
-document.addEventListener('keydown', function (e) {
-    if (e.key === "ArrowRight") siguientePantalla();
-    if (e.key === "ArrowLeft") anteriorPantalla();
-});
-
-// ABRIR CARTA INTERACTIVA
+// CARTA DE AMOR (PANTALLA 2)
 function abrirCarta() {
-    const wrapper = document.getElementById('envelopeWrapper');
-    const carta = document.getElementById('cartaDesplegada');
-
-    if (wrapper) wrapper.style.display = 'none';
-    if (carta) carta.classList.add('abierta');
+    const sobre = document.getElementById("contenedorSobre");
+    if (sobre) {
+        sobre.classList.toggle("abierto");
+    }
 }
 
-// CONFIGURACIÓN DE AUDIO
+// REPRODUCTOR GLOBAL DE MÚSICA
 const listaCanciones = [
-    { titulo: "A Dónde Vamos - Morat", archivo: "a-donde-vamos.mp3" },
-    { titulo: "Cesantías de Amor", archivo: "cesantias-de-amor.mp3" },
-    { titulo: "La Persona de Mi Vida - Iván Villazón", archivo: "la-persona-de-mi-vida.mp3" },
-    { titulo: "Siempre Seré - Tito Rojas", archivo: "siempre-sere.mp3" }
+    { titulo: "Morat - A Dónde Vamos", src: "musica/cancion1.mp3" },
+    { titulo: "Silvestre Dangond - Cesantías de Amor", src: "musica/cancion2.mp3" },
+    { titulo: "Iván Villazón - La Persona de Mi Vida", src: "musica/cancion3.mp3" },
+    { titulo: "Tito Rojas - Siempre Seré", src: "musica/cancion4.mp3" }
 ];
 
-let indiceCancionActual = 0;
-let reproduciendo = false;
-const audio = document.getElementById('musicaFondo');
+let indiceCancion = 0;
+const audioGlobal = document.getElementById("audioGlobal");
+const tituloCancion = document.getElementById("tituloCancion");
+const btnPlayPause = document.getElementById("btnPlayPause");
 
 function cargarCancion(indice) {
-    if (!audio) return;
-    audio.src = listaCanciones[indice].archivo;
-    const label = document.getElementById('tituloCancionActual');
-    if (label) label.innerText = listaCanciones[indice].titulo;
+    indiceCancion = indice;
+    if (audioGlobal && tituloCancion) {
+        audioGlobal.src = listaCanciones[indice].src;
+        tituloCancion.textContent = listaCanciones[indice].titulo;
+    }
 }
 
-function toggleMusica() {
-    if (!audio) return;
-
-    if (!audio.src || audio.src === "" || audio.src.endsWith("#")) {
-        cargarCancion(0);
-    }
-
-    const btn = document.getElementById('btnPlayPause');
-
-    if (reproduciendo) {
-        audio.pause();
-        if (btn) btn.innerText = "▶️ Reproducir";
+function togglePlayPause() {
+    if (!audioGlobal) return;
+    if (audioGlobal.paused) {
+        audioGlobal.play();
+        if (btnPlayPause) btnPlayPause.textContent = "⏸️";
     } else {
-        audio.play().then(() => {
-            if (btn) btn.innerText = "⏸️ Pausar";
-        }).catch(err => {
-            console.log("Bloqueo de reproducción automática o archivo no encontrado:", err);
-            alert("Toca la canción directamente para dar el permiso al navegador.");
-        });
+        audioGlobal.pause();
+        if (btnPlayPause) btnPlayPause.textContent = "▶️";
     }
-    reproduciendo = !reproduciendo;
-}
-
-function reproducirEspecifica(indice) {
-    indiceCancionActual = indice;
-    cargarCancion(indiceCancionActual);
-    reproduciendo = false;
-    toggleMusica();
 }
 
 function siguienteCancion() {
-    indiceCancionActual = (indiceCancionActual + 1) % listaCanciones.length;
-    cargarCancion(indiceCancionActual);
-    if (reproduciendo) audio.play();
+    indiceCancion = (indiceCancion + 1) % listaCanciones.length;
+    cargarCancion(indiceCancion);
+    if (audioGlobal) audioGlobal.play();
+    if (btnPlayPause) btnPlayPause.textContent = "⏸️";
 }
 
 function cancionAnterior() {
-    indiceCancionActual = (indiceCancionActual - 1 + listaCanciones.length) % listaCanciones.length;
-    cargarCancion(indiceCancionActual);
-    if (reproduciendo) audio.play();
+    indiceCancion = (indiceCancion - 1 + listaCanciones.length) % listaCanciones.length;
+    cargarCancion(indiceCancion);
+    if (audioGlobal) audioGlobal.play();
+    if (btnPlayPause) btnPlayPause.textContent = "⏸️";
 }
 
-// CONTADOR EN TIEMPO REAL
+function seleccionarCancion(indice) {
+    cargarCancion(indice);
+    if (audioGlobal) audioGlobal.play();
+    if (btnPlayPause) btnPlayPause.textContent = "⏸️";
+}
+
+// CONTADOR EN TIEMPO REAL (DESDE 8 DE JULIO DE 2026 7:25 PM)
+const fechaInicio = new Date(2026, 6, 8, 19, 25, 0); // Mes 6 = Julio en JS
+
 function actualizarContador() {
-    const inicio = new Date(2026, 6, 8, 19, 25, 0); 
     const ahora = new Date();
+    const diferencia = ahora - fechaInicio;
 
-    let diferencia = ahora.getTime() - inicio.getTime();
-    if (diferencia < 0) diferencia = 0;
+    if (diferencia < 0) return;
 
-    const segundo = 1000;
-    const minuto = segundo * 60;
-    const hora = minuto * 60;
-    const dia = hora * 24;
-    const mesPromedio = dia * 30.4375;
+    const segundosTotales = Math.floor(diferencia / 1000);
+    const minutosTotales = Math.floor(segundosTotales / 60);
+    const horasTotales = Math.floor(minutosTotales / 60);
+    const diasTotales = Math.floor(horasTotales / 24);
 
-    const meses = Math.floor(diferencia / mesPromedio);
-    const dias = Math.floor((diferencia % mesPromedio) / dia);
-    const horas = Math.floor((diferencia % dia) / hora);
-    const minutos = Math.floor((diferencia % hora) / minuto);
-    const segundos = Math.floor((diferencia % minuto) / segundo);
+    const meses = Math.floor(diasTotales / 30);
+    const dias = diasTotales % 30;
+    const horas = horasTotales % 24;
+    const minutos = minutosTotales % 60;
+    const segundos = segundosTotales % 60;
 
     if (document.getElementById("meses")) document.getElementById("meses").textContent = meses;
     if (document.getElementById("dias")) document.getElementById("dias").textContent = dias;
-    if (document.getElementById("horas")) document.getElementById("horas").textContent = String(horas).padStart(2, "0");
-    if (document.getElementById("minutos")) document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
-    if (document.getElementById("segundos")) document.getElementById("segundos").textContent = String(segundos).padStart(2, "0");
+    if (document.getElementById("horas")) document.getElementById("horas").textContent = horas;
+    if (document.getElementById("minutos")) document.getElementById("minutos").textContent = minutos;
+    if (document.getElementById("segundos")) document.getElementById("segundos").textContent = segundos;
 }
 
-actualizarContador();
 setInterval(actualizarContador, 1000);
 
-// REVELAR NOTAS
-function revelarNota(elemento) {
-    const frente = elemento.querySelector('.nota-frente');
-    const atras = elemento.querySelector('.nota-atras');
+// PANTALLA 4: TOGGLE VIVENCIAS
+function toggleVivencia(elemento) {
+    elemento.classList.toggle("activa");
+}
 
-    if (atras.style.display === 'block') {
-        atras.style.display = 'none';
-        frente.style.display = 'block';
-        elemento.classList.remove('revelada');
-    } else {
-        frente.style.display = 'none';
-        atras.style.display = 'block';
-        elemento.classList.add('revelada');
+// PANTALLA 6: VOLTEAR TARJETAS 3D
+function voltearTarjeta(tarjeta) {
+    tarjeta.classList.toggle("volteada");
+}
+
+// PANTALLA 7: LIGHTBOX FOTOS
+function abrirLightbox(src, texto) {
+    const lightbox = document.getElementById("lightbox");
+    const img = document.getElementById("imgLightbox");
+    const txt = document.getElementById("textoLightbox");
+    if (lightbox && img && txt) {
+        img.src = src;
+        txt.textContent = texto;
+        lightbox.style.display = "flex";
     }
 }
 
-// CORAZONES DE FONDO
-function crearCorazon() {
-    const contenedor = document.querySelector(".hearts");
-    if (!contenedor) return;
-
-    const corazon = document.createElement("div");
-    corazon.className = "heart";
-    corazon.textContent = Math.random() > 0.5 ? "♥" : "♡";
-
-    const posicion = Math.random() * 100;
-    const tamaño = 12 + Math.random() * 16;
-    const duracion = 6 + Math.random() * 6;
-
-    corazon.style.left = posicion + "%";
-    corazon.style.fontSize = tamaño + "px";
-    corazon.style.animationDuration = duracion + "s";
-
-    contenedor.appendChild(corazon);
-
-    setTimeout(() => {
-        corazon.remove();
-    }, duracion * 1000);
+function cerrarLightbox() {
+    const lightbox = document.getElementById("lightbox");
+    if (lightbox) lightbox.style.display = "none";
 }
 
-setInterval(crearCorazon, 450);
+// PANTALLA 8: PREGUNTA Y BOTÓN ESQUIVO
+function esquivarBoton() {
+    const btnNo = document.getElementById("btnNo");
+    if (!btnNo) return;
+
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+
+    btnNo.style.position = "fixed";
+    btnNo.style.left = `${x}px`;
+    btnNo.style.top = `${y}px`;
+}
+
+function aceptarPropuesta() {
+    const mensaje = document.getElementById("mensajeFinalCelebracion");
+    if (mensaje) mensaje.style.display = "block";
+
+    // Disparar confeti de corazones
+    if (typeof confetti === "function") {
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+    }
+}
+
+// FONDO ANIMADO DE CORAZONES (CANVAS)
+const canvas = document.getElementById("canvasCorazones");
+if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let corazones = [];
+
+    function redimensionarCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", redimensionarCanvas);
+    redimensionarCanvas();
+
+    class Corazon {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + Math.random() * 100;
+            this.size = Math.random() * 12 + 6;
+            this.speedY = Math.random() * 1.5 + 0.5;
+            this.opacity = Math.random() * 0.5 + 0.3;
+        }
+        update() {
+            this.y -= this.speedY;
+            if (this.y < -20) {
+                this.y = canvas.height + 20;
+                this.x = Math.random() * canvas.width;
+            }
+        }
+        draw() {
+            ctx.fillStyle = `rgba(232, 165, 152, ${this.opacity})`;
+            ctx.font = `${this.size}px serif`;
+            ctx.fillText("❤️", this.x, this.y);
+        }
+    }
+
+    for (let i = 0; i < 25; i++) {
+        corazones.push(new Corazon());
+    }
+
+    function animar() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        corazones.forEach(c => {
+            c.update();
+            c.draw();
+        });
+        requestAnimationFrame(animar);
+    }
+    animar();
+}
+  
