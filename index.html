@@ -5,24 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carol Dayana ❤️</title>
     <link rel="stylesheet" href="estilos.css">
-    <!-- Fuentes Elegantes y Románticas -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-    <!-- FONDO ROMÁNTICO ANIMADO CON DESTELLOS Y BUBBLES -->
-    <div class="fondo-particulas">
-        <div class="particula"></div>
-        <div class="particula"></div>
-        <div class="particula"></div>
-        <div class="particula"></div>
-        <div class="particula"></div>
-        <div class="particula"></div>
-    </div>
-
-    <!-- REPRODUCTOR FLOTANTE ELEGANTE -->
-    <div class="reproductor-flotante">
+    <!-- REPRODUCTOR SUPERIOR FIJO -->
+    <header class="reproductor-fijo">
         <div class="info-musica">
             <span class="icono-vinilo">🎵</span>
             <div class="marquee-contenedor">
@@ -30,13 +19,22 @@
             </div>
         </div>
         <div class="controles-musica">
-            <button onclick="cambiarCancion(-1)" title="Anterior">⏮️</button>
-            <button id="btnPlay" onclick="toggleAudio()" title="Reproducir/Pausar">▶️</button>
-            <button onclick="cambiarCancion(1)" title="Siguiente">⏭️</button>
+            <button onclick="cambiarCancion(-1)" aria-label="Anterior">⏮️</button>
+            <button id="btnPlay" onclick="toggleAudio()" aria-label="Reproducir o Pausar">▶️</button>
+            <button onclick="cambiarCancion(1)" aria-label="Siguiente">⏭️</button>
         </div>
         <audio id="audioPlayer"></audio>
+    </header>
+
+    <!-- FONDO Y PARTICULAS -->
+    <div class="fondo-particulas">
+        <div class="particula"></div>
+        <div class="particula"></div>
+        <div class="particula"></div>
+        <div class="particula"></div>
     </div>
 
+    <!-- CONTENEDOR PRINCIPAL -->
     <main class="contenedor-principal">
 
         <!-- PANTALLA 1: BIENVENIDA -->
@@ -46,33 +44,28 @@
                 <h1 class="titulo-nombre">Carol Dayana</h1>
                 <p class="subtitulo-romantico">Una experiencia hecha con todo mi corazón, solo para ti...</p>
                 <button class="btn-experiencia" onclick="irAPantalla(2)">
-                    <span>Iniciar Experiencia ✨</span>
+                    Iniciar Experiencia ✨
                 </button>
             </div>
         </section>
 
-        <!-- PANTALLA 2: CARTA DE AMOR INTERACTIVA -->
+        <!-- PANTALLA 2: CARTA INTERACTIVA -->
         <section class="pantalla" id="pantalla2">
             <div class="glass-card centro">
                 <h2 class="titulo-seccion">Para la Mujer de Mi Vida 💌</h2>
-                <p class="instruccion">Presiona el botón de abajo o el sobre para abrir tu carta</p>
+                <p class="instruccion">Presiona para abrir tu carta especial</p>
 
-                <div class="escena-sobre">
-                    <div class="sobre-3d" id="sobre3d" onclick="toggleCarta()">
-                        <div class="solapa-sobre"></div>
-                        <div class="sello-corazon">❤️</div>
-                        <div class="cuerpo-sobre"></div>
-                        <div class="carta-desplegable" id="cartaDesplegable">
-                            <h3 class="carta-titulo">Mi Negra Hermosa,</h3>
-                            <p class="carta-texto">
-                                Escribo esto para recordarte lo increíblemente especial que eres en mi vida. Cada sonrisa tuya ilumina mi mundo y cada segundo a tu lado es un regalo que valoro con todo mi corazón. Gracias por ser mi compañía, mi alegría y la persona que me llena el alma.
-                            </p>
-                            <p class="carta-firma">Con todo mi amor, siempre. ❤️</p>
-                        </div>
+                <div class="escena-sobre-interactivo" onclick="abrirModalCarta()">
+                    <div class="sobre-preview">
+                        <div class="solapa-preview"></div>
+                        <div class="sello-preview">❤️</div>
+                        <p class="texto-preview-sobre">Toca para abrir</p>
                     </div>
                 </div>
 
-                <button class="btn-abrir-carta" onclick="toggleCarta()">✉️ Abrir / Cerrar Carta</button>
+                <button class="btn-abrir-carta-luxury" onclick="abrirModalCarta()">
+                    ✉️ Abrir Carta de Amor
+                </button>
 
                 <div class="nav-botones">
                     <button class="btn-nav" onclick="irAPantalla(1)">← Atrás</button>
@@ -81,20 +74,38 @@
             </div>
         </section>
 
-        <!-- PANTALLA 3: CONTADOR DE TIEMPO -->
+        <!-- PANTALLA 3: CRONÓMETRO -->
         <section class="pantalla" id="pantalla3">
             <div class="glass-card centro">
                 <h2 class="titulo-seccion">Nuestro Tiempo Juntos ⏳</h2>
-                <p class="instruccion">Contando cada segundo de felicidad a tu lado</p>
+                <p class="instruccion">Cada segundo a tu lado es mi regalo más bonito</p>
                 
-                <div class="contador-grid">
-                    <div class="caja-tiempo"><span id="meses">0</span><small>Meses</small></div>
-                    <div class="caja-tiempo"><span id="dias">0</span><small>Días</small></div>
-                    <div class="caja-tiempo"><span id="horas">0</span><small>Horas</small></div>
-                    <div class="caja-tiempo"><span id="minutos">0</span><small>Minutos</small></div>
-                    <div class="caja-tiempo"><span id="segundos">0</span><small>Segundos</small></div>
+                <div class="contador-romantico-grid">
+                    <div class="caja-tiempo-luxury">
+                        <span id="meses">0</span>
+                        <small>Meses</small>
+                    </div>
+                    <div class="caja-tiempo-luxury">
+                        <span id="dias">0</span>
+                        <small>Días</small>
+                    </div>
+                    <div class="caja-tiempo-luxury">
+                        <span id="horas">0</span>
+                        <small>Horas</small>
+                    </div>
+                    <div class="caja-tiempo-luxury">
+                        <span id="minutos">0</span>
+                        <small>Minutos</small>
+                    </div>
+                    <div class="caja-tiempo-luxury">
+                        <span id="segundos">0</span>
+                        <small>Segundos</small>
+                    </div>
                 </div>
-                <p class="fecha-destacada">Desde el 8 de Julio de 2026 · 7:25 PM</p>
+
+                <div class="insignia-fecha">
+                    ✨ Desde el 8 de Julio · 7:25 PM ✨
+                </div>
 
                 <div class="nav-botones">
                     <button class="btn-nav" onclick="irAPantalla(2)">← Atrás</button>
@@ -103,30 +114,30 @@
             </div>
         </section>
 
-        <!-- PANTALLA 4: PROMESA SANTA MARTA -->
+        <!-- PANTALLA 4: SANTA MARTA -->
         <section class="pantalla" id="pantalla4">
             <div class="glass-card">
                 <h2 class="titulo-seccion centro">Nuestra Próxima Aventura 🏖️</h2>
-                <p class="instruccion centro">Una promesa guardada en el alma</p>
+                <p class="instruccion centro">Una hermosa promesa juntos</p>
 
-                <div class="tarjeta-destacada-promesa">
+                <div class="tarjeta-promesa-luxury">
                     <div class="encabezado-promesa">
                         <span class="icono-bus">🚌</span>
                         <h3>Destino: Santa Marta</h3>
                     </div>
                     <p class="texto-promesa">
-                        "Sé que aún no conoces Santa Marta, y mi mayor sueño es ser el primero en tomarte de la mano, subirnos a ese bus juntos y llevarte a descubrir el mar por primera vez. Quiero que contemplemos nuestro primer atardecer allá, compartamos vivencias inolvidables y creemos recuerdos que se queden grabados para siempre en nuestros corazones."
+                        "Mi mayor sueño es tomarte de la mano, subirnos a ese bus juntos y llevarte a recorrer la hermosa ciudad de Santa Marta. Quiero que disfrutemos de sus playas, contemplemos nuestros atardeceres frente al mar, compartamos vivencias inolvidables y creemos recuerdos eternos en nuestros corazones."
                     </p>
                 </div>
 
                 <div class="mini-grid-vivencias">
                     <div class="mini-card-promesa">
-                        <h4>🚌 El Viaje en Bus</h4>
-                        <p>Horas compartiendo música y miradas hacia la carretera.</p>
+                        <h4>🚌 El Viaje Juntos</h4>
+                        <p>Horas de camino escuchando nuestras canciones favoritas.</p>
                     </div>
                     <div class="mini-card-promesa">
-                        <h4>🌅 El Atardecer</h4>
-                        <p>Ver el sol ocultarse frente al mar tomados de la mano.</p>
+                        <h4>🏖️ La Ciudad y la Playa</h4>
+                        <p>Caminar por Santa Marta y disfrutar del atardecer juntos.</p>
                     </div>
                 </div>
 
@@ -137,11 +148,11 @@
             </div>
         </section>
 
-        <!-- PANTALLA 5: CANCIONES DEDICADAS -->
+        <!-- PANTALLA 5: CANCIONES -->
         <section class="pantalla" id="pantalla5">
             <div class="glass-card">
                 <h2 class="titulo-seccion centro">Nuestras Canciones 🎶</h2>
-                <p class="instruccion centro">Selecciona cualquier canción para escucharla</p>
+                <p class="instruccion centro">Toca cualquier canción para escucharla</p>
 
                 <div class="lista-canciones-elegante">
                     <div class="item-cancion" onclick="reproducirIndice(0)">
@@ -156,8 +167,8 @@
                     <div class="item-cancion" onclick="reproducirIndice(1)">
                         <div class="num-track">02</div>
                         <div class="detalles-track">
-                            <h4>Cesantías de Amor</h4>
-                            <p>Silvestre Dangond / Jorge Oñate</p>
+                            <h4>Cesantías de Amor (Tres Canciones)</h4>
+                            <p>Diomedes Díaz</p>
                         </div>
                         <button class="btn-play-track">▶️</button>
                     </div>
@@ -175,7 +186,7 @@
                         <div class="num-track">04</div>
                         <div class="detalles-track">
                             <h4>Siempre Seré</h4>
-                            <p>Tito Rojas / Giro</p>
+                            <p>Tito Rojas</p>
                         </div>
                         <button class="btn-play-track">▶️</button>
                     </div>
@@ -188,59 +199,47 @@
             </div>
         </section>
 
-        <!-- PANTALLA 6: RAZONES DE MI AMOR (TARJETAS 3D FLIP PERFECTAS) -->
+        <!-- PANTALLA 6: RAZONES -->
         <section class="pantalla" id="pantalla6">
             <div class="glass-card">
                 <h2 class="titulo-seccion centro">Razones de Mi Amor 💖</h2>
-                <p class="instruccion centro">Toca cada tarjeta para voltearla y leer la razón</p>
+                <p class="instruccion centro">Toca cada tarjeta para voltearla</p>
 
                 <div class="grid-razones-3d">
                     <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
                         <div class="card-flip-inner">
-                            <div class="card-frente"><span>1</span><p>Toca para abrir</p></div>
-                            <div class="card-dorso"><p>Por tu sonrisa que me cambia el día completo. 😊</p></div>
+                            <div class="card-frente"><span>1</span><p>Toca aquí</p></div>
+                            <div class="card-dorso"><p>Por tu sonrisa que ilumina mis días. 😊</p></div>
                         </div>
                     </div>
                     <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
                         <div class="card-flip-inner">
-                            <div class="card-frente"><span>2</span><p>Toca para abrir</p></div>
-                            <div class="card-dorso"><p>Por la forma tan dulce en la que me tratas. 🌸</p></div>
+                            <div class="card-frente"><span>2</span><p>Toca aquí</p></div>
+                            <div class="card-dorso"><p>Por la dulzura con la que me tratas. 🌸</p></div>
                         </div>
                     </div>
                     <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
                         <div class="card-flip-inner">
-                            <div class="card-frente"><span>3</span><p>Toca para abrir</p></div>
-                            <div class="card-dorso"><p>Por cada risa compartida que se vuelve inolvidable. ✨</p></div>
+                            <div class="card-frente"><span>3</span><p>Toca aquí</p></div>
+                            <div class="card-dorso"><p>Por cada risa espontánea que compartimos. ✨</p></div>
                         </div>
                     </div>
                     <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
                         <div class="card-flip-inner">
-                            <div class="card-frente"><span>4</span><p>Toca para abrir</p></div>
-                            <div class="card-dorso"><p>Por ser mi refugio y mi paz en todo momento. 🏡</p></div>
+                            <div class="card-frente"><span>4</span><p>Toca aquí</p></div>
+                            <div class="card-dorso"><p>Por ser mi lugar seguro y mi tranquilidad. 🏡</p></div>
                         </div>
                     </div>
                     <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
                         <div class="card-flip-inner">
-                            <div class="card-frente"><span>5</span><p>Toca para abrir</p></div>
-                            <div class="card-dorso"><p>Por la complicidad tan bonita que existe entre los dos. 🤝</p></div>
+                            <div class="card-frente"><span>5</span><p>Toca aquí</p></div>
+                            <div class="card-dorso"><p>Por la complicidad única entre los dos. 🤝</p></div>
                         </div>
                     </div>
                     <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
                         <div class="card-flip-inner">
-                            <div class="card-frente"><span>6</span><p>Toca para abrir</p></div>
-                            <div class="card-dorso"><p>Por tu mirada que me dice absolutamente todo. 👀❤️</p></div>
-                        </div>
-                    </div>
-                    <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
-                        <div class="card-flip-inner">
-                            <div class="card-frente"><span>7</span><p>Toca para abrir</p></div>
-                            <div class="card-dorso"><p>Por hacer que lo simple se sienta extraordinario. 🌟</p></div>
-                        </div>
-                    </div>
-                    <div class="card-flip-contenedor" onclick="voltearTarjeta(this)">
-                        <div class="card-flip-inner">
-                            <div class="card-frente"><span>8</span><p>Toca para abrir</p></div>
-                            <div class="card-dorso"><p>Simplemente por ser tú, mi persona favorita. ❤️</p></div>
+                            <div class="card-frente"><span>6</span><p>Toca aquí</p></div>
+                            <div class="card-dorso"><p>Por la forma hermosa en la que me miras. 👀❤️</p></div>
                         </div>
                     </div>
                 </div>
@@ -252,23 +251,22 @@
             </div>
         </section>
 
-        <!-- PANTALLA 7: GALERÍA DE FOTOS MULTI-FORMATO -->
+        <!-- PANTALLA 7: GALERÍA -->
         <section class="pantalla" id="pantalla7">
             <div class="glass-card centro">
                 <h2 class="titulo-seccion">Nuestros Recuerdos 📸</h2>
-                <p class="instruccion">Momentos imborrables a tu lado</p>
+                <p class="instruccion">Momentos inolvidables a tu lado</p>
 
                 <div class="galeria-grid-elegante">
                     <div class="marco-foto-premium">
-                        <!-- Carga inteligente que detecta .jpeg, .jpg, .pgeg o .pge -->
-                        <img id="foto1" src="imagenes/foto1.jpeg" alt="Nuestros Carnavales">
+                        <img id="foto1" src="imagenes/foto1.jpeg" alt="Carnavales">
                         <div class="capa-foto-info">
                             <p>Nuestros primeros carnavales juntos 🎉</p>
                         </div>
                     </div>
 
                     <div class="marco-foto-premium">
-                        <img id="foto2" src="imagenes/foto2.jpeg" alt="Nuestro Concierto">
+                        <img id="foto2" src="imagenes/foto2.jpeg" alt="Concierto">
                         <div class="capa-foto-info">
                             <p>Nuestro primer concierto juntos 🎤</p>
                         </div>
@@ -282,7 +280,7 @@
             </div>
         </section>
 
-        <!-- PANTALLA 8: PREGUNTA ESPECIAL -->
+        <!-- PANTALLA 8: PREGUNTA CON BOTÓN ESCURRIDIZO -->
         <section class="pantalla" id="pantalla8">
             <div class="glass-card centro">
                 <h2 class="titulo-seccion">Una Última Pregunta... ❤️</h2>
@@ -290,9 +288,9 @@
                     ¿Aceptas seguir construyendo momentos inolvidables y escribiendo más capítulos de esta historia a mi lado?
                 </p>
 
-                <div class="contenedor-propuesta">
+                <div class="contenedor-juego-botones" id="areaJuego">
                     <button class="btn-si-brillante" onclick="celebrarAceptacion()">¡SÍ! ✨</button>
-                    <button class="btn-no-esquivo" id="btnNo" onmouseover="esquivarBotonNo()" onclick="esquivarBotonNo()">No 🙈</button>
+                    <button class="btn-no-jugueton" id="btnNo" onmouseover="moverBotonNo()" onclick="moverBotonNo()">No 🙈</button>
                 </div>
 
                 <div id="mensajeCelebracion" class="mensaje-celebracion-oculto">
@@ -307,6 +305,20 @@
         </section>
 
     </main>
+
+    <!-- MODAL CARTA GRANDE -->
+    <div class="modal-carta-overlay" id="modalCarta">
+        <div class="modal-carta-contenido">
+            <button class="btn-cerrar-modal" onclick="cerrarModalCarta()">✖</button>
+            <h3 class="carta-modal-titulo">Mi Negra Hermosa,</h3>
+            <div class="carta-modal-cuerpo">
+                <p>Escribo esto para recordarte lo increíblemente especial que eres en mi vida. Cada sonrisa tuya ilumina mi mundo y cada segundo a tu lado es un regalo que valoro con todo mi corazón.</p>
+                <p>Gracias por ser mi compañía, mi alegría y la persona que me llena el alma. Vamos a construir juntos momentos hermosos en Santa Marta y en cada lugar al que la vida nos lleve.</p>
+                <p class="carta-firma">Con todo mi amor, siempre. ❤️</p>
+            </div>
+            <button class="btn-modal-cerrar-bottom" onclick="cerrarModalCarta()">Cerrar Carta 💌</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
