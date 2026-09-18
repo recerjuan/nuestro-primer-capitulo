@@ -10,7 +10,6 @@
 </head>
 <body>
 
-    <!-- Fondo de destellos flotantes en CSS -->
     <div class="fondo-particulas">
         <div class="particula"></div>
         <div class="particula"></div>
@@ -19,7 +18,7 @@
         <div class="particula"></div>
     </div>
 
-    <!-- REPRODUCTOR GLOBAL FLOTANTE -->
+    <!-- REPRODUCTOR GLOBAL -->
     <div class="reproductor-flotante">
         <div class="info-musica">
             <span class="icono-nota">🎵</span>
@@ -32,10 +31,9 @@
             <button id="btnPlayPause" onclick="togglePlayPause()" title="Reproducir/Pausar">▶️</button>
             <button onclick="siguienteCancion()" title="Siguiente">⏭️</button>
         </div>
-        <audio id="audioGlobal" src="musica/cancion1.mp3" loop></audio>
+        <audio id="audioGlobal" preload="auto"></audio>
     </div>
 
-    <!-- CONTENEDOR PRINCIPAL CENTRADO -->
     <main class="wrapper-principal">
 
         <!-- PANTALLA 1: BIENVENIDA -->
@@ -52,21 +50,24 @@
         <section class="pantalla" id="pantalla2">
             <div class="glass-card centro-texto">
                 <h2 class="titulo-seccion">Para la mujer que amo 💌</h2>
-                <p class="subtitulo">Toca el sello para abrir la carta</p>
+                <p class="subtitulo">Toca el sobre o el botón para abrir la carta</p>
 
-                <div class="contenedor-sobre" id="contenedorSobre" onclick="abrirCarta()">
+                <div class="contenedor-sobre" id="contenedorSobre" onclick="toggleCarta()">
                     <div class="sobre">
                         <div class="solapa"></div>
                         <div class="sello-cera">❤️</div>
-                        <div class="papel-carta" id="papelCarta">
-                            <h3 class="carta-titulo">Mi Negra Hermosa,</h3>
-                            <p class="carta-cuerpo">
-                                Escribo esto para recordarte lo increíblemente especial que eres en mi vida. Cada sonrisa tuya ilumina mi mundo y cada segundo a tu lado es un regalo que valoro con todo mi corazón. Gracias por ser mi compañía, mi alegría y la persona que me llena el alma.
-                            </p>
-                            <p class="carta-firma">Con todo mi amor, siempre. ❤️</p>
-                        </div>
                     </div>
                 </div>
+
+                <div class="papel-carta" id="papelCarta">
+                    <h3 class="carta-titulo">Mi Negra Hermosa,</h3>
+                    <p class="carta-cuerpo">
+                        Escribo esto para recordarte lo increíblemente especial que eres en mi vida. Cada sonrisa tuya ilumina mi mundo y cada segundo a tu lado es un regalo que valoro con todo mi corazón. Gracias por ser mi compañía, mi alegría y la persona que me llena el alma.
+                    </p>
+                    <p class="carta-firma">Con todo mi amor, siempre. ❤️</p>
+                </div>
+
+                <button class="btn-accion" onclick="toggleCarta()">✉️ Abrir / Cerrar Carta</button>
 
                 <div class="navegacion-pantalla">
                     <button class="btn-nav" onclick="mostrarPantalla(1)">← Atrás</button>
@@ -112,15 +113,15 @@
                 </div>
 
                 <div class="grid-vivencias">
-                    <div class="tarjeta-vivencia" onclick="toggleVivencia(this)">
+                    <div class="tarjeta-vivencia" onclick="this.classList.toggle('activa')">
                         <h4>🚌 El Viaje en Bus</h4>
                         <p class="detalle-vivencia">Esas horas hablando de todo, compartiendo audífonos y viendo el paisaje hasta llegar al mar.</p>
                     </div>
-                    <div class="tarjeta-vivencia" onclick="toggleVivencia(this)">
+                    <div class="tarjeta-vivencia" onclick="this.classList.toggle('activa')">
                         <h4>🌅 El Atardecer</h4>
                         <p class="detalle-vivencia">Sentarnos en la arena frente al mar a ver cómo se oculta el sol juntos.</p>
                     </div>
-                    <div class="tarjeta-vivencia" onclick="toggleVivencia(this)">
+                    <div class="tarjeta-vivencia" onclick="this.classList.toggle('activa')">
                         <h4>📸 Nuevos Recuerdos</h4>
                         <p class="detalle-vivencia">Guardar cada sonrisa de ese fin de semana como la primera de muchas aventuras.</p>
                     </div>
@@ -181,60 +182,44 @@
             </div>
         </section>
 
-        <!-- PANTALLA 6: NOTAS SECRETAS (FLIP CARDS) -->
+        <!-- PANTALLA 6: RAZONES DE MI AMOR -->
         <section class="pantalla" id="pantalla6">
             <div class="glass-card">
                 <h2 class="titulo-seccion centro-texto">Razones de Mi Amor 💖</h2>
                 <p class="subtitulo centro-texto">Toca cada tarjeta para descubrir un motivo especial</p>
                 
                 <div class="grid-notas">
-                    <div class="nota-card" onclick="voltearTarjeta(this)">
-                        <div class="nota-inner">
-                            <div class="nota-front"><span>1</span><p>Toca aquí</p></div>
-                            <div class="nota-back"><p>Por tu sonrisa que me cambia el día completo. 😊</p></div>
-                        </div>
+                    <div class="nota-card" onclick="revelarNota(this)">
+                        <div class="frente"><span>1</span><p>Toca aquí</p></div>
+                        <div class="reverso"><p>Por tu sonrisa que me cambia el día completo. 😊</p></div>
                     </div>
-                    <div class="nota-card" onclick="voltearTarjeta(this)">
-                        <div class="nota-inner">
-                            <div class="nota-front"><span>2</span><p>Toca aquí</p></div>
-                            <div class="nota-back"><p>Por la forma tan dulce en la que me tratas. 🌸</p></div>
-                        </div>
+                    <div class="nota-card" onclick="revelarNota(this)">
+                        <div class="frente"><span>2</span><p>Toca aquí</p></div>
+                        <div class="reverso"><p>Por la forma tan dulce en la que me tratas. 🌸</p></div>
                     </div>
-                    <div class="nota-card" onclick="voltearTarjeta(this)">
-                        <div class="nota-inner">
-                            <div class="nota-front"><span>3</span><p>Toca aquí</p></div>
-                            <div class="nota-back"><p>Por cada risa compartida que se vuelve inolvidable. ✨</p></div>
-                        </div>
+                    <div class="nota-card" onclick="revelarNota(this)">
+                        <div class="frente"><span>3</span><p>Toca aquí</p></div>
+                        <div class="reverso"><p>Por cada risa compartida que se vuelve inolvidable. ✨</p></div>
                     </div>
-                    <div class="nota-card" onclick="voltearTarjeta(this)">
-                        <div class="nota-inner">
-                            <div class="nota-front"><span>4</span><p>Toca aquí</p></div>
-                            <div class="nota-back"><p>Por ser mi refugio y mi paz en todo momento. 🏡</p></div>
-                        </div>
+                    <div class="nota-card" onclick="revelarNota(this)">
+                        <div class="frente"><span>4</span><p>Toca aquí</p></div>
+                        <div class="reverso"><p>Por ser mi refugio y mi paz en todo momento. 🏡</p></div>
                     </div>
-                    <div class="nota-card" onclick="voltearTarjeta(this)">
-                        <div class="nota-inner">
-                            <div class="nota-front"><span>5</span><p>Toca aquí</p></div>
-                            <div class="nota-back"><p>Por la complicidad tan bonita que existe entre los dos. 🤝</p></div>
-                        </div>
+                    <div class="nota-card" onclick="revelarNota(this)">
+                        <div class="frente"><span>5</span><p>Toca aquí</p></div>
+                        <div class="reverso"><p>Por la complicidad tan bonita que existe entre los dos. 🤝</p></div>
                     </div>
-                    <div class="nota-card" onclick="voltearTarjeta(this)">
-                        <div class="nota-inner">
-                            <div class="nota-front"><span>6</span><p>Toca aquí</p></div>
-                            <div class="nota-back"><p>Por tu mirada que me dice absolutamente todo. 👀❤️</p></div>
-                        </div>
+                    <div class="nota-card" onclick="revelarNota(this)">
+                        <div class="frente"><span>6</span><p>Toca aquí</p></div>
+                        <div class="reverso"><p>Por tu mirada que me dice absolutamente todo. 👀❤️</p></div>
                     </div>
-                    <div class="nota-card" onclick="voltearTarjeta(this)">
-                        <div class="nota-inner">
-                            <div class="nota-front"><span>7</span><p>Toca aquí</p></div>
-                            <div class="nota-back"><p>Por hacer que lo simple se sienta extraordinario. 🌟</p></div>
-                        </div>
+                    <div class="nota-card" onclick="revelarNota(this)">
+                        <div class="frente"><span>7</span><p>Toca aquí</p></div>
+                        <div class="reverso"><p>Por hacer que lo simple se sienta extraordinario. 🌟</p></div>
                     </div>
-                    <div class="nota-card" onclick="voltearTarjeta(this)">
-                        <div class="nota-inner">
-                            <div class="nota-front"><span>8</span><p>Toca aquí</p></div>
-                            <div class="nota-back"><p>Simplemente por ser tú, mi persona favorita. ❤️</p></div>
-                        </div>
+                    <div class="nota-card" onclick="revelarNota(this)">
+                        <div class="frente"><span>8</span><p>Toca aquí</p></div>
+                        <div class="reverso"><p>Simplemente por ser tú, mi persona favorita. ❤️</p></div>
                     </div>
                 </div>
 
@@ -252,12 +237,12 @@
                 <p class="subtitulo centro-texto">Momentos grabados en la memoria</p>
                 
                 <div class="galeria-grid">
-                    <div class="foto-card" onclick="abrirLightbox('imagenes/foto1.jpeg', 'Nuestros primeros carnavales juntos 🎉')">
-                        <img src="imagenes/foto1.jpeg" alt="Carnavales" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500'">
+                    <div class="foto-card" onclick="abrirVisor(this)">
+                        <img id="imgFoto1" src="imagenes/foto1.jpeg" alt="Nuestros Carnavales">
                         <div class="foto-info"><p>Nuestros primeros carnavales juntos 🎉</p></div>
                     </div>
-                    <div class="foto-card" onclick="abrirLightbox('imagenes/foto2.jpeg', 'Nuestro primer concierto juntos 🎤')">
-                        <img src="imagenes/foto2.jpeg" alt="Concierto" onerror="this.src='https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500'">
+                    <div class="foto-card" onclick="abrirVisor(this)">
+                        <img id="imgFoto2" src="imagenes/foto2.jpeg" alt="Nuestro Concierto">
                         <div class="foto-info"><p>Nuestro primer concierto juntos 🎤</p></div>
                     </div>
                 </div>
@@ -293,10 +278,10 @@
 
     </main>
 
-    <!-- VISOR DE FOTOS LIGHTBOX -->
-    <div id="lightbox" class="lightbox" onclick="cerrarLightbox()">
+    <!-- VISOR LIGHTBOX -->
+    <div id="lightbox" class="lightbox" onclick="cerrarVisor()">
         <span class="cerrar-lightbox">&times;</span>
-        <img id="imgLightbox" src="" alt="Foto">
+        <img id="imgLightbox" src="" alt="Foto Ampliada">
         <p id="textoLightbox"></p>
     </div>
 
