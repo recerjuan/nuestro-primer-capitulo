@@ -3,7 +3,7 @@
 ====================================================== */
 const playlist = [
     { titulo: "A Dónde Vamos", artista: "Morat", archivo: "a-donde-vamos.mp3" },
-    { titulo: "Cesantías de Amor", artista: "Música Colombiana", archivo: "cesantias-de-amor.mp3" },
+    { titulo: "Cesantías de Amor", artista: "Diomedes Díaz", archivo: "cesantias-de-amor.mp3" },
     { titulo: "La Persona de Mi Vida", artista: "Iván Villazón", archivo: "la-persona-de-mi-vida.mp3" },
     { titulo: "Siempre Seré", artista: "Tito Rojas / Giro", archivo: "siempre-sere.mp3" }
 ];
@@ -15,8 +15,6 @@ const audio = document.getElementById('musicaFondo');
 function cargarCancion(indice) {
     const pista = playlist[indice];
     audio.src = pista.archivo;
-    document.getElementById('tituloCancion').innerText = pista.titulo;
-    document.getElementById('artistaCancion').innerText = pista.artista;
     
     document.querySelectorAll('.item-cancion').forEach((item, i) => {
         if (i === indice) {
@@ -27,45 +25,27 @@ function cargarCancion(indice) {
     });
 }
 
-function toggleMusica() {
-    if (!audio.src || audio.src === "") {
-        cargarCancion(0);
-    }
-    
-    if (reproduciendo) {
+function reproducirEspecifica(indice) {
+    if (indiceCancionActual === indice && reproduciendo) {
         audio.pause();
         reproduciendo = false;
-        document.getElementById('btnPlayPause').innerText = '▶️ Reproducir';
-    } else {
-        audio.play().then(() => {
-            reproduciendo = true;
-            document.getElementById('btnPlayPause').innerText = '⏸️ Pausa';
-        }).catch(err => {
-            console.log("Se requiere interacción para iniciar audio", err);
-        });
+        document.querySelectorAll('.item-cancion')[indice].classList.remove('sonando');
+        return;
     }
-}
 
-function reproducirEspecifica(indice) {
     indiceCancionActual = indice;
     cargarCancion(indiceCancionActual);
     audio.play().then(() => {
         reproduciendo = true;
-        document.getElementById('btnPlayPause').innerText = '⏸️ Pausa';
+    }).catch(err => {
+        console.log("Error al reproducir audio:", err);
     });
 }
 
-function siguienteCancion() {
+audio.addEventListener('ended', () => {
     indiceCancionActual = (indiceCancionActual + 1) % playlist.length;
     reproducirEspecifica(indiceCancionActual);
-}
-
-function cancionAnterior() {
-    indiceCancionActual = (indiceCancionActual - 1 + playlist.length) % playlist.length;
-    reproducirEspecifica(indiceCancionActual);
-}
-
-audio.addEventListener('ended', () => { siguienteCancion(); });
+});
 
 /* =====================================================
    NAVEGACIÓN ENTRE PANTALLAS
@@ -108,7 +88,7 @@ function abrirCarta() {
         setTimeout(() => {
             carta.classList.remove("oculta");
             carta.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 400);
+        }, 300);
     }
 }
 
@@ -117,9 +97,9 @@ function revelarNota(elemento) {
 }
 
 /* =====================================================
-   CONTADOR DE TIEMPO
+   CONTADOR DE TIEMPO REAL (8 DE JULIO DE 2026, 7:25 PM)
 ====================================================== */
-const fechaInicio = new Date(2026, 6, 8, 19, 25, 0); // 8 de Julio de 2026
+const fechaInicio = new Date(2026, 6, 8, 19, 25, 0);[cite: 1, 3]
 
 function actualizarContador() {
     const ahora = new Date();
@@ -136,20 +116,27 @@ function actualizarContador() {
     const minutos = minutosTotales % 60;
     const segundos = segundosTotales % 60;
 
-    document.getElementById('dias').innerText = diasTotales;
-    document.getElementById('horas').innerText = horas < 10 ? '0' + horas : horas;
-    document.getElementById('minutos').innerText = minutos < 10 ? '0' + minutos : minutos;
-    document.getElementById('segundos').innerText = segundos < 10 ? '0' + segundos : segundos;
+    const elemDias = document.getElementById('dias');
+    const elemHoras = document.getElementById('horas');
+    const elemMin = document.getElementById('minutos');
+    const elemSeg = document.getElementById('segundos');
+
+    if (elemDias) elemDias.innerText = diasTotales;
+    if (elemHoras) elemHoras.innerText = horas < 10 ? '0' + horas : horas;
+    if (elemMin) elemMin.innerText = minutos < 10 ? '0' + minutos : minutos;
+    if (elemSeg) elemSeg.innerText = segundos < 10 ? '0' + segundos : segundos;
 }
 
 /* =====================================================
-   ANIMACIÓN DE CORAZONES
+   ANIMACIÓN DE CORAZONES FLOTANTES
 ====================================================== */
 function crearCorazones() {
     const contenedor = document.getElementById('heartsContainer');
+    if (!contenedor) return;
+    
     const simbolos = ['♥️', '✨', '🌹'];
     
-    for (let i = 0; i < 22; i++) {
+    for (let i = 0; i < 20; i++) {
         const corazon = document.createElement('div');
         corazon.className = 'corazon-flotante';
         corazon.innerText = simbolos[Math.floor(Math.random() * simbolos.length)];
@@ -161,7 +148,6 @@ function crearCorazones() {
 }
 
 window.onload = () => {
-    cargarCancion(0);
     crearCorazones();
     actualizarContador();
     setInterval(actualizarContador, 1000);
