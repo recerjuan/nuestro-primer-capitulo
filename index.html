@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carol Dayana ❤️</title>
     <link rel="stylesheet" href="estilos.css">
-    <!-- Fuentes Elegantes -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Canvas Confeti para la Pantalla 8 -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-    <!-- Fondo de Partículas / Corazones Flotantes -->
-    <canvas id="canvasCorazones"></canvas>
+    <!-- Fondo de destellos flotantes en CSS -->
+    <div class="fondo-particulas">
+        <div class="particula"></div>
+        <div class="particula"></div>
+        <div class="particula"></div>
+        <div class="particula"></div>
+        <div class="particula"></div>
+    </div>
 
     <!-- REPRODUCTOR GLOBAL FLOTANTE -->
     <div class="reproductor-flotante">
@@ -31,13 +35,13 @@
         <audio id="audioGlobal" src="musica/cancion1.mp3" loop></audio>
     </div>
 
-    <!-- CONTENEDOR PRINCIPAL DE PANTALLAS -->
-    <main class="contenedor-principal">
+    <!-- CONTENEDOR PRINCIPAL CENTRADO -->
+    <main class="wrapper-principal">
 
         <!-- PANTALLA 1: BIENVENIDA -->
         <section class="pantalla activa" id="pantalla1">
             <div class="glass-card centro-texto">
-                <div class="corazon-latiente">❤️</div>
+                <div class="icono-corazon-pulsante">❤️</div>
                 <h1 class="titulo-principal">Carol Dayana</h1>
                 <p class="subtitulo">Esta es una pequeña muestra de todo lo que significas para mí...</p>
                 <button class="btn-principal" onclick="mostrarPantalla(2)">Comenzar recorrido ✨</button>
@@ -46,8 +50,10 @@
 
         <!-- PANTALLA 2: CARTA DE AMOR -->
         <section class="pantalla" id="pantalla2">
-            <div class="glass-card">
+            <div class="glass-card centro-texto">
                 <h2 class="titulo-seccion">Para la mujer que amo 💌</h2>
+                <p class="subtitulo">Toca el sello para abrir la carta</p>
+
                 <div class="contenedor-sobre" id="contenedorSobre" onclick="abrirCarta()">
                     <div class="sobre">
                         <div class="solapa"></div>
@@ -61,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="instruccion-sobre">Toca el sello de cera para abrir la carta</p>
+
                 <div class="navegacion-pantalla">
                     <button class="btn-nav" onclick="mostrarPantalla(1)">← Atrás</button>
                     <button class="btn-nav" onclick="mostrarPantalla(3)">Siguiente →</button>
@@ -89,11 +95,11 @@
             </div>
         </section>
 
-        <!-- PANTALLA 4: COFRE DE PROMESAS (SANTA MARTA) -->
+        <!-- PANTALLA 4: PROMESA SANTA MARTA -->
         <section class="pantalla" id="pantalla4">
             <div class="glass-card">
-                <h2 class="titulo-seccion">Nuestra Próxima Aventura 🏖️</h2>
-                <p class="subtitulo">Una promesa que nace desde el corazón</p>
+                <h2 class="titulo-seccion centro-texto">Nuestra Próxima Aventura 🏖️</h2>
+                <p class="subtitulo centro-texto">Una promesa nacida del corazón</p>
                 
                 <div class="tarjeta-promesa-principal">
                     <div class="banner-promesa">
@@ -130,8 +136,8 @@
         <!-- PANTALLA 5: CANCIONES DEDICADAS -->
         <section class="pantalla" id="pantalla5">
             <div class="glass-card">
-                <h2 class="titulo-seccion">Nuestras Canciones 🎶</h2>
-                <p class="subtitulo">La banda sonora de lo que sentimos</p>
+                <h2 class="titulo-seccion centro-texto">Nuestras Canciones 🎶</h2>
+                <p class="subtitulo centro-texto">La banda sonora de lo que sentimos</p>
                 
                 <div class="lista-canciones">
                     <div class="item-cancion" onclick="seleccionarCancion(0)">
@@ -178,8 +184,8 @@
         <!-- PANTALLA 6: NOTAS SECRETAS (FLIP CARDS) -->
         <section class="pantalla" id="pantalla6">
             <div class="glass-card">
-                <h2 class="titulo-seccion">Razones de Mi Amor 💖</h2>
-                <p class="subtitulo">Toca cada tarjeta para descubrir un motivo especial</p>
+                <h2 class="titulo-seccion centro-texto">Razones de Mi Amor 💖</h2>
+                <p class="subtitulo centro-texto">Toca cada tarjeta para descubrir un motivo especial</p>
                 
                 <div class="grid-notas">
                     <div class="nota-card" onclick="voltearTarjeta(this)">
@@ -242,16 +248,16 @@
         <!-- PANTALLA 7: GALERÍA DE FOTOS -->
         <section class="pantalla" id="pantalla7">
             <div class="glass-card">
-                <h2 class="titulo-seccion">Nuestros Recuerdos 📸</h2>
-                <p class="subtitulo">Momentos grabados en la memoria</p>
+                <h2 class="titulo-seccion centro-texto">Nuestros Recuerdos 📸</h2>
+                <p class="subtitulo centro-texto">Momentos grabados en la memoria</p>
                 
                 <div class="galeria-grid">
                     <div class="foto-card" onclick="abrirLightbox('imagenes/foto1.jpeg', 'Nuestros primeros carnavales juntos 🎉')">
-                        <img src="imagenes/foto1.jpeg" alt="Carnavales" onerror="this.src='https://via.placeholder.com/400x300/e8a598/ffffff?text=Carnavales'">
+                        <img src="imagenes/foto1.jpeg" alt="Carnavales" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500'">
                         <div class="foto-info"><p>Nuestros primeros carnavales juntos 🎉</p></div>
                     </div>
                     <div class="foto-card" onclick="abrirLightbox('imagenes/foto2.jpeg', 'Nuestro primer concierto juntos 🎤')">
-                        <img src="imagenes/foto2.jpeg" alt="Concierto" onerror="this.src='https://via.placeholder.com/400x300/e8a598/ffffff?text=Concierto'">
+                        <img src="imagenes/foto2.jpeg" alt="Concierto" onerror="this.src='https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500'">
                         <div class="foto-info"><p>Nuestro primer concierto juntos 🎤</p></div>
                     </div>
                 </div>
@@ -263,7 +269,7 @@
             </div>
         </section>
 
-        <!-- PANTALLA 8: PREGUNTA ESPECIAL Y CIERRE -->
+        <!-- PANTALLA 8: PREGUNTA ESPECIAL -->
         <section class="pantalla" id="pantalla8">
             <div class="glass-card centro-texto">
                 <h2 class="titulo-seccion">Una última pregunta... ❤️</h2>
@@ -290,7 +296,7 @@
     <!-- VISOR DE FOTOS LIGHTBOX -->
     <div id="lightbox" class="lightbox" onclick="cerrarLightbox()">
         <span class="cerrar-lightbox">&times;</span>
-        <img id="imgLightbox" src="" alt="Foto en grande">
+        <img id="imgLightbox" src="" alt="Foto">
         <p id="textoLightbox"></p>
     </div>
 
