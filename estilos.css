@@ -1,11 +1,7 @@
-/* =====================================================
-   PALETA ROJO PASIÓN & TIPOGRAFÍA DE LUJO
-====================================================== */
 :root {
     --color-rojo-pasion: #e60026;
     --color-rojo-oscuro: #800014;
     --color-rojo-brillante: #ff1a40;
-    --color-dorado-suave: #ffd700;
     --color-fondo: #0a0204;
     --color-tarjeta: rgba(25, 5, 12, 0.75);
     --color-texto: #fff0f3;
@@ -30,7 +26,6 @@ body {
     position: relative;
 }
 
-/* CORAZONES FLOTANTES */
 .hearts-container {
     position: fixed;
     top: 0;
@@ -56,7 +51,6 @@ body {
     100% { transform: translateY(-10vh) scale(1.3) rotate(360deg); opacity: 0; }
 }
 
-/* PANTALLAS Y TARJETAS */
 .pantalla {
     display: none;
     min-height: 100vh;
@@ -64,7 +58,7 @@ body {
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.6s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
     position: relative;
     z-index: 2;
 }
@@ -101,7 +95,7 @@ body {
     font-size: 4.8rem;
     color: var(--color-rojo-brillante);
     margin-bottom: 15px;
-    text-shadow: 0 0 20px rgba(255, 26, 64, 0.8), 0 0 35px rgba(230, 0, 38, 0.5);
+    text-shadow: 0 0 20px rgba(255, 26, 64, 0.8);
     line-height: 1.1;
 }
 
@@ -130,7 +124,6 @@ body {
     font-size: 3.2rem;
     color: var(--color-rojo-brillante);
     animation: pulso 1.8s infinite;
-    text-shadow: 0 0 20px var(--color-rojo-brillante);
 }
 
 @keyframes pulso {
@@ -139,7 +132,6 @@ body {
     100% { transform: scale(1); }
 }
 
-/* BOTONES */
 .btn-principal {
     background: linear-gradient(45deg, #e60026, #ff1a40);
     color: white;
@@ -154,8 +146,7 @@ body {
 }
 
 .btn-principal:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(255, 26, 64, 0.7);
+    transform: translateY(-3px);
 }
 
 .boton-regresar {
@@ -165,13 +156,6 @@ body {
     padding: 12px 24px;
     border-radius: 30px;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.boton-regresar:hover {
-    color: white;
-    border-color: white;
-    background: rgba(255, 255, 255, 0.1);
 }
 
 .navegacion {
@@ -181,14 +165,14 @@ body {
     margin-top: 30px;
 }
 
-/* ESTILOS DEL SOBRE Y CARTA */
+/* ESTILOS DEL SOBRE Y LA CARTA ANIMADA */
 .contenedor-sobre {
     position: relative;
     width: 260px;
     height: 160px;
-    margin: 30px auto;
+    margin: 25px auto;
     cursor: pointer;
-    z-index: 10;
+    perspective: 1000px;
 }
 
 .sobre {
@@ -196,18 +180,18 @@ body {
     height: 100%;
     background: var(--color-rojo-oscuro);
     border-radius: 12px;
-    border: 1.5px solid var(--color-rojo-brillante);
+    border: 2px solid var(--color-rojo-brillante);
     position: relative;
-    box-shadow: 0 10px 30px rgba(230, 0, 38, 0.4);
+    box-shadow: 0 10px 30px rgba(230, 0, 38, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 
 .contenedor-sobre:hover .sobre {
-    transform: scale(1.05);
+    transform: scale(1.04);
 }
 
 .solapa {
@@ -224,11 +208,14 @@ body {
     z-index: 3;
 }
 
+.sobre.abriendo .solapa {
+    transform: rotateX(180deg);
+}
+
 .corazon-sello {
-    font-size: 2.4rem;
+    font-size: 2.5rem;
     color: var(--color-rojo-brillante);
     z-index: 4;
-    text-shadow: 0 0 10px rgba(255, 26, 64, 0.8);
 }
 
 .texto-sobre {
@@ -236,10 +223,10 @@ body {
     color: #ffffff;
     margin-top: 8px;
     z-index: 4;
-    font-weight: 500;
+    font-weight: 600;
 }
 
-.contenedor-sobre.abierto {
+.contenedor-sobre.ocultar {
     display: none !important;
 }
 
@@ -253,16 +240,16 @@ body {
     padding: 35px 25px;
     border-radius: 16px;
     text-align: left;
-    margin-top: 20px;
+    margin-top: 15px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
     line-height: 1.8;
-    animation: aparecerCarta 0.8s ease forwards;
+    animation: desplegarCarta 0.8s ease forwards;
     border-left: 5px solid var(--color-rojo-pasion);
 }
 
-@keyframes aparecerCarta {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes desplegarCarta {
+    from { opacity: 0; transform: translateY(40px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .carta-encabezado {
@@ -273,8 +260,6 @@ body {
     border-bottom: 2px solid #ffccd5;
     padding-bottom: 10px;
 }
-
-.icono-carta { font-size: 1.5rem; }
 
 .titulo-carta {
     font-family: var(--fuente-subtitulo);
@@ -294,13 +279,6 @@ body {
     text-align: right;
     color: var(--color-rojo-pasion);
     margin-top: 25px;
-    line-height: 1.2;
-}
-
-.firma span {
-    font-family: var(--fuente-cuerpo);
-    font-size: 1rem;
-    font-weight: 700;
 }
 
 /* CONTADOR DE TIEMPO */
@@ -321,14 +299,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 4px 15px rgba(230, 0, 38, 0.2);
 }
 
 .caja-tiempo span {
     font-size: 2rem;
     font-weight: 700;
     color: #ffffff;
-    text-shadow: 0 0 10px var(--color-rojo-brillante);
 }
 
 .caja-tiempo small {
@@ -336,7 +312,6 @@ body {
     color: #ffb3c1;
     margin-top: 5px;
     text-transform: uppercase;
-    font-weight: 600;
 }
 
 /* GALERÍA DE FOTOS */
@@ -352,13 +327,6 @@ body {
     border: 1px solid rgba(255, 26, 64, 0.3);
     border-radius: 14px;
     padding: 12px;
-    transition: transform 0.3s ease;
-}
-
-.tarjeta-foto:hover {
-    transform: translateY(-5px);
-    border-color: var(--color-rojo-brillante);
-    box-shadow: 0 8px 20px rgba(230, 0, 38, 0.4);
 }
 
 .marco-foto {
@@ -372,10 +340,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
 }
-
-.tarjeta-foto:hover .marco-foto img { transform: scale(1.06); }
 
 .pie-foto {
     margin-top: 10px;
@@ -402,74 +367,85 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
 }
 
-.tarjeta-nota:hover {
-    background: rgba(230, 0, 38, 0.25);
-    border-color: var(--color-rojo-brillante);
-}
-
-.nota-frente { font-size: 0.85rem; color: #ff85a1; font-weight: 500; }
-
-.nota-atras {
-    display: none;
-    font-size: 0.88rem;
-    line-height: 1.5;
-    color: #ffffff;
-}
+.nota-frente { font-size: 0.85rem; color: #ff85a1; }
+.nota-atras { display: none; font-size: 0.88rem; color: #ffffff; }
 
 .tarjeta-nota.revelada {
     background: var(--color-rojo-oscuro);
     border-color: var(--color-rojo-brillante);
-    box-shadow: 0 5px 15px rgba(230, 0, 38, 0.4);
 }
 
 .tarjeta-nota.revelada .nota-frente { display: none; }
-.tarjeta-nota.revelada .nota-atras { display: block; animation: aparecerCarta 0.5s ease; }
+.tarjeta-nota.revelada .nota-atras { display: block; }
 
-/* PLAYLIST Y FINAL */
+/* MÚSICA CON CONTROLES PLAY / PAUSA */
 .lista-dedicatorias {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
     margin: 25px 0;
 }
 
 .item-cancion {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(230, 0, 38, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(230, 0, 38, 0.4);
     border-radius: 14px;
-    padding: 14px 20px;
+    padding: 15px 20px;
     display: flex;
     align-items: center;
-    gap: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    justify-content: space-between;
     text-align: left;
+    transition: all 0.3s ease;
 }
 
-.item-cancion:hover {
+.item-cancion.activa {
     background: rgba(230, 0, 38, 0.25);
     border-color: var(--color-rojo-brillante);
-    transform: translateX(6px);
+    box-shadow: 0 0 15px rgba(255, 26, 64, 0.4);
 }
 
-.item-cancion.sonando {
-    background: var(--color-rojo-oscuro);
-    border-color: var(--color-rojo-brillante);
-    box-shadow: 0 0 15px rgba(230, 0, 38, 0.5);
+.detalles-cancion {
+    display: flex;
+    flex-direction: column;
 }
 
-.num-pista {
+.titulo-pista {
+    font-weight: 600;
+    color: #ffffff;
     font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--color-rojo-brillante);
 }
 
-.detalles-cancion { display: flex; flex-direction: column; }
-.titulo-pista { font-weight: 600; color: white; font-size: 0.95rem; }
-.artista-pista { font-size: 0.8rem; color: #ffb3c1; }
+.artista-pista {
+    font-size: 0.8rem;
+    color: #ffb3c1;
+    margin-top: 3px;
+}
+
+.controles-audio {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-play, .btn-pause {
+    background: var(--color-rojo-pasion);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-pause {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-play:hover { background: var(--color-rojo-brillante); }
+.btn-pause:hover { background: rgba(255, 255, 255, 0.4); }
 
 .seccion-final { margin-top: 35px; }
 
@@ -477,10 +453,10 @@ body {
     font-family: var(--fuente-subtitulo);
     font-size: 1.3rem;
     color: var(--color-rojo-brillante);
-    text-shadow: 0 0 10px rgba(255, 26, 64, 0.5);
 }
 
 @media (max-width: 600px) {
     .titulo-principal.nombre-rojo { font-size: 3.5rem; }
-    .titulo-seccion { font-size: 1.7rem; }
+    .item-cancion { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .controles-audio { width: 100%; justify-content: flex-end; }
 }
