@@ -3,7 +3,7 @@
     --color-rojo-oscuro: #800014;
     --color-rojo-brillante: #ff1a40;
     --color-fondo: #0a0204;
-    --color-tarjeta: rgba(25, 5, 12, 0.88);
+    --color-tarjeta: rgba(25, 5, 12, 0.92);
     --color-texto: #fff0f3;
     --fuente-titulo: 'Alex Brush', cursive;
     --fuente-subtitulo: 'Playfair Display', serif;
@@ -64,7 +64,7 @@ body {
 }
 
 .pantalla.activa {
-    display: flex;
+    display: flex !important;
 }
 
 .contenido {
@@ -80,7 +80,7 @@ body {
     box-shadow: 0 15px 45px rgba(230, 0, 38, 0.25);
 }
 
-/* TIPOGRAFÍA Y ESTILOS ELEGANTES */
+/* TIPOGRAFÍA Y ESTILOS */
 .subtitulo-romantico {
     font-size: 0.8rem;
     letter-spacing: 3px;
@@ -144,6 +144,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 6px 20px rgba(230, 0, 38, 0.5);
+    display: inline-block;
 }
 
 .btn-principal:hover {
@@ -159,6 +160,7 @@ body {
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-block;
 }
 
 .boton-regresar:hover {
@@ -337,6 +339,7 @@ body {
     height: 250px;
     overflow: hidden;
     border-radius: 10px;
+    background: #111;
 }
 
 .marco-foto img {
@@ -352,7 +355,7 @@ body {
     font-weight: 500;
 }
 
-/* NOTAS INTERACTIVAS */
+/* NOTAS INTERACTIVAS (INCÓGNITAS) */
 .grid-notas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -361,11 +364,11 @@ body {
 }
 
 .tarjeta-nota {
-    background: rgba(230, 0, 38, 0.1);
-    border: 1px solid rgba(255, 26, 64, 0.3);
+    background: rgba(230, 0, 38, 0.15);
+    border: 1.5px dashed rgba(255, 26, 64, 0.5);
     border-radius: 12px;
     padding: 20px 15px;
-    min-height: 110px;
+    min-height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -373,12 +376,19 @@ body {
     transition: all 0.3s ease;
 }
 
-.nota-frente { font-size: 0.85rem; color: #ff85a1; }
-.nota-atras { display: none; font-size: 0.88rem; color: #ffffff; }
+.tarjeta-nota:hover {
+    border-color: var(--color-rojo-brillante);
+    transform: translateY(-2px);
+}
+
+.nota-frente { font-size: 0.9rem; color: #ff85a1; font-weight: 600; }
+.nota-atras { display: none; font-size: 0.88rem; color: #ffffff; line-height: 1.5; }
 
 .tarjeta-nota.revelada {
     background: var(--color-rojo-oscuro);
+    border-style: solid;
     border-color: var(--color-rojo-brillante);
+    box-shadow: 0 0 12px rgba(255, 26, 64, 0.4);
 }
 
 .tarjeta-nota.revelada .nota-frente { display: none; }
@@ -431,18 +441,21 @@ body {
     gap: 8px;
 }
 
-.btn-play, .btn-pause {
+.btn-play {
     background: var(--color-rojo-pasion);
     color: white;
     border: none;
-    padding: 8px 14px;
+    padding: 8px 18px;
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
 
-.btn-pause { background: rgba(255, 255, 255, 0.2); }
+.btn-play:hover {
+    background: var(--color-rojo-brillante);
+}
 
 .seccion-final { margin-top: 35px; }
 
