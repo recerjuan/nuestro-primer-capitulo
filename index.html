@@ -3,242 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Carol Dayana | Un detalle especial</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
-    
+    <title>Carol Dayana ❤️</title>
     <link rel="stylesheet" href="estilos.css">
+    <!-- Fuentes Elegantes -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Canvas Confeti para la Pantalla 8 -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-    <div class="hearts"></div>
+    <!-- Fondo de Partículas / Corazones Flotantes -->
+    <canvas id="canvasCorazones"></canvas>
 
-    <!-- PANTALLA 1: BIENVENIDA -->
-    <section class="pantalla activa" id="pantalla1">
-        <div class="contenido inicio">
-            <div class="corazon-animado-entrada">♥</div>
-            <p class="pequeno animado-delay-1">BIENVENIDA A TU ESPACIO ESPECIAL</p>
-            <h1 class="titulo-animado-entrada">
-                <span>¡Bienvenida, Carol Dayana!</span>
-                cada instante contigo es inolvidable.
-            </h1>
-            <p class="descripcion animado-delay-2">
-                Bienvenida a este pequeño rincón digital que creé especialmente para ti, para recordar lo maravillosa que eres y lo mucho que significas en mi vida.
-            </p>
-            <button class="btn-principal animado-delay-3" onclick="siguientePantalla()">Comenzar recorrido <span>→</span></button>
-        </div>
-    </section>
-
-    <!-- PANTALLA 2: CARTA DE AMOR INTERACTIVA -->
-    <section class="pantalla" id="pantalla2">
-        <div class="contenido carta-container">
-            <p class="pequeno">DE MI CORAZÓN PARA TI</p>
-            
-            <!-- SOBRE ANIMADO INTERACTIVO -->
-            <div class="envelope-wrapper" id="envelopeWrapper" onclick="abrirCarta()">
-                <div class="envelope">
-                    <div class="sello-cera">♥</div>
-                    <p class="click-instruccion">Toca para abrir la carta ✨</p>
-                </div>
-            </div>
-
-            <!-- CARTA DESPLEGADA -->
-            <div class="carta-desplegada" id="cartaDesplegada">
-                <h2 class="titulo-carta">
-                    <span>Para la mujer que amo</span><br>
-                    Las primeras palabras que decidí escribirte...
-                </h2>
-
-                <div class="cuerpo-texto">
-                    <p>Carol Dayana, quiero aprovechar este momento para repetirte y expresarte algo que he sentido desde hace ratico, porque desde que llegaste a mi vida has logrado convertir muchos de mis días comunes en momentos verdaderamente especiales. Poco a poco te has ido ganando un lugar muy importante en mi corazón, y hoy quiero que sepas cuánto valoro cada instante que comparto contigo.</p>
-                    <p>Me encanta pasar tiempo a tu lado, porque cada conversación, cada sonrisa, cada mirada y cada momento que vivimos juntos tiene un significado muy especial para mí. No importa si se trata de algo sencillo o extraordinario, porque cuando estoy contigo todo parece tener un brillo diferente. Tu compañía tiene esa maravillosa capacidad de alegrar mis días, de transmitirme tranquilidad cuando la necesito y de regalarme recuerdos que guardo con muchísimo cariño.</p>
-                    <p>Además, quiero agradecerte sinceramente por cada una de las experiencias tan bonitas que hemos compartido, por tu tiempo, por tu forma de ser, por las risas que hemos disfrutado juntos, por las conversaciones que parecen durar solo unos minutos aunque pasen horas y por permitirme conocerte un poco más cada día. Cada recuerdo contigo se ha convertido en un tesoro que atesoro con mucho cariño, y aunque probablemente ya te lo he dicho muchas veces, quiero que nunca olvides que me gustas muchísimo.</p>
-                    <p>Me gusta tu manera de pensar, la forma en que ves la vida, tu personalidad, tu nobleza, tu esencia y cada uno de esos pequeños detalles que te hacen una mujer única y especial. Admiro la forma en que eres capaz de iluminar un lugar con presencia y cómo, sin darte cuenta, haces que las personas que te rodean se sientan bien. Con el paso del tiempo te has convertido en alguien con quien disfruto compartir mis alegrías, mis pensamientos, mis sueños y hasta esos pequeños momentos del día que parecen insignificantes, pero que contigo adquieren un valor inmenso.</p>
-                    <p>Por eso, deseo de corazón que podamos seguir construyendo recuerdos hermosos, seguir conociéndonos cada vez más y continuar compartiendo momentos que nos hagan felices, porque me ilusiona pensar en todo lo que aún nos queda por vivir, en todas las conversaciones pendientes, en las risas que aún no hemos compartido y en cada nueva experiencia que podamos descubrir juntos.</p>
-                    <p>Gracias por estar en mi vida, por hacer que cada momento a tu lado sea tan especial y por permitirme sentir tantas emociones bonitas. Espero poder seguir compartiendo contigo mi tiempo, mis experiencias, mis sueños y una parte cada vez más grande de mi vida, porque sinceramente disfruto tenerte cerca y porque cada día encuentro más razones para agradecer que estés en mi vida.</p>
-                </div>
-
-                <p class="firma">Con todo mi amor, siempre. ❤️</p>
-            </div>
-
-            <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button class="btn-principal" onclick="siguientePantalla()">Siguiente <span>→</span></button>
+    <!-- REPRODUCTOR GLOBAL FLOTANTE -->
+    <div class="reproductor-flotante">
+        <div class="info-musica">
+            <span class="icono-nota">🎵</span>
+            <div class="marquee-texto">
+                <span id="tituloCancion">Morat - A Dónde Vamos</span>
             </div>
         </div>
-    </section>
-
-    <!-- PANTALLA 3: CONTADOR DE TIEMPO -->
-    <section class="pantalla" id="pantalla3">
-        <div class="contenido">
-            <p class="pequeno">NUESTRA HISTORIA EN TIEMPO REAL</p>
-            <h2>Llevamos haciendo sonreír al otro durante:</h2>
-            
-            <div class="contador-contenedor">
-                <div class="caja-tiempo">
-                    <span id="meses">0</span>
-                    <small>Meses</small>
-                </div>
-                <div class="caja-tiempo">
-                    <span id="dias">0</span>
-                    <small>Días</small>
-                </div>
-                <div class="caja-tiempo">
-                    <span id="horas">00</span>
-                    <small>Horas</small>
-                </div>
-                <div class="caja-tiempo">
-                    <span id="minutos">00</span>
-                    <small>Minutos</small>
-                </div>
-                <div class="caja-tiempo">
-                    <span id="segundos">00</span>
-                    <small>Segundos</small>
-                </div>
-            </div>
-
-            <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button class="btn-principal" onclick="siguientePantalla()">Siguiente <span>→</span></button>
-            </div>
+        <div class="controles-musica">
+            <button onclick="cancionAnterior()" title="Anterior">⏮️</button>
+            <button id="btnPlayPause" onclick="togglePlayPause()" title="Reproducir/Pausar">▶️</button>
+            <button onclick="siguienteCancion()" title="Siguiente">⏭️</button>
         </div>
-    </section>
+        <audio id="audioGlobal" src="musica/cancion1.mp3" loop></audio>
+    </div>
 
-    <!-- PANTALLA 4: GALERÍA DE FOTOS -->
-    <section class="pantalla" id="pantalla4">
-        <div class="contenido">
-            <p class="pequeno">GALERÍA DE NUESTROS MOMENTOS</p>
-            <h2>Cada imagen guarda un recuerdo inolvidable 📸</h2>
-            <p class="descripcion">Lugares, sonrisas y momentos que siempre llevaré en mi corazón:</p>
-            
-            <div class="grid-fotos dos-fotos">
-                <div class="tarjeta-foto">
-                    <img src="primera-foto.jpg" alt="Nuestros primeros carnavales juntos">
-                    <div class="pie-foto">Nuestros primeros carnavales juntos 🎉</div>
+    <!-- CONTENEDOR PRINCIPAL DE PANTALLAS -->
+    <main class="contenedor-principal">
+
+        <!-- PANTALLA 1: BIENVENIDA -->
+        <section class="pantalla activa" id="pantalla1">
+            <div class="glass-card centro-texto">
+                <div class="corazon-latiente">❤️</div>
+                <h1 class="titulo-principal">Carol Dayana</h1>
+                <p class="subtitulo">Esta es una pequeña muestra de todo lo que significas para mí...</p>
+                <button class="btn-principal" onclick="mostrarPantalla(2)">Comenzar recorrido ✨</button>
+            </div>
+        </section>
+
+        <!-- PANTALLA 2: CARTA DE AMOR -->
+        <section class="pantalla" id="pantalla2">
+            <div class="glass-card">
+                <h2 class="titulo-seccion">Para la mujer que amo 💌</h2>
+                <div class="contenedor-sobre" id="contenedorSobre" onclick="abrirCarta()">
+                    <div class="sobre">
+                        <div class="solapa"></div>
+                        <div class="sello-cera">❤️</div>
+                        <div class="papel-carta" id="papelCarta">
+                            <h3 class="carta-titulo">Mi Negra Hermosa,</h3>
+                            <p class="carta-cuerpo">
+                                Escribo esto para recordarte lo increíblemente especial que eres en mi vida. Cada sonrisa tuya ilumina mi mundo y cada segundo a tu lado es un regalo que valoro con todo mi corazón. Gracias por ser mi compañía, mi alegría y la persona que me llena el alma.
+                            </p>
+                            <p class="carta-firma">Con todo mi amor, siempre. ❤️</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="tarjeta-foto">
-                    <img src="segunda-foto.jpeg" alt="Nuestro primer concierto juntos">
-                    <div class="pie-foto">Nuestro primer concierto juntos 🎤✨</div>
+                <p class="instruccion-sobre">Toca el sello de cera para abrir la carta</p>
+                <div class="navegacion-pantalla">
+                    <button class="btn-nav" onclick="mostrarPantalla(1)">← Atrás</button>
+                    <button class="btn-nav" onclick="mostrarPantalla(3)">Siguiente →</button>
                 </div>
             </div>
+        </section>
 
-            <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button class="btn-principal" onclick="siguientePantalla()">Siguiente <span>→</span></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- PANTALLA 5: NOTAS SECRETAS -->
-    <section class="pantalla" id="pantalla5">
-        <div class="contenido">
-            <p class="pequeno">DETALLES QUE ME ENCANTAN DE TI</p>
-            <h2>Pequeñas razones por las que eres tan especial</h2>
-            
-            <div class="grid-notas">
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">Tu sonrisa, porque siempre logra alegrarme el día.</span>
+        <!-- PANTALLA 3: CONTADOR DE TIEMPO -->
+        <section class="pantalla" id="pantalla3">
+            <div class="glass-card centro-texto">
+                <h2 class="titulo-seccion">Nuestro Tiempo Juntos ⏳</h2>
+                <p class="subtitulo">Contando cada segundo desde aquel día especial</p>
+                <div class="contador-grid">
+                    <div class="contador-caja"><span id="meses">0</span><small>Meses</small></div>
+                    <div class="contador-caja"><span id="dias">0</span><small>Días</small></div>
+                    <div class="contador-caja"><span id="horas">0</span><small>Horas</small></div>
+                    <div class="contador-caja"><span id="minutos">0</span><small>Minutos</small></div>
+                    <div class="contador-caja"><span id="segundos">0</span><small>Segundos</small></div>
                 </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">La forma en que me miras y haces que me olvide de todo.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">Cada momento contigo, incluso los más sencillos.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">Tus abrazos, porque en ellos siento que estoy donde quiero estar.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">La manera en que te preocupas por mí y por cómo me siento.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">Nuestras conversaciones, porque nunca me canso de escucharte.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">Cada recuerdo que hemos construido juntos y todos los que aún nos faltan.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">La felicidad que siento simplemente por tenerte en mi vida.</span>
+                <p class="fecha-inicio-texto">Desde el 8 de Julio de 2026 · 7:25 PM</p>
+                <div class="navegacion-pantalla">
+                    <button class="btn-nav" onclick="mostrarPantalla(2)">← Atrás</button>
+                    <button class="btn-nav" onclick="mostrarPantalla(4)">Siguiente →</button>
                 </div>
             </div>
+        </section>
 
-            <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button class="btn-principal" onclick="siguientePantalla()">Siguiente <span>→</span></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- PANTALLA 6: MÚSICA DEDICADA -->
-    <section class="pantalla" id="pantalla6">
-        <div class="contenido">
-            <p class="pequeno">NUESTRA PLAYLIST ESPECIAL</p>
-            <h2>Canciones que nos hemos dedicado 🎶</h2>
-            <p class="descripcion">Cada una de estas canciones me recuerda un momento único a tu lado. Toca cualquier canción para escucharla:</p>
-            
-            <div class="reproductor-pantalla6">
-                <div class="info-musica-activa">
-                    <span class="icono-nota">🎵</span>
-                    <span id="tituloCancionActual">Selecciona una canción abajo</span>
+        <!-- PANTALLA 4: COFRE DE PROMESAS (SANTA MARTA) -->
+        <section class="pantalla" id="pantalla4">
+            <div class="glass-card">
+                <h2 class="titulo-seccion">Nuestra Próxima Aventura 🏖️</h2>
+                <p class="subtitulo">Una promesa que nace desde el corazón</p>
+                
+                <div class="tarjeta-promesa-principal">
+                    <div class="banner-promesa">
+                        <span class="icono-bus">🚌</span>
+                        <h3>Destino: Santa Marta</h3>
+                    </div>
+                    <p class="texto-promesa-especial">
+                        "Sé que aún no conoces Santa Marta, y mi mayor sueño es ser el primero en tomarte de la mano, subirnos a ese bus juntos y llevarte a descubrir el mar por primera vez. Quiero que contemplemos nuestro primer atardecer allá, compartamos vivencias inolvidables y creemos recuerdos que se queden grabados para siempre en nuestros corazones."
+                    </p>
                 </div>
-                <div class="controles-pantalla6">
-                    <button onclick="cancionAnterior()">⏮️ Anterior</button>
-                    <button onclick="toggleMusica()" id="btnPlayPause">▶️ Reproducir</button>
-                    <button onclick="siguienteCancion()">Siguiente ⏭️</button>
-                </div>
-            </div>
 
-            <div class="lista-dedicatorias">
-                <div class="item-cancion" onclick="reproducirEspecifica(0)">
-                    <div class="icon-play">▶️</div>
-                    <div class="detalles-cancion">
-                        <span class="titulo-pista">A Dónde Vamos</span>
-                        <span class="artista-pista">Morat</span>
+                <div class="grid-vivencias">
+                    <div class="tarjeta-vivencia" onclick="toggleVivencia(this)">
+                        <h4>🚌 El Viaje en Bus</h4>
+                        <p class="detalle-vivencia">Esas horas hablando de todo, compartiendo audífonos y viendo el paisaje hasta llegar al mar.</p>
+                    </div>
+                    <div class="tarjeta-vivencia" onclick="toggleVivencia(this)">
+                        <h4>🌅 El Atardecer</h4>
+                        <p class="detalle-vivencia">Sentarnos en la arena frente al mar a ver cómo se oculta el sol juntos.</p>
+                    </div>
+                    <div class="tarjeta-vivencia" onclick="toggleVivencia(this)">
+                        <h4>📸 Nuevos Recuerdos</h4>
+                        <p class="detalle-vivencia">Guardar cada sonrisa de ese fin de semana como la primera de muchas aventuras.</p>
                     </div>
                 </div>
 
-                <div class="item-cancion" onclick="reproducirEspecifica(1)">
-                    <div class="icon-play">▶️</div>
-                    <div class="detalles-cancion">
-                        <span class="titulo-pista">Cesantías de Amor</span>
-                        <span class="artista-pista">El Papá de los pollitos</span>
-                    </div>
-                </div>
-
-                <div class="item-cancion" onclick="reproducirEspecifica(2)">
-                    <div class="icon-play">▶️</div>
-                    <div class="detalles-cancion">
-                        <span class="titulo-pista">La Persona de Mi Vida</span>
-                        <span class="artista-pista">Iván Villazón</span>
-                    </div>
-                </div>
-
-                <div class="item-cancion" onclick="reproducirEspecifica(3)">
-                    <div class="icon-play">▶️</div>
-                    <div class="detalles-cancion">
-                        <span class="titulo-pista">Siempre Seré</span>
-                        <span class="artista-pista">Tito Rojas / Giro</span>
-                    </div>
+                <div class="navegacion-pantalla">
+                    <button class="btn-nav" onclick="mostrarPantalla(3)">← Atrás</button>
+                    <button class="btn-nav" onclick="mostrarPantalla(5)">Siguiente →</button>
                 </div>
             </div>
+        </section>
 
-            <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
+        <!-- PANTALLA 5: CANCIONES DEDICADAS -->
+        <section class="pantalla" id="pantalla5">
+            <div class="glass-card">
+                <h2 class="titulo-seccion">Nuestras Canciones 🎶</h2>
+                <p class="subtitulo">La banda sonora de lo que sentimos</p>
+                
+                <div class="lista-canciones">
+                    <div class="item-cancion" onclick="seleccionarCancion(0)">
+                        <span class="numero-cancion">1</span>
+                        <div class="info-item-cancion">
+                            <h4>A Dónde Vamos</h4>
+                            <p>Morat</p>
+                        </div>
+                        <span class="btn-reproducir-item">▶️</span>
+                    </div>
+                    <div class="item-cancion" onclick="seleccionarCancion(1)">
+                        <span class="numero-cancion">2</span>
+                        <div class="info-item-cancion">
+                            <h4>Cesantías de Amor</h4>
+                            <p>Silvestre Dangond / Jorge Oñate</p>
+                        </div>
+                        <span class="btn-reproducir-item">▶️</span>
+                    </div>
+                    <div class="item-cancion" onclick="seleccionarCancion(2)">
+                        <span class="numero-cancion">3</span>
+                        <div class="info-item-cancion">
+                            <h4>La Persona de Mi Vida</h4>
+                            <p>Iván Villazón</p>
+                        </div>
+                        <span class="btn-reproducir-item">▶️</span>
+                    </div>
+                    <div class="item-cancion" onclick="seleccionarCancion(3)">
+                        <span class="numero-cancion">4</span>
+                        <div class="info-item-cancion">
+                            <h4>Siempre Seré</h4>
+                            <p>Tito Rojas / Giro</p>
+                        </div>
+                        <span class="btn-reproducir-item">▶️</span>
+                    </div>
+                </div>
+
+                <div class="navegacion-pantalla">
+                    <button class="btn-nav" onclick="mostrarPantalla(4)">← Atrás</button>
+                    <button class="btn-nav" onclick="mostrarPantalla(6)">Siguiente →</button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <audio id="musicaFondo" loop></audio>
+        <!-- PANTALLA 6: NOTAS SECRETAS (FLIP CARDS) -->
+        <section class="pantalla" id="pantalla6">
+            <div class="glass-card">
+                <h2 class="titulo-seccion">Razones de Mi Amor 💖</h2>
+                <p class="subtitulo">Toca cada tarjeta para descubrir un motivo especial</p>
+                
+                <div class="grid-notas">
+                    <div class="nota-card" onclick="voltearTarjeta(this)">
+                        <div class="nota-inner">
+                            <div class="nota-front"><span>1</span><p>Toca aquí</p></div>
+                            <div class="nota-back"><p>Por tu sonrisa que me cambia el día completo. 😊</p></div>
+                        </div>
+                    </div>
+                    <div class="nota-card" onclick="voltearTarjeta(this)">
+                        <div class="nota-inner">
+                            <div class="nota-front"><span>2</span><p>Toca aquí</p></div>
+                            <div class="nota-back"><p>Por la forma tan dulce en la que me tratas. 🌸</p></div>
+                        </div>
+                    </div>
+                    <div class="nota-card" onclick="voltearTarjeta(this)">
+                        <div class="nota-inner">
+                            <div class="nota-front"><span>3</span><p>Toca aquí</p></div>
+                            <div class="nota-back"><p>Por cada risa compartida que se vuelve inolvidable. ✨</p></div>
+                        </div>
+                    </div>
+                    <div class="nota-card" onclick="voltearTarjeta(this)">
+                        <div class="nota-inner">
+                            <div class="nota-front"><span>4</span><p>Toca aquí</p></div>
+                            <div class="nota-back"><p>Por ser mi refugio y mi paz en todo momento. 🏡</p></div>
+                        </div>
+                    </div>
+                    <div class="nota-card" onclick="voltearTarjeta(this)">
+                        <div class="nota-inner">
+                            <div class="nota-front"><span>5</span><p>Toca aquí</p></div>
+                            <div class="nota-back"><p>Por la complicidad tan bonita que existe entre los dos. 🤝</p></div>
+                        </div>
+                    </div>
+                    <div class="nota-card" onclick="voltearTarjeta(this)">
+                        <div class="nota-inner">
+                            <div class="nota-front"><span>6</span><p>Toca aquí</p></div>
+                            <div class="nota-back"><p>Por tu mirada que me dice absolutamente todo. 👀❤️</p></div>
+                        </div>
+                    </div>
+                    <div class="nota-card" onclick="voltearTarjeta(this)">
+                        <div class="nota-inner">
+                            <div class="nota-front"><span>7</span><p>Toca aquí</p></div>
+                            <div class="nota-back"><p>Por hacer que lo simple se sienta extraordinario. 🌟</p></div>
+                        </div>
+                    </div>
+                    <div class="nota-card" onclick="voltearTarjeta(this)">
+                        <div class="nota-inner">
+                            <div class="nota-front"><span>8</span><p>Toca aquí</p></div>
+                            <div class="nota-back"><p>Simplemente por ser tú, mi persona favorita. ❤️</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navegacion-pantalla">
+                    <button class="btn-nav" onclick="mostrarPantalla(5)">← Atrás</button>
+                    <button class="btn-nav" onclick="mostrarPantalla(7)">Siguiente →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 7: GALERÍA DE FOTOS -->
+        <section class="pantalla" id="pantalla7">
+            <div class="glass-card">
+                <h2 class="titulo-seccion">Nuestros Recuerdos 📸</h2>
+                <p class="subtitulo">Momentos grabados en la memoria</p>
+                
+                <div class="galeria-grid">
+                    <div class="foto-card" onclick="abrirLightbox('imagenes/foto1.jpeg', 'Nuestros primeros carnavales juntos 🎉')">
+                        <img src="imagenes/foto1.jpeg" alt="Carnavales" onerror="this.src='https://via.placeholder.com/400x300/e8a598/ffffff?text=Carnavales'">
+                        <div class="foto-info"><p>Nuestros primeros carnavales juntos 🎉</p></div>
+                    </div>
+                    <div class="foto-card" onclick="abrirLightbox('imagenes/foto2.jpeg', 'Nuestro primer concierto juntos 🎤')">
+                        <img src="imagenes/foto2.jpeg" alt="Concierto" onerror="this.src='https://via.placeholder.com/400x300/e8a598/ffffff?text=Concierto'">
+                        <div class="foto-info"><p>Nuestro primer concierto juntos 🎤</p></div>
+                    </div>
+                </div>
+
+                <div class="navegacion-pantalla">
+                    <button class="btn-nav" onclick="mostrarPantalla(6)">← Atrás</button>
+                    <button class="btn-nav" onclick="mostrarPantalla(8)">Siguiente →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 8: PREGUNTA ESPECIAL Y CIERRE -->
+        <section class="pantalla" id="pantalla8">
+            <div class="glass-card centro-texto">
+                <h2 class="titulo-seccion">Una última pregunta... ❤️</h2>
+                <p class="texto-pregunta">¿Aceptas seguir construyendo momentos inolvidables y escribiendo más capítulos de esta historia a mi lado?</p>
+                
+                <div class="contenedor-botones-pregunta">
+                    <button class="btn-si" onclick="aceptarPropuesta()">¡SÍ! ✨</button>
+                    <button class="btn-no" id="btnNo" onmouseover="esquivarBoton()" onclick="esquivarBoton()">No 🙈</button>
+                </div>
+
+                <div id="mensajeFinalCelebracion" class="mensaje-final-oculto">
+                    <h3>¡Sabía que dirías que sí! Te amo, mi negra. ❤️</h3>
+                    <p class="frase-cierre">Esto apenas comienza... Gracias por ser parte de mi vida.</p>
+                </div>
+
+                <div class="navegacion-pantalla margin-top-40">
+                    <button class="btn-nav" onclick="mostrarPantalla(7)">← Atrás</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- VISOR DE FOTOS LIGHTBOX -->
+    <div id="lightbox" class="lightbox" onclick="cerrarLightbox()">
+        <span class="cerrar-lightbox">&times;</span>
+        <img id="imgLightbox" src="" alt="Foto en grande">
+        <p id="textoLightbox"></p>
+    </div>
 
     <script src="script.js"></script>
 </body>
