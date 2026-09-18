@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Carol Dayana | Mi Amor Eterno</title>
     
-    <!-- Fuentes elegantes y caligráficas románticas -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -14,15 +13,9 @@
 </head>
 <body>
 
-    <!-- Lluvia continua de corazones y destellos flotantes -->
     <div class="hearts-container" id="heartsContainer"></div>
 
-    <!-- Elemento de Audio Global -->
-    <audio id="musicaFondo" preload="auto"></audio>
-
-    <!-- =====================================================
-         PANTALLA 1 - BIENVENIDA CON NOMBRE ROJO Y DEDICATORIA
-    ====================================================== -->
+    <!-- PANTALLA 1: BIENVENIDA -->
     <section class="pantalla activa" id="pantalla1">
         <div class="contenido inicio">
             <div class="corazon-principal">♥️</div>
@@ -36,25 +29,23 @@
         </div>
     </section>
 
-    <!-- =====================================================
-         PANTALLA 2 - SOBRE CERRADO ANIMADO Y CARTA COMPLETA
-    ====================================================== -->
+    <!-- PANTALLA 2: SOBRE CERRADO CON CARTA ADENTRO -->
     <section class="pantalla" id="pantalla2">
         <div class="contenido carta-container">
             <p class="subtitulo-romantico">DE MI CORAZÓN PARA TI</p>
             <h2 class="titulo-seccion">Una Carta de Amor</h2>
             
-            <!-- SOBRE ANIMADO CERRADO -->
+            <!-- SOBRE INTERACTIVO -->
             <div class="contenedor-sobre" id="contenedorSobre" onclick="abrirCarta()">
-                <div class="sobre">
-                    <div class="solapa"></div>
+                <div class="sobre" id="sobreElemento">
+                    <div class="solapa" id="solapaSobre"></div>
                     <div class="cuerpo-sobre"></div>
                     <div class="corazon-sello">♥️</div>
                     <p class="texto-sobre">Haz clic para abrir tu carta ✨</p>
                 </div>
             </div>
 
-            <!-- CARTA DESPLEGABLE COMPLETA (INICIA OCULTA) -->
+            <!-- CARTA OCULTA QUE SE DESPLIEGA -->
             <div class="carta oculta" id="cartaEscribir">
                 <div class="carta-encabezado">
                     <span class="icono-carta">📜</span>
@@ -92,9 +83,7 @@
         </div>
     </section>
 
-    <!-- =====================================================
-         PANTALLA 3 - CONTADOR DE TIEMPO
-    ====================================================== -->
+    <!-- PANTALLA 3: CONTADOR DE TIEMPO -->
     <section class="pantalla" id="pantalla3">
         <div class="contenido">
             <p class="subtitulo-romantico">NUESTRO TIEMPO JUNTOS</p>
@@ -129,9 +118,7 @@
         </div>
     </section>
 
-    <!-- =====================================================
-         PANTALLA 4 - GALERÍA DE FOTOS (DETALLES CORREGIDOS)
-    ====================================================== -->
+    <!-- PANTALLA 4: FOTOS -->
     <section class="pantalla" id="pantalla4">
         <div class="contenido">
             <p class="subtitulo-romantico">GALERÍA DE NUESTROS MOMENTOS</p>
@@ -160,9 +147,7 @@
         </div>
     </section>
 
-    <!-- =====================================================
-         PANTALLA 5 - NOTAS SECRETAS REVELABLES
-    ====================================================== -->
+    <!-- PANTALLA 5: NOTAS -->
     <section class="pantalla" id="pantalla5">
         <div class="contenido">
             <p class="subtitulo-romantico">RAZONES PARA AMARTE</p>
@@ -211,45 +196,63 @@
         </div>
     </section>
 
-    <!-- =====================================================
-         PANTALLA 6 - PLAYLIST Y MENSAJE FINAL
-    ====================================================== -->
+    <!-- PANTALLA 6: REPRODUCTOR DE MÚSICA GARANTIZADO Y MENSAJE -->
     <section class="pantalla" id="pantalla6">
         <div class="contenido">
             <p class="subtitulo-romantico">NUESTRA PLAYLIST DEDICADA</p>
             <h2 class="titulo-seccion">Canciones especiales para ti 🎶</h2>
-            <p class="descripcion">Toca cualquiera de las canciones para comenzar a escucharla:</p>
+            <p class="descripcion">Reproduce y escucha las canciones directamente desde aquí:</p>
             
             <div class="lista-dedicatorias">
-                <div class="item-cancion" id="pista-0" onclick="reproducirEspecifica(0)">
-                    <span class="num-pista">01</span>
+                <!-- Pista 1 -->
+                <div class="item-cancion" id="card-0">
                     <div class="detalles-cancion">
-                        <span class="titulo-pista">A Dónde Vamos</span>
+                        <span class="titulo-pista">01. A Dónde Vamos</span>
                         <span class="artista-pista">Morat</span>
                     </div>
+                    <audio id="audio-0" src="a-donde-vamos.mp3" preload="metadata"></audio>
+                    <div class="controles-audio">
+                        <button class="btn-play" onclick="playAudio(0)">▶ Play</button>
+                        <button class="btn-pause" onclick="pauseAudio(0)">⏸ Pausa</button>
+                    </div>
                 </div>
 
-                <div class="item-cancion" id="pista-1" onclick="reproducirEspecifica(1)">
-                    <span class="num-pista">02</span>
+                <!-- Pista 2 -->
+                <div class="item-cancion" id="card-1">
                     <div class="detalles-cancion">
-                        <span class="titulo-pista">Cesantías de Amor</span>
+                        <span class="titulo-pista">02. Cesantías de Amor</span>
                         <span class="artista-pista">Diomedes Díaz</span>
                     </div>
-                </div>
-
-                <div class="item-cancion" id="pista-2" onclick="reproducirEspecifica(2)">
-                    <span class="num-pista">03</span>
-                    <div class="detalles-cancion">
-                        <span class="titulo-pista">La Persona de Mi Vida</span>
-                        <span class="artista-pista">Iván Villazón</span>
+                    <audio id="audio-1" src="cesantias-de-amor.mp3" preload="metadata"></audio>
+                    <div class="controles-audio">
+                        <button class="btn-play" onclick="playAudio(1)">▶ Play</button>
+                        <button class="btn-pause" onclick="pauseAudio(1)">⏸ Pausa</button>
                     </div>
                 </div>
 
-                <div class="item-cancion" id="pista-3" onclick="reproducirEspecifica(3)">
-                    <span class="num-pista">04</span>
+                <!-- Pista 3 -->
+                <div class="item-cancion" id="card-2">
                     <div class="detalles-cancion">
-                        <span class="titulo-pista">Siempre Seré</span>
+                        <span class="titulo-pista">03. La Persona de Mi Vida</span>
+                        <span class="artista-pista">Iván Villazón</span>
+                    </div>
+                    <audio id="audio-2" src="la-persona-de-mi-vida.mp3" preload="metadata"></audio>
+                    <div class="controles-audio">
+                        <button class="btn-play" onclick="playAudio(2)">▶ Play</button>
+                        <button class="btn-pause" onclick="pauseAudio(2)">⏸ Pausa</button>
+                    </div>
+                </div>
+
+                <!-- Pista 4 -->
+                <div class="item-cancion" id="card-3">
+                    <div class="detalles-cancion">
+                        <span class="titulo-pista">04. Siempre Seré</span>
                         <span class="artista-pista">Tito Rojas / Giro</span>
+                    </div>
+                    <audio id="audio-3" src="siempre-sere.mp3" preload="metadata"></audio>
+                    <div class="controles-audio">
+                        <button class="btn-play" onclick="playAudio(3)">▶ Play</button>
+                        <button class="btn-pause" onclick="pauseAudio(3)">⏸ Pausa</button>
                     </div>
                 </div>
             </div>
