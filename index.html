@@ -25,18 +25,17 @@
             <p class="descripcion">
                 He creado este espacio digital pensando exclusivamente en ti, mi vida. Un rincón mágico donde guardo el profundo amor, el respeto, la devoción y la inmensa gratitud que siento por tener la bendición de caminar a tu lado día a día.
             </p>
-            <button class="btn-principal" onclick="siguientePantalla()">Comenzar nuestro recorrido <span>→</span></button>
+            <button class="btn-principal btn-siguiente">Comenzar nuestro recorrido <span>→</span></button>
         </div>
     </section>
 
-    <!-- PANTALLA 2: SOBRE CERRADO CON CARTA ADENTRO -->
+    <!-- PANTALLA 2: SOBRE Y CARTA -->
     <section class="pantalla" id="pantalla2">
         <div class="contenido carta-container">
             <p class="subtitulo-romantico">DE MI CORAZÓN PARA TI</p>
             <h2 class="titulo-seccion">Una Carta de Amor</h2>
             
-            <!-- SOBRE INTERACTIVO -->
-            <div class="contenedor-sobre" id="contenedorSobre" onclick="abrirCarta()">
+            <div class="contenedor-sobre" id="contenedorSobre">
                 <div class="sobre" id="sobreElemento">
                     <div class="solapa"></div>
                     <div class="cuerpo-sobre"></div>
@@ -45,7 +44,6 @@
                 </div>
             </div>
 
-            <!-- CARTA OCULTA QUE SE DESPLIEGA -->
             <div class="carta oculta" id="cartaEscribir">
                 <div class="carta-encabezado">
                     <span class="icono-carta">📜</span>
@@ -77,8 +75,8 @@
             </div>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button class="btn-principal" onclick="siguientePantalla()">Siguiente <span>→</span></button>
+                <button class="boton-regresar btn-anterior">← Regresar</button>
+                <button class="btn-principal btn-siguiente">Siguiente <span>→</span></button>
             </div>
         </div>
     </section>
@@ -91,29 +89,17 @@
             <p class="descripcion">Tiempo transcurrido desde nuestro inicio oficial (8 de Julio, 7:25 PM):</p>
             
             <div class="contador-contenedor">
-                <div class="caja-tiempo">
-                    <span id="dias">0</span>
-                    <small>Días</small>
-                </div>
-                <div class="caja-tiempo">
-                    <span id="horas">00</span>
-                    <small>Horas</small>
-                </div>
-                <div class="caja-tiempo">
-                    <span id="minutos">00</span>
-                    <small>Minutos</small>
-                </div>
-                <div class="caja-tiempo">
-                    <span id="segundos">00</span>
-                    <small>Segundos</small>
-                </div>
+                <div class="caja-tiempo"><span id="dias">0</span><small>Días</small></div>
+                <div class="caja-tiempo"><span id="horas">00</span><small>Horas</small></div>
+                <div class="caja-tiempo"><span id="minutos">00</span><small>Minutos</small></div>
+                <div class="caja-tiempo"><span id="segundos">00</span><small>Segundos</small></div>
             </div>
 
             <p class="frase-destacada">"Y cada segundo que pasa, es otra razón más para volver a elegirte."</p>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button class="btn-principal" onclick="siguientePantalla()">Siguiente <span>→</span></button>
+                <button class="boton-regresar btn-anterior">← Regresar</button>
+                <button class="btn-principal btn-siguiente">Siguiente <span>→</span></button>
             </div>
         </div>
     </section>
@@ -141,8 +127,8 @@
             </div>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button class="btn-principal" onclick="siguientePantalla()">Siguiente <span>→</span></button>
+                <button class="boton-regresar btn-anterior">← Regresar</button>
+                <button class="btn-principal btn-siguiente">Siguiente <span>→</span></button>
             </div>
         </div>
     </section>
@@ -155,48 +141,24 @@
             <p class="descripcion">Haz clic en cada tarjeta para descubrir lo que siento por ti:</p>
             
             <div class="grid-notas">
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">Tu hermosa sonrisa, porque siempre logra alegrarme hasta el día más difícil.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">La forma tan dulce en que me miras y haces que todo lo malo desaparezca.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">Cada momento a tu lado, incluso el más sencillo, se convierte en algo mágico.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">Tus abrazos, porque en ellos siento que he llegado al lugar correcto en el mundo.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">La manera tan linda e incondicional en que te preocupas por mí.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">Nuestras conversaciones interminables en las que jamás me canso de escucharte.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">Cada recuerdo hermoso que hemos construido y todos los sueños que nos faltan cumplir.</span>
-                </div>
-                <div class="tarjeta-nota" onclick="revelarNota(this)">
-                    <span class="nota-frente">✨ Toca para descubrir</span>
-                    <span class="nota-atras">La inmensa felicidad de saber que existes y que estás en mi vida.</span>
-                </div>
+                <div class="tarjeta-nota"><span class="nota-frente">✨ Toca para descubrir</span><span class="nota-atras">Tu hermosa sonrisa, porque siempre logra alegrarme hasta el día más difícil.</span></div>
+                <div class="tarjeta-nota"><span class="nota-frente">✨ Toca para descubrir</span><span class="nota-atras">La forma tan dulce en que me miras y haces que todo lo malo desaparezca.</span></div>
+                <div class="tarjeta-nota"><span class="nota-frente">✨ Toca para descubrir</span><span class="nota-atras">Cada momento a tu lado, incluso el más sencillo, se convierte en algo mágico.</span></div>
+                <div class="tarjeta-nota"><span class="nota-frente">✨ Toca para descubrir</span><span class="nota-atras">Tus abrazos, porque en ellos siento que he llegado al lugar correcto en el mundo.</span></div>
+                <div class="tarjeta-nota"><span class="nota-frente">✨ Toca para descubrir</span><span class="nota-atras">La manera tan linda e incondicional en que te preocupas por mí.</span></div>
+                <div class="tarjeta-nota"><span class="nota-frente">✨ Toca para descubrir</span><span class="nota-atras">Nuestras conversaciones interminables en las que jamás me canso de escucharte.</span></div>
+                <div class="tarjeta-nota"><span class="nota-frente">✨ Toca para descubrir</span><span class="nota-atras">Cada recuerdo hermoso que hemos construido y todos los sueños que nos faltan cumplir.</span></div>
+                <div class="tarjeta-nota"><span class="nota-frente">✨ Toca para descubrir</span><span class="nota-atras">La inmensa felicidad de saber que existes y que estás en mi vida.</span></div>
             </div>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
-                <button class="btn-principal" onclick="siguientePantalla()">Siguiente <span>→</span></button>
+                <button class="boton-regresar btn-anterior">← Regresar</button>
+                <button class="btn-principal btn-siguiente">Siguiente <span>→</span></button>
             </div>
         </div>
     </section>
 
-    <!-- PANTALLA 6: REPRODUCTOR DE MÚSICA GARANTIZADO Y MENSAJE -->
+    <!-- PANTALLA 6: MÚSICA -->
     <section class="pantalla" id="pantalla6">
         <div class="contenido">
             <p class="subtitulo-romantico">NUESTRA PLAYLIST DEDICADA</p>
@@ -204,7 +166,6 @@
             <p class="descripcion">Reproduce y escucha las canciones directamente desde aquí:</p>
             
             <div class="lista-dedicatorias">
-                <!-- Pista 1 -->
                 <div class="item-cancion" id="card-0">
                     <div class="detalles-cancion">
                         <span class="titulo-pista">01. A Dónde Vamos</span>
@@ -212,12 +173,11 @@
                     </div>
                     <audio id="audio-0" src="a-donde-vamos.mp3" preload="metadata"></audio>
                     <div class="controles-audio">
-                        <button class="btn-play" onclick="playAudio(0)">▶ Play</button>
-                        <button class="btn-pause" onclick="pauseAudio(0)">⏸ Pausa</button>
+                        <button class="btn-play" data-audio="0">▶ Play</button>
+                        <button class="btn-pause" data-audio="0">⏸ Pausa</button>
                     </div>
                 </div>
 
-                <!-- Pista 2 -->
                 <div class="item-cancion" id="card-1">
                     <div class="detalles-cancion">
                         <span class="titulo-pista">02. Cesantías de Amor</span>
@@ -225,12 +185,11 @@
                     </div>
                     <audio id="audio-1" src="cesantias-de-amor.mp3" preload="metadata"></audio>
                     <div class="controles-audio">
-                        <button class="btn-play" onclick="playAudio(1)">▶ Play</button>
-                        <button class="btn-pause" onclick="pauseAudio(1)">⏸ Pausa</button>
+                        <button class="btn-play" data-audio="1">▶ Play</button>
+                        <button class="btn-pause" data-audio="1">⏸ Pausa</button>
                     </div>
                 </div>
 
-                <!-- Pista 3 -->
                 <div class="item-cancion" id="card-2">
                     <div class="detalles-cancion">
                         <span class="titulo-pista">03. La Persona de Mi Vida</span>
@@ -238,12 +197,11 @@
                     </div>
                     <audio id="audio-2" src="la-persona-de-mi-vida.mp3" preload="metadata"></audio>
                     <div class="controles-audio">
-                        <button class="btn-play" onclick="playAudio(2)">▶ Play</button>
-                        <button class="btn-pause" onclick="pauseAudio(2)">⏸ Pausa</button>
+                        <button class="btn-play" data-audio="2">▶ Play</button>
+                        <button class="btn-pause" data-audio="2">⏸ Pausa</button>
                     </div>
                 </div>
 
-                <!-- Pista 4 -->
                 <div class="item-cancion" id="card-3">
                     <div class="detalles-cancion">
                         <span class="titulo-pista">04. Siempre Seré</span>
@@ -251,8 +209,8 @@
                     </div>
                     <audio id="audio-3" src="siempre-sere.mp3" preload="metadata"></audio>
                     <div class="controles-audio">
-                        <button class="btn-play" onclick="playAudio(3)">▶ Play</button>
-                        <button class="btn-pause" onclick="pauseAudio(3)">⏸ Pausa</button>
+                        <button class="btn-play" data-audio="3">▶ Play</button>
+                        <button class="btn-pause" data-audio="3">⏸ Pausa</button>
                     </div>
                 </div>
             </div>
@@ -262,7 +220,7 @@
             </div>
 
             <div class="navegacion">
-                <button class="boton-regresar" onclick="anteriorPantalla()">← Regresar</button>
+                <button class="boton-regresar btn-anterior">← Regresar</button>
             </div>
         </div>
     </section>
