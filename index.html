@@ -17,22 +17,6 @@
     <!-- Lluvia continua de corazones y destellos flotantes -->
     <div class="hearts-container" id="heartsContainer"></div>
 
-    <!-- REPRODUCTOR FLOTANTE DE MÚSICA -->
-    <div class="reproductor-flotante">
-        <div class="info-cancion">
-            <span class="icono-nota">🎵</span>
-            <div class="textos-cancion">
-                <span id="tituloCancion">Cargando música...</span>
-                <small id="artistaCancion">Carol Dayana & Juan</small>
-            </div>
-        </div>
-        <div class="controles-musica">
-            <button onclick="cancionAnterior()" class="btn-ctrl" title="Anterior">⏮️</button>
-            <button onclick="toggleMusica()" id="btnPlayPause" class="btn-ctrl btn-play">▶️ Reproducir</button>
-            <button onclick="siguienteCancion()" class="btn-ctrl" title="Siguiente">⏭️</button>
-        </div>
-    </div>
-    
     <!-- Elemento de Audio Global -->
     <audio id="musicaFondo" preload="auto"></audio>
 
@@ -70,7 +54,7 @@
                 </div>
             </div>
 
-            <!-- CARTA DESPLEGABLE COMPLETA -->
+            <!-- CARTA DESPLEGABLE COMPLETA (INICIA OCULTA) -->
             <div class="carta oculta" id="cartaEscribir">
                 <div class="carta-encabezado">
                     <span class="icono-carta">📜</span>
@@ -115,7 +99,7 @@
         <div class="contenido">
             <p class="subtitulo-romantico">NUESTRO TIEMPO JUNTOS</p>
             <h2 class="titulo-seccion">Cada segundo a tu lado es un regalo ❤️</h2>
-            <p class="descripcion">Tiempo transcurrido llenando mi vida de felicidad:</p>
+            <p class="descripcion">Tiempo transcurrido desde nuestro inicio oficial (8 de Julio, 7:25 PM):</p>
             
             <div class="contador-contenedor">
                 <div class="caja-tiempo">
@@ -146,7 +130,7 @@
     </section>
 
     <!-- =====================================================
-         PANTALLA 4 - GALERÍA DE FOTOS
+         PANTALLA 4 - GALERÍA DE FOTOS (DETALLES CORREGIDOS)
     ====================================================== -->
     <section class="pantalla" id="pantalla4">
         <div class="contenido">
@@ -157,15 +141,15 @@
             <div class="grid-fotos dos-fotos">
                 <div class="tarjeta-foto">
                     <div class="marco-foto">
-                        <img src="primera-foto.jpg" alt="Nuestro Momento Especial 1">
+                        <img src="primera-foto.jpg" alt="Nuestro primer carnaval juntos">
                     </div>
-                    <div class="pie-foto">Nuestra foto juntos ❤️</div>
+                    <div class="pie-foto">Nuestro primer carnaval juntos 🎭</div>
                 </div>
                 <div class="tarjeta-foto">
                     <div class="marco-foto">
-                        <img src="segunda-foto.jpeg" alt="Nuestro Momento Especial 2">
+                        <img src="segunda-foto.jpeg" alt="Nuestro primer concierto juntos">
                     </div>
-                    <div class="pie-foto">Un recuerdo inolvidable 💖</div>
+                    <div class="pie-foto">Nuestro primer concierto juntos 🎶</div>
                 </div>
             </div>
 
@@ -249,7 +233,7 @@
                     <span class="num-pista">02</span>
                     <div class="detalles-cancion">
                         <span class="titulo-pista">Cesantías de Amor</span>
-                        <span class="artista-pista">Música Colombiana</span>
+                        <span class="artista-pista">Diomedes Díaz</span>
                     </div>
                 </div>
 
@@ -270,11 +254,8 @@
                 </div>
             </div>
 
-            <div class="seccion-whatsapp">
-                <p class="final-frase">"Esto apenas comienza mi amor, te amo con todo mi corazón..."</p>
-                <a href="https://wa.me/?text=¡Mi%20amor,%20me%20encantó%20muchísimo%20la%20sorpresa!%20❤️" target="_blank" class="boton-whatsapp">
-                    💬 Envíame un mensaje al WhatsApp
-                </a>
+            <div class="seccion-final">
+                <p class="final-frase">"Esto apenas comienza mi amor, te amo con todo mi corazón..." ❤️</p>
             </div>
 
             <div class="navegacion">
