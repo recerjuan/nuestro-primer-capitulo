@@ -705,13 +705,16 @@
             elemento.classList.toggle('revelada');
         }
 
+        // Fecha de inicio: 8 de Julio de 2024 a las 19:25:00
         var fechaInicio = new Date(2024, 6, 8, 19, 25, 0);
 
         function actualizarContador() {
             var ahora = new Date();
-            var diferencia = ahora - fechaInicio;
+            var diferencia = ahora.getTime() - fechaInicio.getTime();
 
-            if (diferencia < 0) return;
+            if (diferencia < 0) {
+                diferencia = 0;
+            }
 
             var segundosTotal = Math.floor(diferencia / 1000);
             var minutosTotal = Math.floor(segundosTotal / 60);
